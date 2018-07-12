@@ -1,0 +1,251 @@
+<template>
+  <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
+    <template slot="ticker" slot-scope="data">
+      <span class="ticker">
+        <router-link :to="'/tickers/' + data.value + query">{{ data.value }}</router-link>
+      </span>
+      <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
+        <CartIcon class="icon-cart" />
+      </a>
+    </template>
+    <template slot="change" slot-scope="data">
+      <span :class="numClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
+    </template>
+    <template slot="high" slot-scope="data">
+      <span v-b-tooltip.hover :title="formatDate(data)" class="num-high">{{ data.value }}</span>
+    </template>
+  </b-table>
+</template>
+
+<style>
+.summary table {
+  margin-bottom: 0;
+}
+
+.summary th,
+.summary td {
+  padding: 0.35rem 0.5rem;
+}
+
+.summary th:focus {
+  outline: 0;
+}
+
+.summary th {
+  border-top: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f6f6f6;
+}
+
+.numeric {
+  text-align: right;
+}
+
+.num-change {
+  font-weight: 600;
+}
+
+.num-positive {
+  color: green;
+}
+
+.num-negative {
+  color: red;
+}
+
+.num-high {
+  border-bottom: 1px dotted #888;
+}
+</style>
+
+<style scoped>
+.icon-cart {
+  fill: #1e7e34;
+}
+
+.ticker {
+  display: inline-block;
+  width: 45px;
+}
+</style>
+
+<script>
+import CartIcon from '../assets/cart.svg'
+
+export default {
+  components: {
+    CartIcon
+  },
+
+  props: {
+    period: {
+      type: String,
+      default: '1d'
+    },
+    summaryData: {
+      type: Object,
+      default: null
+    },
+    hotStocks: {
+      type: Array,
+      default: null
+    },
+    filter: {
+      type: String,
+      default: ''
+    }
+  },
+
+  data() {
+    return {
+      fields: [
+        { key: 'ticker', sortable: true },
+        {
+          key: 'volume',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc',
+          formatter: value => value.toLocaleString()
+        },
+        {
+          key: 'open',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'curr',
+          label: 'Current',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'change',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'high',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'low',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'avg',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'sd',
+          label: 'Volatility',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        }
+      ],
+      STOCK_BUY_URL: 'http://www.neopets.com/stockmarket.phtml?type=buy&ticker='
+    }
+  },
+
+  computed: {
+    period_1d() {
+      if (!this.summaryData) return null
+      return this.summaryData.period_1d
+    },
+    period_5d() {
+      if (!this.summaryData) return null
+      return this.summaryData.period_5d
+    },
+    period_1m() {
+      if (!this.summaryData) return null
+      return this.summaryData.period_1m
+    },
+    period_all() {
+      if (!this.summaryData) return null
+      return this.summaryData.period_all
+    },
+    currentItems() {
+      switch (this.period) {
+        case '1d':
+          return this.period_1d
+        case '5d':
+          return this.period_5d
+        case '1m':
+          return this.period_1m
+        case 'all':
+          return this.period_all
+      }
+    },
+    currentFields() {
+      return this.getFields(this.currentItems)
+    },
+    sortBy() {
+      if (this.filter === 'bargain') return 'curr'
+      if (this.filter === 'hot') return 'curr'
+      return null
+    },
+    sortDesc() {
+      if (this.filter === 'bargain') return false
+      if (this.filter === 'hot') return true
+      return null
+    },
+    query() {
+      return this.$route.query.period
+        ? `?period=${this.$route.query.period}`
+        : ''
+    }
+  },
+
+  methods: {
+    getFields(items) {
+      const keys = Object.keys(items[0])
+      return this.fields.filter(field => keys.includes(field.key))
+    },
+    numClass(val) {
+      if (val > 0) return 'num-positive'
+      if (val < 0) return 'num-negative'
+      return
+    },
+    formatNum(val) {
+      if (val > 0) return '+' + val
+      return val
+    },
+    formatDate(val) {
+      const date = new Date(val.item.time_high)
+      return date.toLocaleString() + ' NST'
+    },
+    filterItem(item) {
+      switch (this.filter) {
+        case 'bargain':
+          return this.bargainFilter(item)
+        case 'hot':
+          return this.hotFilter(item)
+        default:
+          return true
+      }
+    },
+    bargainFilter(item) {
+      const price = item.curr
+      return price >= 15 && price < 20
+    },
+    hotFilter(item) {
+      return this.hotStocks && this.hotStocks.includes(item.ticker)
+    }
+  }
+}
+</script>
