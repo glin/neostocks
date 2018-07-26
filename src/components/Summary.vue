@@ -66,11 +66,11 @@
 
 <style scoped>
 .icon-cart {
-  fill: #1e7e34;
+  fill: #155724;
 }
 
 .ticker {
-  display: inline-block;
+  float: left;
   width: 45px;
 }
 </style>
