@@ -10,6 +10,10 @@
             <b-nav-item :to="'/hot' + query">Hot</b-nav-item>
             <b-nav-item :to="'/index' + query">Index</b-nav-item>
           </b-navbar-nav>
+
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item to="/about">About</b-nav-item>
+          </b-navbar-nav>
         </b-collapse>
       </b-container>
     </b-navbar>

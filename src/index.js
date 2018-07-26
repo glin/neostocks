@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import App from './App'
+import About from './components/About'
 import PeriodNav from './components/PeriodNav'
 import Summary from './components/Summary'
 import Ticker from './components/Ticker'
@@ -61,6 +62,12 @@ const routes = [
     props: {
       nav: route => ({ period: route.query.period }),
       main: route => ({ period: route.query.period })
+    }
+  },
+  {
+    path: '/about',
+    components: {
+      main: About
     }
   },
   {
