@@ -151,6 +151,12 @@ export default {
           sortDirection: 'desc'
         },
         {
+          key: 'median',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
           key: 'sd',
           label: 'Volatility',
           class: 'numeric',
