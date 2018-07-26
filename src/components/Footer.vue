@@ -12,6 +12,7 @@
 }
 
 .last-update-time {
+  margin-right: 2px;
   text-align: right;
   font-style: italic;
   font-size: small;
