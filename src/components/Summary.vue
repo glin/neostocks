@@ -1,12 +1,15 @@
 <template>
   <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
     <template slot="ticker" slot-scope="data">
-      <span class="ticker">
-        <router-link :to="'/tickers/' + data.value + query">{{ data.value }}</router-link>
-      </span>
-      <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
-        <CartIcon class="icon-cart" />
-      </a>
+      <div class="ticker">
+        <span class="ticker-link">
+          <router-link :to="'/tickers/' + data.value + query">{{ data.value }}</router-link>
+        </span>
+        <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
+          <!-- <CartIcon class="icon-cart" /> -->
+          <span class="buy-link">(buy)</span>
+        </a>
+      </div>
     </template>
     <template slot="change" slot-scope="data">
       <span :class="numClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
@@ -65,23 +68,32 @@
 </style>
 
 <style scoped>
-.icon-cart {
-  fill: #155724;
+.ticker {
+  white-space: nowrap;
 }
 
-.ticker {
+.ticker-link {
   float: left;
   width: 45px;
 }
+
+.buy-link {
+  font-size: small;
+  color: #1e7e34;
+}
+
+/* .icon-cart {
+  fill: #155724;
+} */
 </style>
 
 <script>
-import CartIcon from '../assets/cart.svg'
+// import CartIcon from '../assets/cart.svg'
 
 export default {
-  components: {
-    CartIcon
-  },
+  // components: {
+  //   CartIcon
+  // },
 
   props: {
     period: {
