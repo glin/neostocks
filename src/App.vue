@@ -4,7 +4,7 @@
     <b-container class="content">
       <router-view name="nav" />
       <keep-alive>
-        <router-view v-bind="stockData" name="main" />
+        <router-view v-bind="stockData" :companies="companies" name="main" />
       </keep-alive>
     </b-container>
     <Footer :update-time="updateTime" />
@@ -44,7 +44,8 @@ export default {
       summaryData: window.__data__.summary_data,
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
-      marketIndex: null
+      marketIndex: null,
+      companies: window.__data__.companies
     }
   },
 

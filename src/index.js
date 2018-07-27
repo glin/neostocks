@@ -43,14 +43,14 @@ const routes = [
     }
   },
   {
-    path: '/tickers/:id',
+    path: '/tickers/:ticker',
     components: {
-      nav: PeriodNav,
+      // nav: PeriodNav,
       main: Ticker
     },
     props: {
-      nav: route => ({ period: route.query.period }),
-      main: route => ({ id: route.params.id, period: route.query.period })
+      // nav: route => ({ period: route.query.period }),
+      main: route => ({ ticker: route.params.ticker, period: route.query.period })
     }
   },
   {
