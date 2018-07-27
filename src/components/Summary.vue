@@ -73,7 +73,7 @@
 }
 
 .ticker-link {
-  float: left;
+  display: inline-block;
   width: 45px;
 }
 
