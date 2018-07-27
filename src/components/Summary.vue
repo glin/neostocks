@@ -2,9 +2,10 @@
   <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
     <template slot="ticker" slot-scope="data">
       <div class="ticker">
-        <span class="ticker-link">
-          <router-link :to="'/tickers/' + data.value + query">{{ data.value }}</router-link>
-        </span>
+        <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
+          <img :src="getImgSrc(data.value)" class="company-logo">
+          <span class="ticker-text">{{ data.value }}</span>
+        </router-link>
         <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
           <!-- <CartIcon class="icon-cart" /> -->
           <span class="buy-link">(buy)</span>
@@ -72,7 +73,16 @@
   white-space: nowrap;
 }
 
-.ticker-link {
+.ticker-link:hover {
+  text-decoration: none;
+}
+
+.company-logo {
+  margin: -5px 5px -2px 0;
+  height: 25px;
+}
+
+.ticker-text {
   display: inline-block;
   width: 45px;
 }
@@ -89,6 +99,8 @@
 
 <script>
 // import CartIcon from '../assets/cart.svg'
+function requireAll(r) { r.keys().forEach(r); }
+requireAll(require.context('../assets/logos/', true));
 
 export default {
   // components: {
@@ -111,6 +123,10 @@ export default {
     filter: {
       type: String,
       default: ''
+    },
+    companies: {
+      type: Object,
+      required: true
     }
   },
 
@@ -263,6 +279,11 @@ export default {
     },
     hotFilter(item) {
       return this.hotStocks && this.hotStocks.includes(item.ticker)
+    },
+    getImgSrc(ticker) {
+      const id = this.companies[ticker].logo_id
+      const src = require(`../assets/logos/${id}.gif`)
+      return src
     }
   }
 }
