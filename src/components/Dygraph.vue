@@ -37,6 +37,7 @@ export default {
 
   data() {
     return {
+      g: null,
       style: {
         width: this.width,
         height: this.height
@@ -48,7 +49,12 @@ export default {
     this.$watch(
       'data',
       () => {
-        if (this.data == null) return
+        if (this.data == null) {
+          this.resetGraph()
+          return
+        }
+
+        // copy data before mutating it
         let data = { ...this.data }
 
         if (!isNaN(data.time[0])) {
@@ -64,10 +70,19 @@ export default {
           }, {})
         }
         const csv = dataFrameToCSV(data)
-        renderDygraph(this.$refs.el, csv, this.options)
+        this.g = renderDygraph(this.$refs.el, csv, this.options)
       },
       { immediate: true }
     )
+  },
+
+  methods: {
+    resetGraph() {
+      if (this.g) {
+        const plotData = [[0, 0]]
+        this.g.updateOptions({ file: plotData })
+      }
+    }
   }
 }
 
