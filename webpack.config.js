@@ -1,6 +1,7 @@
 const path = require('path')
 const NamedModulesPlugin = require('webpack').NamedModulesPlugin
 const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   resolve: {
@@ -32,7 +33,7 @@ module.exports = {
         use: 'vue-svg-loader'
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|ico)$/,
         use: [
           {
             loader: 'url-loader',
@@ -41,13 +42,26 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: ['link:href']
+          }
+        }
       }
     ]
   },
 
   plugins: [
     new NamedModulesPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'src/assets/index.html',
+      filename: path.resolve(__dirname, 'dist/index.html')
+    })
   ],
 
   devServer: {
