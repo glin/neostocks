@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       summaryData: window.__data__.summary_data,
+      summaryIndexData: window.__data__.summary_index_data,
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
       marketIndex: null,
@@ -53,6 +54,7 @@ export default {
     stockData() {
       return {
         summaryData: this.summaryData,
+        summaryIndexData: this.summaryIndexData,
         hotStocks: this.hotStocks,
         marketIndex: this.marketIndex
       }
@@ -62,6 +64,7 @@ export default {
   created() {
     Shiny.addCustomMessageHandler('stock-data', msg => {
       this.summaryData = msg.summary_data
+      this.summaryIndexData = msg.summary_index_data
       this.hotStocks = msg.hot_stocks
       this.updateTime = msg.update_time
     })
