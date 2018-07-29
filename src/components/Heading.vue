@@ -8,7 +8,7 @@
 <style scoped>
 .heading {
   margin: 0 5px 10px;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
 }
 
 .divider {
