@@ -2,6 +2,7 @@ const path = require('path')
 const NamedModulesPlugin = require('webpack').NamedModulesPlugin
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   resolve: {
@@ -61,7 +62,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/assets/index.html',
       filename: path.resolve(__dirname, 'dist/index.html')
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, 'public')
+    }])
   ],
 
   devServer: {

@@ -1,3 +1,13 @@
 <template>
-  <h4 :style="{ textAlign: 'center' }">page not found :(</h4>
+  <b-container class="text-center">
+    <img src="/static/404.png">
+    <h4>page not found</h4>
+  </b-container>
 </template>
+
+<style scoped>
+img {
+  margin: 10px auto;
+  max-width: 100%;
+}
+</style>
