@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Heading>Neodaq Index</Heading>
+    <Heading>Neodaq</Heading>
     <PeriodNav :period="period" />
     <Dygraph :data="data" :series-labels="seriesLabels" />
   </div>
