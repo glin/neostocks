@@ -1,14 +1,20 @@
 <template>
   <div>
+    <Heading>Neodaq Index</Heading>
+    <PeriodNav :period="period" />
     <Dygraph :data="data" :series-labels="seriesLabels" />
   </div>
 </template>
 
 <script>
+import Heading from './Heading'
+import PeriodNav from './PeriodNav'
 import Dygraph from './Dygraph'
 
 export default {
   components: {
+    Heading,
+    PeriodNav,
     Dygraph
   },
 

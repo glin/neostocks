@@ -7,7 +7,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import App from './App'
 import About from './components/About'
-import PeriodNav from './components/PeriodNav'
 import Summary from './components/Summary'
 import Ticker from './components/Ticker'
 import MarketIndex from './components/MarketIndex'
@@ -20,61 +19,37 @@ const routes = [
   {
     path: '/summary',
     alias: ['/', '/bargain', '/hot'],
-    components: {
-      nav: PeriodNav,
-      main: Summary
-    },
-    props: {
-      nav: route => {
-        return { period: route.query.period }
-      },
-      main: route => {
-        let filter = route.query.filter
-        switch (route.path) {
-          case '/bargain':
-            filter = 'bargain'
-            break
-          case '/hot':
-            filter = 'hot'
-            break
-        }
-        return { period: route.query.period, filter }
+    component: Summary,
+    props: route => {
+      let filter = route.query.filter
+      switch (route.path) {
+        case '/bargain':
+          filter = 'bargain'
+          break
+        case '/hot':
+          filter = 'hot'
+          break
       }
+      return { period: route.query.period, filter }
     }
   },
   {
     path: '/tickers/:ticker',
-    components: {
-      // nav: PeriodNav,
-      main: Ticker
-    },
-    props: {
-      // nav: route => ({ period: route.query.period }),
-      main: route => ({ ticker: route.params.ticker, period: route.query.period })
-    }
+    component: Ticker,
+    props: route => ({ ticker: route.params.ticker, period: route.query.period })
   },
   {
     path: '/index',
-    components: {
-      nav: PeriodNav,
-      main: MarketIndex
-    },
-    props: {
-      nav: route => ({ period: route.query.period }),
-      main: route => ({ period: route.query.period })
-    }
+    component: MarketIndex,
+    props: route => ({ period: route.query.period })
   },
   {
     path: '/about',
-    components: {
-      main: About
-    }
+    component: About
   },
   {
     path: '*',
-    components: {
-      main: PageNotFound
-    }
+    component: PageNotFound
   }
 ]
 

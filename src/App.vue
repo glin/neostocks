@@ -2,9 +2,8 @@
   <div>
     <Header />
     <b-container class="content">
-      <router-view name="nav" />
       <keep-alive>
-        <router-view v-bind="stockData" :companies="companies" name="main" />
+        <router-view v-bind="stockData" :companies="companies" />
       </keep-alive>
     </b-container>
     <Footer :update-time="updateTime" />

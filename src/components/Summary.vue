@@ -1,24 +1,28 @@
 <template>
-  <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
-    <template slot="ticker" slot-scope="data">
-      <div class="ticker">
-        <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
-          <img :src="getImgSrc(data.value)" class="company-logo">
-          <span class="ticker-text">{{ data.value }}</span>
-        </router-link>
-        <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
-          <!-- <CartIcon class="icon-cart" /> -->
-          <span class="buy-link">(buy)</span>
-        </a>
-      </div>
-    </template>
-    <template slot="change" slot-scope="data">
-      <span :class="numClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
-    </template>
-    <template slot="high" slot-scope="data">
-      <span v-b-tooltip.hover :title="formatDate(data)" class="num-high">{{ data.value }}</span>
-    </template>
-  </b-table>
+  <div>
+    <Heading>{{ title }}</Heading>
+    <PeriodNav :period="period" />
+
+    <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
+      <template slot="ticker" slot-scope="data">
+        <div class="ticker">
+          <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
+            <img :src="getImgSrc(data.value)" class="company-logo">
+            <span class="ticker-text">{{ data.value }}</span>
+          </router-link>
+          <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
+            <span class="buy-link">(buy)</span>
+          </a>
+        </div>
+      </template>
+      <template slot="change" slot-scope="data">
+        <span :class="numClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
+      </template>
+      <template slot="high" slot-scope="data">
+        <span v-b-tooltip.hover :title="formatDate(data)" class="num-high">{{ data.value }}</span>
+      </template>
+    </b-table>
+  </div>
 </template>
 
 <style>
@@ -91,21 +95,22 @@
   font-size: small;
   color: #1e7e34;
 }
-
-/* .icon-cart {
-  fill: #155724;
-} */
 </style>
 
 <script>
-// import CartIcon from '../assets/cart.svg'
-function requireAll(r) { r.keys().forEach(r); }
-requireAll(require.context('../assets/logos/', true));
+import Heading from './Heading'
+import PeriodNav from './PeriodNav'
+
+function requireAll(r) {
+  r.keys().forEach(r)
+}
+requireAll(require.context('../assets/logos/', true))
 
 export default {
-  // components: {
-  //   CartIcon
-  // },
+  components: {
+    Heading,
+    PeriodNav
+  },
 
   props: {
     period: {
@@ -197,6 +202,16 @@ export default {
   },
 
   computed: {
+    title() {
+      switch (this.filter) {
+        case 'bargain':
+          return 'Bargain Stocks'
+        case 'hot':
+          return 'Hot Stocks'
+        default:
+          return 'Summary'
+      }
+    },
     period_1d() {
       if (!this.summaryData) return null
       return this.summaryData.period_1d
