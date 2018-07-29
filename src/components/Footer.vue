@@ -17,6 +17,12 @@
   font-style: italic;
   font-size: small;
 }
+
+@media (max-width: 575.98px) {
+  .last-update-time {
+    text-align: center;
+  }
+}
 </style>
 
 <script>

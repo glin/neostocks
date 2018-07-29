@@ -14,4 +14,10 @@
 .divider {
   margin: 5px 0;
 }
+
+@media (max-width: 575.98px) {
+  .heading {
+    text-align: center;
+  }
+}
 </style>

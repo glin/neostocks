@@ -19,6 +19,15 @@
   border-width: 3px 1px 1px;
   border-radius: 2px 2px 0 0;
 }
+
+@media (max-width: 575.98px) {
+  .nav-item {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
 </style>
 
 <script>
