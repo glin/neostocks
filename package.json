@@ -4,7 +4,9 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack-cli --mode production",
-    "build:watch": "npm run build -- --watch"
+    "build:watch": "npm run build -- --watch",
+    "dev": "webpack-cli --mode development",
+    "dev:watch": "npm run dev -- --watch"
   },
   "license": "MIT",
   "dependencies": {
