@@ -23,7 +23,7 @@
 export default {
   props: {
     updateTime: {
-      type: String,
+      type: Object,
       default: null
     }
   },
