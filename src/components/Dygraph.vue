@@ -23,7 +23,7 @@ export default {
     },
     height: {
       type: String,
-      default: '400px'
+      default: '350px'
     },
     seriesLabels: {
       type: Object,
@@ -94,7 +94,9 @@ const defaultOptions = {
         return new Date(d).toLocaleString()
       }
     }
-  }
+  },
+  colors: ['#2294ba', '#1e7e34'],
+  fillGraph: true
 }
 
 function renderDygraph(el, data, options = defaultOptions) {
