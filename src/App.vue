@@ -33,6 +33,8 @@ body {
 import Header from './components/Header'
 import Footer from './components/Footer'
 
+const companies = require('./companies.json')
+
 export default {
   components: {
     Header,
@@ -46,7 +48,7 @@ export default {
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
       marketIndex: null,
-      companies: window.__data__.companies
+      companies
     }
   },
 
