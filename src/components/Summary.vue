@@ -16,7 +16,7 @@
         </div>
       </template>
       <template slot="change" slot-scope="data">
-        <span :class="numClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
+        <span :class="numChangeClass(data.value)">{{ formatNum(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
         <span v-b-tooltip.hover :title="formatDate(data)" class="num-high">{{ data.value }}</span>
@@ -271,10 +271,10 @@ export default {
       const keys = Object.keys(items[0])
       return this.fields.filter(field => keys.includes(field.key))
     },
-    numClass(val) {
-      if (val > 0) return 'num-positive'
-      if (val < 0) return 'num-negative'
-      return
+    numChangeClass(val) {
+      if (val > 0) return 'num-positive num-change'
+      if (val < 0) return 'num-negative num-change'
+      return 'num-zero num-change'
     },
     formatNum(val) {
       if (val > 0) return '+' + val
