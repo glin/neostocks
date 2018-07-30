@@ -187,7 +187,8 @@ export default {
           key: 'avg',
           class: 'numeric',
           sortable: true,
-          sortDirection: 'desc'
+          sortDirection: 'desc',
+          periods: ['all']
         },
         {
           key: 'median',
@@ -247,7 +248,14 @@ export default {
       }
     },
     currentFields() {
-      return this.getFields(this.currentItems)
+      const keys = Object.keys(this.currentItems[0])
+      const fields = this.fields.filter(field => {
+        if (field.periods && !field.periods.includes(this.period)) {
+          return false
+        }
+        return keys.includes(field.key)
+      })
+      return fields
     },
     sortBy() {
       if (this.filter === 'bargain') return 'curr'
@@ -267,10 +275,6 @@ export default {
   },
 
   methods: {
-    getFields(items) {
-      const keys = Object.keys(items[0])
-      return this.fields.filter(field => keys.includes(field.key))
-    },
     numChangeClass(val) {
       if (val > 0) return 'num-positive num-change'
       if (val < 0) return 'num-negative num-change'
