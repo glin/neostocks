@@ -27,6 +27,12 @@ body {
   background-color: #fff;
   border: 1px solid lightgrey;
 }
+
+@media (max-width: 575.98px) {
+  .content {
+    margin-top: 7.5px;
+  }
+}
 </style>
 
 <script>
