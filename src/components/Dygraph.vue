@@ -92,7 +92,8 @@ const defaultOptions = {
     x: {
       valueFormatter: function(d) {
         return new Date(d).toLocaleString()
-      }
+      },
+      drawGrid: false
     }
   },
   colors: ['#2294ba', '#1e7e34'],
