@@ -7,7 +7,7 @@
       <template slot="ticker" slot-scope="data">
         <div class="ticker">
           <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
-            <img :src="getImgSrc(data.value)" class="company-logo">
+            <img :src="getCompanyLogo(data.value)" :alt="data.value" class="company-logo">
             <span class="ticker-text">{{ data.value }}</span>
           </router-link>
           <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
@@ -106,11 +106,6 @@
 <script>
 import Heading from './Heading'
 import PeriodNav from './PeriodNav'
-
-function requireAll(r) {
-  r.keys().forEach(r)
-}
-requireAll(require.context('../assets/logos/', true))
 
 export default {
   components: {
@@ -305,10 +300,8 @@ export default {
     hotFilter(item) {
       return this.hotStocks && this.hotStocks.includes(item.ticker)
     },
-    getImgSrc(ticker) {
-      const id = this.companies[ticker].logo_id
-      const src = require(`../assets/logos/${id}.gif`)
-      return src
+    getCompanyLogo(ticker) {
+      return this.companies[ticker].logo
     }
   }
 }

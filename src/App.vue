@@ -38,8 +38,7 @@ body {
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
-
-const companies = require('./companies.json')
+import { getCompanyData } from './companies'
 
 export default {
   components: {
@@ -54,7 +53,7 @@ export default {
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
       marketIndex: null,
-      companies
+      companies: getCompanyData()
     }
   },
 
