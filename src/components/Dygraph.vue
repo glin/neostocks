@@ -87,7 +87,7 @@ export default {
 }
 
 const defaultOptions = {
-  gridLineColor: 'rgb(170, 170, 170)',
+  gridLineColor: 'rgb(187, 187, 187)',
   axes: {
     x: {
       valueFormatter: function(d) {
