@@ -10,7 +10,7 @@
             <img :src="getCompanyLogo(data.value)" :alt="data.value" class="company-logo">
             <span class="ticker-text">{{ data.value }}</span>
           </router-link>
-          <a v-if="filter === 'bargain'" :href="STOCK_BUY_URL + data.value" target="_blank" rel="noopener noreferrer">
+          <a v-if="filter === 'bargain'" :href="getBuyUrl(data.value)" target="_blank" rel="noopener noreferrer">
             <span class="buy-link">(buy)</span>
           </a>
         </div>
@@ -198,8 +198,7 @@ export default {
           sortable: true,
           sortDirection: 'desc'
         }
-      ],
-      STOCK_BUY_URL: 'http://www.neopets.com/stockmarket.phtml?type=buy&ticker='
+      ]
     }
   },
 
@@ -302,6 +301,9 @@ export default {
     },
     getCompanyLogo(ticker) {
       return this.companies[ticker].logo
+    },
+    getBuyUrl(ticker) {
+      return this.companies[ticker].buyUrl
     }
   }
 }
