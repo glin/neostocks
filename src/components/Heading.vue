@@ -7,17 +7,13 @@
 
 <style scoped>
 .heading {
-  margin: 0 5px 10px;
-  font-size: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px 5px;
+  font-size: 1.25rem;
 }
 
 .divider {
   margin: 5px 0;
-}
-
-@media (max-width: 575.98px) {
-  .heading {
-    text-align: center;
-  }
 }
 </style>
