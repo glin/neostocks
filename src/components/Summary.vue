@@ -94,7 +94,7 @@
 
 .ticker-text {
   display: inline-block;
-  width: 45px;
+  width: 50px;
 }
 
 .buy-link {
