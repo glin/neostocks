@@ -280,7 +280,7 @@ export default {
       return 'num-zero num-change'
     },
     formatNum(val) {
-      if (val > 0) return '+' + val
+      if (val >= 0) return '+' + val
       return val
     },
     formatDate(val) {
