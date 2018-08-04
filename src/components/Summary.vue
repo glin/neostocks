@@ -19,7 +19,7 @@
         <span :class="numChangeClass(data.value)">{{ formatNum(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip.hover :title="formatDate(data)" class="num-high">{{ data.value }}</span>
+        <span v-b-tooltip.hover :title="formatDate(data)" :class="isCurrentHigh(data.item.curr, data.value) ? 'current-high' : ''" class="num-high">{{ data.value }}</span>
       </template>
     </b-table>
   </div>
@@ -73,6 +73,11 @@
 
 .num-high {
   border-bottom: 1px dotted #888;
+}
+
+.current-high {
+  font-weight: 600;
+  color: #e36209;
 }
 </style>
 
@@ -309,6 +314,9 @@ export default {
     },
     getBuyUrl(ticker) {
       return this.companies[ticker].buyUrl
+    },
+    isCurrentHigh(curr, high) {
+      return curr === high && curr >= 30 && this.filter !== 'bargain'
     }
   }
 }
