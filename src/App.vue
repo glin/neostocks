@@ -26,6 +26,7 @@ body {
   padding: 10px;
   background-color: #fff;
   border: 1px solid lightgrey;
+  border-radius: 2px;
 }
 
 @media (max-width: 575.98px) {
