@@ -9,7 +9,6 @@ import App from './App'
 import About from './components/About'
 import Summary from './components/Summary'
 import Ticker from './components/Ticker'
-import MarketIndex from './components/MarketIndex'
 import PageNotFound from './components/PageNotFound'
 
 Vue.use(VueRouter)
@@ -40,8 +39,9 @@ const routes = [
   },
   {
     path: '/index',
-    component: MarketIndex,
-    props: route => ({ period: route.query.period })
+    alias: '/tickers/NEODAQ',
+    component: Ticker,
+    props: route => ({ ticker: 'NEODAQ', period: route.query.period })
   },
   {
     path: '/about',

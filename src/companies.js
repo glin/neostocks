@@ -13,5 +13,10 @@ export function getCompanyData() {
     company.profileUrl = COMPANY_PROFILE_URL + company.id
   })
 
+  companies['NEODAQ'] = {
+    company: 'Neopian Stock Market',
+    logo: require('./assets/logos/nigel.gif')
+  }
+
   return companies
 }
