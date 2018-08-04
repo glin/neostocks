@@ -2,6 +2,21 @@
   <div ref="el" :id="id" :style="style" />
 </template>
 
+<style>
+.dygraph-legend {
+  position: static;
+  float: right;
+  margin-right: 40px;
+  width: auto;
+}
+
+@media (max-width: 575.98px) {
+  .dygraph-legend {
+    margin-right: 10px;
+  }
+}
+</style>
+
 <script>
 import Dygraph from 'dygraphs'
 
