@@ -67,6 +67,10 @@
   color: red;
 }
 
+.num-zero {
+  color: #6c757d;
+}
+
 .num-high {
   border-bottom: 1px dotted #888;
 }
