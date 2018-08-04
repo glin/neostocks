@@ -13,7 +13,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-form-input type="text" placeholder="search tickers" @input="onSearch" />
+          <b-form-input :formatter="formatSearch" type="text" placeholder="search tickers" @input="onSearch" />
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -48,6 +48,12 @@ export default {
       return this.$route.query.period
         ? `?period=${this.$route.query.period}`
         : ''
+    }
+  },
+  methods: {
+    formatSearch(val) {
+      // only allow alpha, whitespace, separator characters
+      return val.toUpperCase().replace(/[^A-Z\s,]/g, '')
     }
   }
 }

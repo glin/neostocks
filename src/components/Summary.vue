@@ -316,7 +316,8 @@ export default {
     },
     searchFilter(item) {
       if (!this.search) return true
-      return item.ticker.match(this.search.toUpperCase())
+      const searchItems = this.search.split(/[\s,]/).filter(s => s != '')
+      return searchItems.some(search => item.ticker.match(search))
     },
     bargainFilter(item) {
       const price = item.curr
