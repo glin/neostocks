@@ -139,6 +139,10 @@ export default {
       type: String,
       default: ''
     },
+    search: {
+      type: String,
+      default: ''
+    },
     companies: {
       type: Object,
       required: true
@@ -293,14 +297,19 @@ export default {
       return date.toLocaleString() + ' NST'
     },
     filterItem(item) {
+      const searchMatch = this.searchFilter(item)
       switch (this.filter) {
         case 'bargain':
-          return this.bargainFilter(item)
+          return searchMatch && this.bargainFilter(item)
         case 'hot':
-          return this.hotFilter(item)
+          return searchMatch && this.hotFilter(item)
         default:
-          return true
+          return searchMatch
       }
+    },
+    searchFilter(item) {
+      if (!this.search) return true
+      return item.ticker.match(this.search.toUpperCase())
     },
     bargainFilter(item) {
       const price = item.curr

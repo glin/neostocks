@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Header />
+    <Header :on-search="handleSearch" />
     <b-container class="content">
       <keep-alive>
-        <router-view v-bind="stockData" :companies="companies" />
+        <router-view v-bind="stockData" :companies="companies" :search="search" />
       </keep-alive>
     </b-container>
     <Footer :update-time="updateTime" />
@@ -52,7 +52,8 @@ export default {
       summaryData: window.__data__.summary_data,
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
-      companies: getCompanyData()
+      companies: getCompanyData(),
+      search: ''
     }
   },
 
@@ -71,6 +72,12 @@ export default {
       this.hotStocks = msg.hot_stocks
       this.updateTime = msg.update_time
     })
+  },
+
+  methods: {
+    handleSearch(val) {
+      this.search = val
+    }
   }
 }
 </script>

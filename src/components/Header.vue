@@ -13,7 +13,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/about">About</b-nav-item>
+          <b-form-input type="text" placeholder="search tickers" @input="onSearch" />
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -37,6 +37,12 @@
 
 <script>
 export default {
+  props: {
+    onSearch: {
+      type: Function,
+      required: true
+    }
+  },
   computed: {
     query() {
       return this.$route.query.period
