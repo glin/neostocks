@@ -3,7 +3,7 @@
     <Heading class="heading">{{ title }}</Heading>
     <PeriodNav :period="period" />
 
-    <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" class="summary" hover striped responsive>
+    <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" :empty-filtered-text="emptyFilterText" class="summary" hover striped responsive show-empty>
       <template slot="ticker" slot-scope="data">
         <div class="ticker">
           <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
@@ -274,6 +274,13 @@ export default {
       if (this.filter === 'bargain') return false
       if (this.filter === 'hot') return true
       return null
+    },
+    emptyFilterText() {
+      return (
+        'There are no ' +
+        (this.filter ? `${this.filter} stocks ` : 'tickers ') +
+        (this.search ? `matching <i> ${this.search}</i>` : 'right now')
+      )
     },
     query() {
       return this.$route.query.period
