@@ -193,7 +193,8 @@ export default {
           key: 'median',
           class: 'numeric',
           sortable: true,
-          sortDirection: 'desc'
+          sortDirection: 'desc',
+          periods: ['all']
         },
         {
           key: 'sd',
