@@ -13,7 +13,7 @@
         <div class="company-subtitle">
           <div class="current-price">
             <span>{{ currentPrice }}</span>
-            <span :class="numChangeClass(currentChange)" class="current-change">{{ formatNum(currentChange) }}</span>
+            <span :class="numChangeClass(currentChange)" class="current-change">{{ formatChange(currentChange) }}</span>
           </div>
 
           <div v-if="company.buyUrl && company.profileUrl" class="company-links">
@@ -32,7 +32,7 @@
       <div v-for="tbl in summaryTables" :class="tbl.class" :key="tbl.class">
         <b-table v-for="keys in tbl.keys" :key="keys[0]" :items="currentItems" :fields="keys.map(key => fields.find(f => f.key === key))" class="summary-table" small stacked>
           <template slot="change" slot-scope="data">
-            <span :class="numChangeClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
+            <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
             <span v-b-tooltip.hover :title="formatDate(data.item.time_high)" :class="isCurrentHigh ? 'current-high' : ''" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
@@ -325,7 +325,7 @@ export default {
       if (val < 0) return 'num-negative'
       return 'num-zero'
     },
-    formatNum(val) {
+    formatChange(val) {
       if (val >= 0) return '+' + val
       return val
     },

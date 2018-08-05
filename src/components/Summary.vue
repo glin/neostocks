@@ -16,8 +16,11 @@
           <span v-if="filter === 'hot' && isHotStockNew(data.value)" class="new-hot-tag">new!</span>
         </div>
       </template>
+      <!-- <template slot="volume" slot-scope="data">
+        <span :title="data.value.toLocaleString()">{{ formatNum(data.value) }}</span>
+      </template> -->
       <template slot="change" slot-scope="data">
-        <span :class="numChangeClass(data.value)">{{ formatNum(data.value) }}</span>
+        <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
         <span v-b-tooltip.hover :title="formatDate(data)" :class="isCurrentHigh(data.item.curr, data.value) ? 'current-high' : ''" class="num-high">{{ data.value }}</span>
@@ -304,13 +307,33 @@ export default {
       if (val < 0) return 'num-negative num-change'
       return 'num-zero num-change'
     },
-    formatNum(val) {
+    formatChange(val) {
       if (val >= 0) return '+' + val
       return val
     },
     formatDate(val) {
       const date = new Date(val.item.time_high)
       return date.toLocaleString() + ' NST'
+    },
+    // Adapted from https://stackoverflow.com/questions/9461621
+    formatNum(num) {
+      const si = [
+        { value: 1, suffix: '' },
+        { value: 1e3, suffix: 'k' },
+        { value: 1e6, suffix: 'M' },
+        { value: 1e9, suffix: 'B' }
+      ]
+      const regex = /\.0+$|(\.[0-9]*[1-9])0+$/
+      let i
+      for (i = si.length - 1; i > 0; i--) {
+        if (num >= si[i].value) {
+          break
+        }
+      }
+      const abbrev = num / si[i].value
+      const numDigits = abbrev.toString().replace('.', '').length
+      const digits = numDigits < 3 ? 1 : 0
+      return abbrev.toFixed(digits).replace(regex, '$1') + si[i].suffix
     },
     filterItem(item) {
       const searchMatch = this.searchFilter(item)
