@@ -25,7 +25,7 @@
       </Heading>
 
       <PeriodNav :period="period" />
-      <Dygraph :data="data" class="price-graph" />
+      <Dygraph :data="data" :annotation="annotation" class="price-graph" />
 
       <hr class="divider">
 
@@ -35,7 +35,7 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatNum(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="formatDate(data)" :class="isCurrentHigh ? 'current-high' : ''" class="num-high">{{ data.value }}</span>
+            <span v-b-tooltip.hover :title="formatDate(data.item.time_high)" :class="isCurrentHigh ? 'current-high' : ''" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
           </template>
         </b-table>
       </div>
@@ -50,6 +50,13 @@
 
 .summary-table.table {
   margin-bottom: 0;
+}
+
+.current-high-annotation {
+  font-weight: 600;
+  color: #444 !important;
+  border: none;
+  background: transparent;
 }
 </style>
 
@@ -210,7 +217,9 @@ export default {
           label: 'Volatility',
           class: 'numeric'
         }
-      ]
+      ],
+      annotation: null,
+      showHighAnnotation: false
     }
   },
 
@@ -320,9 +329,24 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(val) {
-      const date = new Date(val.item.time_high)
+    formatDate(str) {
+      const date = new Date(str)
       return date.toLocaleString() + ' NST'
+    },
+    handleHighHover(hovered) {
+      if (hovered) {
+        this.annotation = {
+          series: this.ticker,
+          x: this.currentSummary.time_high,
+          shortText: 'High',
+          cssClass: 'current-high-annotation',
+          width: 36,
+          height: 24,
+          tickHeight: null
+        }
+      } else {
+        this.annotation = null
+      }
     }
   }
 }

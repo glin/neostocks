@@ -47,6 +47,10 @@ export default {
     options: {
       type: Object,
       default: defaultOptions
+    },
+    annotation: {
+      type: Object,
+      default: null
     }
   },
 
@@ -57,6 +61,12 @@ export default {
         width: this.width,
         height: this.height
       }
+    }
+  },
+
+  watch: {
+    annotation() {
+      this.setAnnotations()
     }
   },
 
@@ -86,6 +96,7 @@ export default {
         }
         const csv = dataFrameToCSV(data)
         this.g = renderDygraph(this.$refs.el, csv, this.options)
+        this.setAnnotations()
       },
       { immediate: true }
     )
@@ -93,10 +104,14 @@ export default {
 
   methods: {
     resetGraph() {
-      if (this.g) {
-        const plotData = [[0, 0]]
-        this.g.updateOptions({ file: plotData })
-      }
+      if (!this.g) return
+      const plotData = [[0, 0]]
+      this.g.updateOptions({ file: plotData })
+    },
+    setAnnotations() {
+      if (!this.g) return
+      const annotations = this.annotation ? [this.annotation] : []
+      this.g.setAnnotations(annotations)
     }
   }
 }
