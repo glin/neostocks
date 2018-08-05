@@ -106,7 +106,7 @@ const defaultOptions = {
   axes: {
     x: {
       valueFormatter: function(d) {
-        return new Date(d).toLocaleString()
+        return new Date(d).toLocaleString() + ' NST'
       },
       drawGrid: false
     }
