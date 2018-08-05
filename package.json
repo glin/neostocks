@@ -10,6 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@mdi/svg": "^2.5.94",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
     "babel-loader": "^7.1.5",
