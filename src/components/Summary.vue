@@ -13,6 +13,7 @@
           <a v-if="filter === 'bargain'" :href="getBuyUrl(data.value)" target="_blank" rel="noopener noreferrer">
             <span class="buy-link">(buy)</span>
           </a>
+          <span v-if="filter === 'hot' && isHotStockNew(data.value)" class="new-hot-tag">new!</span>
         </div>
       </template>
       <template slot="change" slot-scope="data">
@@ -109,6 +110,11 @@
 .buy-link {
   font-size: small;
   color: #1e7e34;
+}
+
+.new-hot-tag {
+  font-size: small;
+  color: #e36209;
 }
 </style>
 
@@ -327,16 +333,27 @@ export default {
       return price >= 15 && price < 20
     },
     hotFilter(item) {
-      return this.hotStocks && this.hotStocks.includes(item.ticker)
+      return this.isHotStock(item.ticker)
+    },
+    isHotStock(ticker) {
+      return (
+        this.hotStocks && this.hotStocks.some(stock => stock.ticker === ticker)
+      )
+    },
+    isHotStockNew(ticker) {
+      return (
+        this.hotStocks &&
+        this.hotStocks.some(stock => stock.ticker === ticker && stock.new)
+      )
+    },
+    isCurrentHigh(curr, high) {
+      return curr === high && curr >= 30 && this.filter !== 'bargain'
     },
     getCompanyLogo(ticker) {
       return this.companies[ticker].logo
     },
     getBuyUrl(ticker) {
       return this.companies[ticker].buyUrl
-    },
-    isCurrentHigh(curr, high) {
-      return curr === high && curr >= 30 && this.filter !== 'bargain'
     }
   }
 }
