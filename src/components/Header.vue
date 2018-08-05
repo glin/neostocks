@@ -45,7 +45,7 @@
 }
 
 .search-input {
-  padding-right: 50px;
+  padding-right: 40px;
   min-width: 200px;
   border-radius: 1px;
   transition: none;
@@ -56,8 +56,12 @@
 }
 
 .search-btn {
+  display: flex;
+  justify-content: center;
   position: absolute;
   right: 0;
+  padding: 0;
+  width: 40px;
   border: none;
   background: transparent;
 }
