@@ -243,7 +243,7 @@ export default {
       if (!this.summaryData) return null
       return this.summaryData.period_all
     },
-    currentItems() {
+    currentSummary() {
       switch (this.period) {
         case '1d':
           return this.period_1d
@@ -254,6 +254,9 @@ export default {
         case 'all':
           return this.period_all
       }
+    },
+    currentItems() {
+      return this.currentSummary.filter(item => item.ticker !== 'NEODAQ')
     },
     currentFields() {
       const keys = Object.keys(this.currentItems[0])
