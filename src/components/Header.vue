@@ -55,7 +55,7 @@
 
 .search-input {
   padding-right: 40px;
-  min-width: 200px;
+  width: 200px;
   border-radius: 1px;
   transition: none;
 }
