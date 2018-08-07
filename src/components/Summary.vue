@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Heading class="heading">{{ title }}</Heading>
     <PeriodNav :period="period" />
 
     <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" :empty-filtered-text="emptyFilterText" class="summary" hover striped responsive show-empty>
@@ -86,12 +85,6 @@
 </style>
 
 <style scoped>
-@media (min-width: 576px) {
-  .heading {
-    display: none;
-  }
-}
-
 .ticker {
   white-space: nowrap;
 }
