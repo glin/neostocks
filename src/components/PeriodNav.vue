@@ -1,9 +1,9 @@
 <template>
   <b-nav :class="navClass" tabs>
     <b-nav-item :active="period === '1d'" @click="navigate('')">1 day</b-nav-item>
-    <b-nav-item :active="period === '5d'" @click="navigate('?period=5d')">5 days</b-nav-item>
-    <b-nav-item :active="period === '1m'" @click="navigate('?period=1m')">1 month</b-nav-item>
-    <b-nav-item :active="period === 'all'" @click="navigate('?period=all')">All</b-nav-item>
+    <b-nav-item :active="period === '5d'" @click="navigate('5d')">5 days</b-nav-item>
+    <b-nav-item :active="period === '1m'" @click="navigate('1m')">1 month</b-nav-item>
+    <b-nav-item :active="period === 'all'" @click="navigate('all')">All</b-nav-item>
   </b-nav>
 </template>
 
@@ -53,8 +53,14 @@ export default {
   },
 
   methods: {
-    navigate(location) {
-      this.$router.push(location)
+    navigate(period) {
+      const query = { ...this.$route.query }
+      if (period) {
+        query.period = period
+      } else {
+        delete query.period
+      }
+      this.$router.push({ query })
     }
   }
 }

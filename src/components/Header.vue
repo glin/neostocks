@@ -14,11 +14,20 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form class="search-form">
-            <b-form-input :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" @input="onSearch" />
-            <b-button class="search-btn" variant="default">
+          <b-nav-form class="search-form" @submit="handleSearch">
+            <b-form-input :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="onSearch" @focus.native="handleSearchInputFocus(true)" @blur.native="handleSearchInputFocus(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
+            <b-button class="search-btn" variant="default" @click="handleSearch">
               <SearchIcon class="search-icon" />
             </b-button>
+            <b-list-group v-if="showSearchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
+              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResults" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="clearSearch">
+                <img :src="company.logo" :alt="company.ticker" class="company-logo">
+                <span>{{ company.ticker }}</span>
+              </b-list-group-item>
+              <b-list-group-item v-if="search && searchResults.length === 0" class="search-result-item">
+                <span class="no-results-found">No tickers found</span>
+              </b-list-group-item>
+            </b-list-group>
           </b-nav-form>
         </b-navbar-nav>
       </b-collapse>
@@ -80,6 +89,44 @@
 .search-btn:hover > .search-icon {
   opacity: 1;
 }
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.search-result-item,
+.search-result-item.active {
+  padding: 0.35rem 0.7rem;
+  border-radius: 0;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.search-result-item:first-child {
+  border-top: none;
+}
+
+.search-result-item:hover {
+  background-color: #fff;
+}
+
+.search-result-item.hover {
+  background-color: #eee;
+}
+
+.company-logo {
+  margin-right: 0.25em;
+  height: 25px;
+}
+
+.no-results-found {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
 </style>
 
 <script>
@@ -89,23 +136,86 @@ export default {
   components: {
     SearchIcon
   },
+
   props: {
+    search: {
+      type: String,
+      required: true
+    },
     onSearch: {
       type: Function,
       required: true
+    },
+    searchResults: {
+      type: Array,
+      required: true
+    },
+    clearSearch: {
+      type: Function,
+      required: true
+    },
+    query: {
+      type: String,
+      required: true
     }
   },
+
+  data() {
+    return {
+      selectedIndex: -1,
+      searchInputFocused: false,
+      searchResultsHovered: false
+    }
+  },
+
   computed: {
-    query() {
-      return this.$route.query.period
-        ? `?period=${this.$route.query.period}`
-        : ''
+    showSearchResults() {
+      return this.searchInputFocused || this.searchResultsHovered
     }
   },
+
+  watch: {
+    searchResults(newSearchResults) {
+      if (newSearchResults.length === 1) {
+        this.selectedIndex = 0
+      } else {
+        this.selectedIndex = -1
+      }
+    }
+  },
+
   methods: {
     formatSearch(val) {
       // only allow alpha, whitespace, separator characters
       return val.toUpperCase().replace(/[^A-Z\s,]/g, '')
+    },
+    isSelected(index) {
+      return this.selectedIndex === index
+    },
+    changeSelectedIndex(n) {
+      this.selectedIndex =
+        (this.selectedIndex + n + this.searchResults.length) %
+        this.searchResults.length
+    },
+    handleSearchInputFocus(focused) {
+      this.searchInputFocused = focused
+    },
+    handleSearchResultsHover(index) {
+      this.selectedIndex = index
+      this.searchResultsHovered = (index > -1)
+    },
+    handleSearch() {
+      if (this.selectedIndex < 0) {
+        this.clearSearch()
+        const query = { search: this.search }
+        if (this.$route.query.period) {
+          query.period = this.$route.query.period
+        }
+        this.$router.push({ path: '/', query: query })
+        return
+      }
+      const selected = this.$refs.searchResults[this.selectedIndex]
+      selected.$el.click()
     }
   }
 }

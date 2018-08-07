@@ -29,7 +29,7 @@ const routes = [
           filter = 'hot'
           break
       }
-      return { period: route.query.period, filter }
+      return { period: route.query.period, search: route.query.search, filter }
     }
   },
   {
@@ -62,6 +62,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // Convert all query parameters to lowercase
   Object.keys(to.query).map(key => {
+    if (key === 'search') return
     to.query[key] = to.query[key].toLowerCase()
   })
   next()

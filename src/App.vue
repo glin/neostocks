@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Header :on-search="handleSearch" />
+    <Header :search="search" :on-search="handleSearch" :search-results="searchResults" :clear-search="clearSearch" :query="query" />
     <b-container class="content">
       <keep-alive>
-        <router-view v-bind="stockData" :companies="companies" :search="search" />
+        <router-view v-bind="stockData" :companies="companies" />
       </keep-alive>
     </b-container>
     <Footer :update-time="updateTime" />
@@ -63,6 +63,33 @@ export default {
         summaryData: this.summaryData,
         hotStocks: this.hotStocks
       }
+    },
+    searchResults() {
+      if (!this.search) return []
+
+      const searchItems = this.search
+        .split(/[\s,]/)
+        .filter(s => s != '')
+        .map(s => s.toUpperCase())
+
+      const tickers = Object.keys(this.companies).filter(ticker => {
+        const company = this.companies[ticker]
+        if (company.index) return false
+        return searchItems.some(search => ticker.match(search))
+      })
+
+      return tickers.map(ticker => {
+        return {
+          ticker,
+          ...this.companies[ticker],
+          href: '/tickers/' + ticker + this.query
+        }
+      })
+    },
+    query() {
+      return this.$route.query.period
+        ? `?period=${this.$route.query.period}`
+        : ''
     }
   },
 
@@ -77,6 +104,9 @@ export default {
   methods: {
     handleSearch(val) {
       this.search = val
+    },
+    clearSearch() {
+      this.search = ''
     }
   }
 }

@@ -348,7 +348,10 @@ export default {
     },
     searchFilter(item) {
       if (!this.search) return true
-      const searchItems = this.search.split(/[\s,]/).filter(s => s != '')
+      const searchItems = this.search
+        .split(/[\s,]/)
+        .filter(s => s != '')
+        .map(s => s.toUpperCase())
       return searchItems.some(search => item.ticker.match(search))
     },
     bargainFilter(item) {
