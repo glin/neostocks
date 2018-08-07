@@ -8,14 +8,15 @@ const COMPANY_PROFILE_URL =
 export function getCompanyData() {
   Object.keys(companies).forEach(ticker => {
     const company = companies[ticker]
-    company.logo = require(`./assets/logos/${company.logo_id}.gif`)
+    company.logo = require(`./assets/logos/${company.logo_id}.png`)
     company.buyUrl = STOCK_BUY_URL + ticker
     company.profileUrl = COMPANY_PROFILE_URL + company.id
   })
 
   companies['NEODAQ'] = {
     company: 'Neopian Stock Market',
-    logo: require('./assets/logos/nigel.gif')
+    logo: require('./assets/logos/nigel.png'),
+    index: true
   }
 
   return companies
