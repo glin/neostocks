@@ -202,20 +202,20 @@ export default {
     },
     handleSearchResultsHover(index) {
       this.selectedIndex = index
-      this.searchResultsHovered = (index > -1)
+      this.searchResultsHovered = index > -1
     },
     handleSearch() {
-      if (this.selectedIndex < 0) {
+      if (this.selectedIndex >= 0) {
+        const selected = this.$refs.searchResults[this.selectedIndex]
+        selected.$el.click()
+      } else if (this.search) {
         this.clearSearch()
         const query = { search: this.search }
         if (this.$route.query.period) {
           query.period = this.$route.query.period
         }
         this.$router.push({ path: '/', query: query })
-        return
       }
-      const selected = this.$refs.searchResults[this.selectedIndex]
-      selected.$el.click()
     }
   }
 }
