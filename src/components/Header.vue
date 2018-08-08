@@ -19,8 +19,8 @@
             <b-button class="search-btn" variant="default" @click="handleSearch">
               <SearchIcon class="search-icon" />
             </b-button>
-            <b-list-group v-if="showSearchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
-              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResults" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="clearSearch">
+            <b-list-group v-if="showSearchResults" ref="searchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
+              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResultItems" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="clearSearch">
                 <img :src="company.logo" :alt="company.ticker" class="company-logo">
                 <span>{{ company.ticker }}</span>
               </b-list-group-item>
@@ -94,6 +94,11 @@
   position: absolute;
   top: 100%;
   width: 100%;
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: none;
+  border-bottom: none;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
@@ -104,6 +109,8 @@
   color: #495057;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: none;
+  border-left: none;
 }
 
 .search-result-item:first-child {
@@ -206,7 +213,7 @@ export default {
     },
     handleSearch() {
       if (this.selectedIndex >= 0) {
-        const selected = this.$refs.searchResults[this.selectedIndex]
+        const selected = this.$refs.searchResultItems[this.selectedIndex]
         selected.$el.click()
       } else if (this.search) {
         this.clearSearch()
