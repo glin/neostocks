@@ -1,27 +1,45 @@
 <template>
-  <div>
-    <Header :search="search" :on-search="handleSearch" :search-results="searchResults" :clear-search="clearSearch" :query="query" />
-    <b-container class="content">
-      <keep-alive>
-        <router-view v-bind="stockData" :companies="companies" />
-      </keep-alive>
-    </b-container>
-    <Footer :update-time="updateTime" />
+  <div class="main">
+    <div class="main-container">
+      <Header :search="search" :on-search="handleSearch" :search-results="searchResults" :clear-search="clearSearch" :query="query" />
+      <b-container class="main-content">
+        <keep-alive>
+          <router-view v-bind="stockData" :companies="companies" />
+        </keep-alive>
+      </b-container>
+      <UpdateTime :update-time="updateTime" />
+    </div>
+    <Footer />
   </div>
 </template>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
 
+html,
 body {
+  height: 100%;
+}
+
+body {
+  overflow-y: scroll;
   background-color: #f7f7f7 !important;
   font-family: 'Open Sans';
-  overflow-y: scroll;
 }
 </style>
 
 <style scoped>
-.content {
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-container {
+  flex: 1 0 auto;
+}
+
+.main-content {
   margin-top: 15px;
   padding: 10px;
   background-color: #fff;
@@ -30,7 +48,11 @@ body {
 }
 
 @media (max-width: 575.98px) {
-  .content {
+  .main-container {
+    min-height: 100vh;
+  }
+
+  .main-content {
     margin-top: 7.5px;
   }
 }
@@ -39,12 +61,14 @@ body {
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import UpdateTime from './components/UpdateTime'
 import { getCompanyData } from './companies'
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    UpdateTime
   },
 
   data() {

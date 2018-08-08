@@ -1,80 +1,47 @@
 <template>
-  <b-container class="footer">
-    <div v-if="updateTimeString" :title="updateTimeString" class="last-update-time">
-      last updated {{ updateTimeSince }} ago
-    </div>
-  </b-container>
+  <footer>
+    <b-container class="footer-content">
+      <b-link :to="'/about'" class="about-link">About</b-link>
+      <div class="copyright">© 1999-2018 Neopets, Inc.<br class="copyright-break"> All rights reserved. Used with permission.</div>
+    </b-container>
+  </footer>
 </template>
 
 <style scoped>
-.footer {
-  padding: 6px 2px;
+footer {
+  flex-shrink: 0;
+  width: 100%;
+  /* border-top: 1px solid #ddd; */
+  padding: 10px 0;
+  background-color: #f0f0f0;
 }
 
-.last-update-time {
-  margin-right: 2px;
-  text-align: right;
-  font-style: italic;
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
   font-size: small;
+  color: #555;
+}
+
+.about-link {
+  color: #555;
+}
+
+.copyright {
+  text-align: right;
 }
 
 @media (max-width: 575.98px) {
-  .last-update-time {
-    text-align: center;
+  .copyright {
+    font-size: smaller;
+  }
+}
+
+@media (min-width: 576px) {
+  .copyright-break {
+    display: none;
   }
 }
 </style>
-
-<script>
-export default {
-  props: {
-    updateTime: {
-      type: Object,
-      default: null
-    }
-  },
-
-  data() {
-    return {
-      now: new Date()
-    }
-  },
-
-  computed: {
-    updateTimeUTC() {
-      return this.updateTime ? new Date(this.updateTime.UTC) : null
-    },
-    updateTimeNST() {
-      return this.updateTime ? new Date(this.updateTime.NST) : null
-    },
-    updateTimeString() {
-      return this.updateTimeNST
-        ? this.updateTimeNST.toLocaleString() + ' NST'
-        : null
-    },
-    updateTimeSince() {
-      return timeSince(this.updateTimeUTC, this.now)
-    }
-  },
-
-  created() {
-    setInterval(() => (this.now = new Date()), 60 * 1000)
-  }
-}
-
-function timeSince(then, now = new Date()) {
-  var seconds = Math.floor((now - then) / 1000)
-
-  var interval = Math.floor(seconds / 3600)
-  if (interval > 1) {
-    return interval + ' hours'
-  }
-  interval = Math.floor(seconds / 60)
-  if (interval > 1) {
-    return interval + ' mins'
-  } else if (interval === 1) {
-    return interval + ' min'
-  }
-  return 'less than 1 min'
-}
-</script>
