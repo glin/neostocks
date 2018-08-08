@@ -15,10 +15,10 @@
 
         <b-navbar-nav class="ml-auto">
           <b-nav-form class="search-form" @submit="handleSearch">
-            <b-form-input :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="onSearch" @focus.native="handleSearchInputFocus(true)" @blur.native="handleSearchInputFocus(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
-            <b-button class="search-btn" variant="default" @click="handleSearch">
-              <SearchIcon class="search-icon" />
-            </b-button>
+            <label for="ticker-search-input" class="search-icon" @mousedown.prevent>
+              <SearchIcon />
+            </label>
+            <b-form-input id="ticker-search-input" :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="onSearch" @focus.native="handleSearchInputFocus(true)" @blur.native="handleSearchInputFocus(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
             <b-list-group v-if="showSearchResults" ref="searchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
               <b-list-group-item v-for="(company, index) in searchResults" ref="searchResultItems" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="clearSearch">
                 <img :src="company.logo" :alt="company.ticker" class="company-logo">
@@ -54,9 +54,9 @@
 }
 
 .search-input {
-  padding-right: 40px;
+  padding-left: 36px;
   width: 200px;
-  border-radius: 1px;
+  border-radius: 2px;
   transition: none;
 }
 
@@ -64,30 +64,13 @@
   box-shadow: inset 0 0 0 1px rgba(0, 123, 255, 0.25);
 }
 
-.search-btn {
+.search-icon {
   display: flex;
   justify-content: center;
   position: absolute;
-  right: 0;
-  padding: 0;
-  width: 40px;
-  border: none;
-  background: transparent;
-}
-
-.search-btn:focus,
-.search-btn:hover {
-  box-shadow: none;
-}
-
-.search-icon {
-  display: block;
+  left: 0;
+  width: 36px;
   opacity: 0.6;
-}
-
-.search-btn:focus,
-.search-btn:hover > .search-icon {
-  opacity: 1;
 }
 
 .search-results {
