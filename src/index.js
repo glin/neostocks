@@ -10,6 +10,7 @@ import About from './components/About'
 import Summary from './components/Summary'
 import Ticker from './components/Ticker'
 import PageNotFound from './components/PageNotFound'
+import companies from './companies'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -30,18 +31,33 @@ const routes = [
           break
       }
       return { period: route.query.period, search: route.query.search, filter }
+    },
+    meta: {
+      showUpdateTime: true
     }
   },
   {
     path: '/tickers/:ticker',
     component: Ticker,
-    props: route => ({ ticker: route.params.ticker, period: route.query.period })
+    props: route => ({ ticker: route.params.ticker, period: route.query.period }),
+    meta: {
+      showUpdateTime: true
+    },
+    beforeEnter(to, from, next) {
+      if (!companies[to.params.ticker]) {
+        to.meta.showUpdateTime = false
+      }
+      next()
+    }
   },
   {
     path: '/index',
     alias: '/tickers/NEODAQ',
     component: Ticker,
-    props: route => ({ ticker: 'NEODAQ', period: route.query.period })
+    props: route => ({ ticker: 'NEODAQ', period: route.query.period }),
+    meta: {
+      showUpdateTime: true
+    }
   },
   {
     path: '/about',

@@ -7,7 +7,7 @@
           <router-view v-bind="stockData" :companies="companies" />
         </keep-alive>
       </b-container>
-      <UpdateTime :update-time="updateTime" />
+      <UpdateTime v-if="showUpdateTime" :update-time="updateTime" />
     </div>
     <Footer />
   </div>
@@ -37,6 +37,7 @@ body {
 
 .main-container {
   flex: 1 0 auto;
+  margin-bottom: 30px;
 }
 
 .main-content {
@@ -62,7 +63,7 @@ body {
 import Header from './components/Header'
 import Footer from './components/Footer'
 import UpdateTime from './components/UpdateTime'
-import { getCompanyData } from './companies'
+import companies from './companies'
 
 export default {
   components: {
@@ -76,8 +77,8 @@ export default {
       summaryData: window.__data__.summary_data,
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
-      companies: getCompanyData(),
-      search: ''
+      search: '',
+      companies
     }
   },
 
@@ -109,6 +110,9 @@ export default {
           href: '/tickers/' + ticker + this.query
         }
       })
+    },
+    showUpdateTime() {
+      return this.$route.meta.showUpdateTime
     },
     query() {
       return this.$route.query.period

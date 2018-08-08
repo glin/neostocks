@@ -5,7 +5,7 @@ const STOCK_BUY_URL =
 const COMPANY_PROFILE_URL =
   'http://www.neopets.com/stockmarket.phtml?type=profile&company_id='
 
-export function getCompanyData() {
+function getCompanyData() {
   Object.keys(companies).forEach(ticker => {
     const company = companies[ticker]
     company.logo = require(`./assets/logos/${company.logo_id}.png`)
@@ -21,3 +21,5 @@ export function getCompanyData() {
 
   return companies
 }
+
+export default getCompanyData()

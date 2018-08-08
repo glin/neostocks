@@ -11,7 +11,6 @@
   display: flex;
   justify-content: flex-end;
   padding: 6px 4px;
-  margin-bottom: 30px;
   font-style: italic;
   font-size: small;
   color: #555;
