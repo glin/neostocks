@@ -35,7 +35,7 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="formatDate(data.item.time_high)" :class="isCurrentHigh ? 'current-high' : ''" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
+            <span v-b-tooltip.hover :title="formatDate(data.item.time_high)" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
           </template>
         </b-table>
       </div>

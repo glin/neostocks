@@ -22,7 +22,7 @@
         <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip.hover :title="formatDate(data)" :class="isCurrentHigh(data.item.curr, data.value) ? 'current-high' : ''" class="num-high">{{ data.value }}</span>
+        <span v-b-tooltip.hover :title="formatDate(data)" :class="{ 'current-high': isCurrentHigh(data.item.curr, data.value) }" class="num-high">{{ data.value }}</span>
       </template>
     </b-table>
   </div>
