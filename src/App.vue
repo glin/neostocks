@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="main-container">
-      <Header :search="search" :on-search="handleSearch" :search-results="searchResults" :clear-search="clearSearch" :query="query" />
+      <Header :search="search" :on-search-change="handleSearchChange" :search-results="searchResults" :clear-search="clearSearch" :query="query" />
       <b-container class="main-content">
         <keep-alive>
           <router-view v-bind="stockData" :companies="companies" />
@@ -130,7 +130,7 @@ export default {
   },
 
   methods: {
-    handleSearch(val) {
+    handleSearchChange(val) {
       this.search = val
     },
     clearSearch() {

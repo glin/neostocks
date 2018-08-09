@@ -13,13 +13,13 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form class="search-form" @submit="handleSearch">
+          <b-nav-form class="search-form" @submit="handleSearchSubmit" @keydown.esc="showSearchResults(false)">
             <label for="ticker-search-input" class="search-icon" @mousedown.prevent>
               <SearchIcon />
             </label>
-            <b-form-input id="ticker-search-input" :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="onSearch" @focus.native="handleSearchInputFocus(true)" @blur.native="handleSearchInputFocus(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
-            <b-list-group v-if="showSearchResults" ref="searchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
-              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResultItems" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="clearSearch">
+            <b-form-input id="ticker-search-input" ref="searchInput" :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="handleSearchChange" @focus.native="showSearchResults(true)" @blur.native="showSearchResults(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
+            <b-list-group v-if="searchResultsVisible" ref="searchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
+              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResultItems" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="handleSearchSubmit" @mousedown.prevent.native>
                 <img :src="company.logo" :alt="company.ticker" class="company-logo">
                 <span>{{ company.ticker }}</span>
               </b-list-group-item>
@@ -131,7 +131,7 @@ export default {
       type: String,
       required: true
     },
-    onSearch: {
+    onSearchChange: {
       type: Function,
       required: true
     },
@@ -152,14 +152,7 @@ export default {
   data() {
     return {
       selectedIndex: -1,
-      searchInputFocused: false,
-      searchResultsHovered: false
-    }
-  },
-
-  computed: {
-    showSearchResults() {
-      return this.searchInputFocused || this.searchResultsHovered
+      searchResultsVisible: false
     }
   },
 
@@ -182,29 +175,37 @@ export default {
       return this.selectedIndex === index
     },
     changeSelectedIndex(n) {
-      this.selectedIndex =
-        (this.selectedIndex + n + this.searchResults.length) %
-        this.searchResults.length
-    },
-    handleSearchInputFocus(focused) {
-      this.searchInputFocused = focused
+      let numItems = this.searchResults.length
+      if (this.searchResults.length === 0) return
+      // temporary shift to count the "no selection" item at -1
+      numItems += 1
+      this.selectedIndex += 1
+      this.selectedIndex = (this.selectedIndex + n + numItems) % numItems
+      this.selectedIndex -= 1
     },
     handleSearchResultsHover(index) {
       this.selectedIndex = index
-      this.searchResultsHovered = index > -1
     },
-    handleSearch() {
+    handleSearchChange(value) {
+      this.searchResultsVisible = value.length > 0
+      this.onSearchChange(value)
+    },
+    handleSearchSubmit() {
       if (this.selectedIndex >= 0) {
         const selected = this.$refs.searchResultItems[this.selectedIndex]
         selected.$el.click()
       } else if (this.search) {
-        this.clearSearch()
         const query = { search: this.search }
         if (this.$route.query.period) {
           query.period = this.$route.query.period
         }
         this.$router.push({ path: '/', query: query })
       }
+      this.clearSearch()
+      this.$refs.searchInput.$el.blur()
+    },
+    showSearchResults(visible) {
+      this.searchResultsVisible = visible
     }
   }
 }
