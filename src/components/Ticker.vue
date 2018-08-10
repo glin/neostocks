@@ -35,7 +35,7 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="formatDate(data.item.time_high)" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
+            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
           </template>
         </b-table>
       </div>
@@ -282,6 +282,20 @@ export default {
         this.currentPrice >= 30
       )
     },
+    currentHighTime() {
+      if (this.period === 'all') {
+        const date = new Date(this.currentSummary.time_high)
+        return date.toLocaleDateString()
+      }
+      return this.currentSummary.time_high
+    },
+    currentHighTimeFormatted() {
+      const date = new Date(this.currentSummary.time_high)
+      if (this.period === 'all') {
+        return date.toLocaleDateString()
+      }
+      return date.toLocaleString() + ' NST'
+    },
     summaryTables() {
       return [
         { class: 'summary-tables', keys: this.currentKeys },
@@ -348,15 +362,11 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(str) {
-      const date = new Date(str)
-      return date.toLocaleString() + ' NST'
-    },
     handleHighHover(hovered) {
       if (hovered) {
         this.annotation = {
           series: this.ticker,
-          x: this.currentSummary.time_high,
+          x: this.currentHighTime,
           shortText: 'High',
           cssClass: 'current-high-annotation',
           width: 36,
