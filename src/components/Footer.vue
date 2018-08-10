@@ -22,11 +22,11 @@ footer {
   align-items: center;
   height: 100%;
   font-size: small;
-  color: #555;
+  color: #777;
 }
 
 .about-link {
-  color: #555;
+  color: #777;
 }
 
 .copyright {
