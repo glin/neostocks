@@ -1,13 +1,45 @@
 <template>
   <div class="about">
-    <p>Cat ipsum dolor sit amet, bobcat but maine coon. Lynx puma. Panther havana brown. Burmese norwegian forest for kitten grimalkin abyssinian. Manx sphynx, tiger and norwegian forest munchkin mouser yet himalayan. Jaguar. Cougar birman and american bobtail yet tabby tiger. British shorthair himalayan so kitty and bobcat for sphynx but lion. Kitty bombay, british shorthair yet havana brown cheetah so birman, for maine coon. British shorthair havana brown but manx. Kitten singapura so ocicat scottish fold. Scottish fold egyptian mau egyptian mau yet devonshire rex tiger british shorthair. Bobcat donskoy and havana brown ocelot tom, american shorthair. Tomcat. Jaguar maine coon but tom munchkin. Cornish rex ocelot but mouser persian but cheetah grimalkin cornish rex.</p>
-    <p>Devonshire rex thai for cheetah yet leopard, mouser. Turkish angora abyssinian british shorthair tiger ragdoll but norwegian forest so tabby. Kitty. Panther siamese or kitten yet thai but british shorthair cougar. Singapura. Tabby donskoy devonshire rex. Thai maine coon so himalayan ocicat american shorthair for manx. Donskoy munchkin or malkin. Tabby bombay so cheetah savannah jaguar singapura or persian. Birman turkish angora birman for abyssinian and leopard. Cougar burmese. Manx british shorthair devonshire rex but tom siberian, ocelot ragdoll. Russian blue havana brown or kitty singapura, siberian so siberian so himalayan. Birman siamese singapura for kitten, leopard. Cheetah manx leopard. Balinese balinese so devonshire rex. Persian russian blue yet munchkin bengal. Himalayan. Savannah balinese so munchkin sphynx. Singapura maine coon for mouser so persian so maine coon but tomcat. Russian blue. Grimalkin turkish angora. Lion tom tomcat. Cornish rex american shorthair jaguar, but scottish fold tom.</p>
-    <p>Bengal panther. Cheetah ragdoll. Grimalkin ragdoll lion for ocelot turkish angora. Bobcat. Ocicat puma, or maine coon. Norwegian forest norwegian forest thai ocelot.</p>
+    <h3>About</h3>
+    <hr>
+    <h5>What is this?</h5>
+    <p>A stock price tracker for the
+      <a href="http://www.neopets.com/stockmarket.phtml" target="_blank" rel="noopener noreferrer">Neopets Stock Market</a>, much like the old Neodaq.com (RIP).
+    </p>
+
+    <h5>When does the site update?</h5>
+    <p>
+      Every 30 minutes at :00 and :30.
+    </p>
+
+    <h5>When does the Neopets Stock Market update?</h5>
+    <p>
+      <i>Approximately</i> every 30 minutes, but it's not scheduled. It's difficult to predict what minute stocks will update at a given hour, so prices shown here may not be current until the next site update.
+    </p>
+
+    <h5>Credits</h5>
+    <p>
+      Data from 2006-2017 comes from Neodaq.com, and was collected by
+      <a href="https://www.reddit.com/r/neopets/comments/7rwxwd/neodaqs_data_collected_from_old_neodaqs_website/" target="_blank" rel="noopener noreferrer">/u/HostilePride</a> using WaybackMachine snapshots.
+    </p>
+    <p> Data from Feb-June 2018 was generously contributed by
+      <a href="https://www.reddit.com/user/HostilePride" target="_blank" rel="noopener noreferrer">/u/HostilePride</a>. Thanks!
+    </p>
   </div>
 </template>
 
 <style scoped>
 .about {
-  padding: 10px 10px 0 10px;
+  padding: 10px 15px 10px;
+}
+
+.about h5 {
+  margin: 25px 0 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.about p {
+  margin: 0 0 3px;
 }
 </style>
