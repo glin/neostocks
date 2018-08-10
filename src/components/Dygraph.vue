@@ -44,10 +44,6 @@ export default {
       type: Object,
       default: null
     },
-    options: {
-      type: Object,
-      default: defaultOptions
-    },
     annotation: {
       type: Object,
       default: null
@@ -82,6 +78,8 @@ export default {
         // copy data before mutating it
         let data = { ...this.data }
 
+        const isDateTime = data.time[0].indexOf(':') > 0
+
         if (!isNaN(data.time[0])) {
           data.time = data.time.map(timeSec => new Date(timeSec * 1000))
         }
@@ -95,7 +93,8 @@ export default {
           }, {})
         }
         const csv = dataFrameToCSV(data)
-        this.g = renderDygraph(this.$refs.el, csv, this.options)
+        const valueFormatter = isDateTime ? dateTimeValueFormatter : dateValueFormatter
+        this.g = renderDygraph(this.$refs.el, csv, defaultOptions(valueFormatter))
         this.setAnnotations()
       },
       { immediate: true }
@@ -116,21 +115,29 @@ export default {
   }
 }
 
-const defaultOptions = {
-  gridLineColor: 'rgb(187, 187, 187)',
-  axes: {
-    x: {
-      valueFormatter: function(d) {
-        return new Date(d).toLocaleString() + ' NST'
-      },
-      drawGrid: false
-    }
-  },
-  colors: ['#2294ba', '#1e7e34'],
-  fillGraph: true
+function defaultOptions(valueFormatter = dateTimeValueFormatter) {
+  return {
+    gridLineColor: 'rgb(187, 187, 187)',
+    axes: {
+      x: {
+        valueFormatter,
+        drawGrid: false
+      }
+    },
+    colors: ['#2294ba', '#1e7e34'],
+    fillGraph: true
+  }
 }
 
-function renderDygraph(el, data, options = defaultOptions) {
+function dateTimeValueFormatter(d) {
+  return new Date(d).toLocaleString() + ' NST'
+}
+
+function dateValueFormatter(d) {
+  return new Date(d).toLocaleDateString()
+}
+
+function renderDygraph(el, data, options) {
   const g = new Dygraph(el, data, options)
   return g
 }
