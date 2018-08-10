@@ -13,7 +13,7 @@
         <div class="company-subtitle">
           <div class="current-price">
             <span>{{ currentPrice }}</span>
-            <span :class="numChangeClass(currentChange)" class="current-change">{{ formatChange(currentChange) }}</span>
+            <span v-if="!isNaN(currentChange)" :class="numChangeClass(currentChange)" class="current-change">{{ formatChange(currentChange) }}</span>
           </div>
 
           <div v-if="company.buyUrl && company.profileUrl" class="company-links">
@@ -239,12 +239,6 @@ export default {
         return data
       }, {})
     },
-    currentPrice() {
-      return this.summary.period_1d.curr
-    },
-    currentChange() {
-      return this.summary.period_1d.change
-    },
     currentSummary() {
       switch (this.period) {
         case '1d':
@@ -257,11 +251,20 @@ export default {
           return this.summary.period_all
       }
     },
+    currentPrice() {
+      return this.currentSummary.curr
+    },
+    currentChange() {
+      return this.currentSummary.change
+    },
     currentItems() {
       return [this.currentSummary]
     },
     isCurrentHigh() {
-      return this.currentPrice === this.currentSummary.high && this.currentPrice >= 30
+      return (
+        this.currentPrice === this.currentSummary.high &&
+        this.currentPrice >= 30
+      )
     },
     summaryTables() {
       return [
