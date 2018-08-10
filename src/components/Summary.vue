@@ -191,6 +191,21 @@ export default {
           key: 'low',
           class: 'numeric',
           sortable: true,
+          sortDirection: 'desc',
+          periods: ['1d', '5d', '1m']
+        },
+        {
+          key: 'avg_peak',
+          label: 'Avg Peak',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'pct_95',
+          label: 'Top 5%',
+          class: 'numeric',
+          sortable: true,
           sortDirection: 'desc'
         },
         {
@@ -206,20 +221,6 @@ export default {
           sortable: true,
           sortDirection: 'desc',
           periods: ['all']
-        },
-        {
-          key: 'pct_95',
-          label: 'Top 5%',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'avg_peak',
-          label: 'Avg Peak',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
         },
         {
           key: 'sd',
