@@ -216,6 +216,22 @@ export default {
           key: 'sd',
           label: 'Volatility',
           class: 'numeric'
+        },
+        {
+          key: 'avg_volume',
+          label: 'Avg Volume',
+          class: 'numeric',
+          formatter: value => value.toLocaleString()
+        },
+        {
+          key: 'avg_peak',
+          label: 'Avg Peak',
+          class: 'numeric'
+        },
+        {
+          key: 'pct_95',
+          label: 'Top 5%',
+          class: 'numeric'
         }
       ],
       annotation: null,
@@ -274,15 +290,15 @@ export default {
     },
     currentKeys() {
       if (this.period === 'all') {
-        return [['median'], ['high', 'low'], ['avg', 'sd']]
+        return [['pct_95', 'median'], ['high', 'avg_peak'], ['avg', 'sd']]
       }
-      return [['volume', 'open', 'change'], ['high', 'low', 'avg'], ['sd', 'median', 'avg']]
+      return [['volume', 'open'], ['high', 'low'], ['avg', 'sd']]
     },
     currentKeysCompact() {
       if (this.period === 'all') {
-        return [['median', 'sd'], ['high', 'low', 'avg']]
+        return [['avg', 'median', 'sd'], ['high', 'avg_peak', 'pct_95']]
       }
-      return [['volume', 'open', 'change', 'sd'], ['high', 'low', 'avg', 'median']]
+      return [['volume', 'open', 'sd'], ['high', 'low', 'avg']]
     }
   },
 

@@ -208,11 +208,33 @@ export default {
           periods: ['all']
         },
         {
+          key: 'pct_95',
+          label: 'Top 5%',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
+          key: 'avg_peak',
+          label: 'Avg Peak',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        {
           key: 'sd',
           label: 'Volatility',
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc'
+        },
+        {
+          key: 'avg_volume',
+          label: 'Avg Volume',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc',
+          formatter: value => value.toLocaleString()
         }
       ]
     }
