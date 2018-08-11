@@ -13,21 +13,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form class="search-form" @submit="handleSearchSubmit" @keydown.esc="showSearchResults(false)">
-            <label for="ticker-search-input" class="search-icon" @mousedown.prevent>
-              <SearchIcon />
-            </label>
-            <b-form-input id="ticker-search-input" ref="searchInput" :value="search" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="handleSearchChange" @focus.native="showSearchResults(true)" @blur.native="showSearchResults(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
-            <b-list-group v-if="searchResultsVisible" ref="searchResults" class="search-results" @mouseout="handleSearchResultsHover(-1)">
-              <b-list-group-item v-for="(company, index) in searchResults" ref="searchResultItems" :key="company.ticker" :to="company.href" :class="{ hover: isSelected(index) }" class="search-result-item" active-class="test" tabindex="-1" @mouseover.native="handleSearchResultsHover(index)" @click.native="handleSearchSubmit" @mousedown.prevent.native>
-                <img :src="company.logo" :alt="company.ticker" class="company-logo">
-                <span>{{ company.ticker }}</span>
-              </b-list-group-item>
-              <b-list-group-item v-if="search && searchResults.length === 0" class="search-result-item">
-                <span class="no-results">No tickers found</span>
-              </b-list-group-item>
-            </b-list-group>
-          </b-nav-form>
+          <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -52,96 +38,14 @@
   font-weight: 600;
   color: rgba(0, 0, 0, 0.7) !important;
 }
-
-.search-form {
-  position: relative;
-}
-
-.search-input {
-  padding-left: 36px;
-  width: 200px;
-  border-radius: 2px;
-  background-color: transparent;
-  transition: none;
-}
-
-@media (max-width: 575.98px) {
-  .search-form {
-    margin: 10px 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-input {
-    width: 180px;
-  }
-}
-
-.search-input:focus {
-  box-shadow: inset 0 0 0 1px rgba(0, 123, 255, 0.25);
-}
-
-.search-icon {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  width: 36px;
-  opacity: 0.6;
-}
-
-.search-results {
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  max-height: 420px;
-  overflow-y: auto;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-top: none;
-  border-bottom: none;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.search-result-item,
-.search-result-item.active {
-  padding: 0.35rem 0.7rem;
-  border-radius: 0;
-  color: #495057;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-right: none;
-  border-left: none;
-}
-
-.search-result-item:first-child {
-  border-top: none;
-}
-
-.search-result-item:hover {
-  background-color: #fff;
-}
-
-.search-result-item.hover {
-  background-color: #eee;
-}
-
-.company-logo {
-  margin-right: 0.25em;
-  height: 25px;
-}
-
-.no-results {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
 </style>
 
 <script>
-import SearchIcon from '@mdi/svg/svg/magnify.svg'
+import SearchBar from './SearchBar'
 
 export default {
   components: {
-    SearchIcon
+    SearchBar
   },
 
   props: {
@@ -149,83 +53,21 @@ export default {
       type: String,
       required: true
     },
-    onSearchChange: {
-      type: Function,
-      required: true
-    },
     searchResults: {
       type: Array,
       required: true
     },
-    clearSearch: {
+    onSearchChange: {
+      type: Function,
+      required: true
+    },
+    onSearchSubmit: {
       type: Function,
       required: true
     },
     query: {
       type: String,
       required: true
-    }
-  },
-
-  data() {
-    return {
-      selectedIndex: -1,
-      searchResultsVisible: false
-    }
-  },
-
-  watch: {
-    searchResults(newSearchResults) {
-      if (newSearchResults.length === 1) {
-        this.selectedIndex = 0
-      } else {
-        this.selectedIndex = -1
-      }
-    }
-  },
-
-  methods: {
-    formatSearch(val) {
-      // only allow alpha, whitespace, separator characters
-      return val.toUpperCase().replace(/[^A-Z\s,]/g, '')
-    },
-    isSelected(index) {
-      return this.selectedIndex === index
-    },
-    changeSelectedIndex(n) {
-      let numItems = this.searchResults.length
-      if (this.searchResults.length === 0) return
-      // temporary shift to count the "no selection" item at -1
-      numItems += 1
-      this.selectedIndex += 1
-      this.selectedIndex = (this.selectedIndex + n + numItems) % numItems
-      this.selectedIndex -= 1
-    },
-    handleSearchResultsHover(index) {
-      this.selectedIndex = index
-    },
-    handleSearchChange(value) {
-      this.searchResultsVisible = value.length > 0
-      this.onSearchChange(value)
-    },
-    handleSearchSubmit() {
-      if (this.selectedIndex >= 0) {
-        const selected = this.$refs.searchResultItems[this.selectedIndex]
-        selected.$el.click()
-      } else if (this.search && this.searchResults.length > 0) {
-        const query = { search: this.search }
-        if (this.$route.query.period) {
-          query.period = this.$route.query.period
-        }
-        this.$router.push({ path: '/', query: query })
-      } else {
-        return
-      }
-      this.clearSearch()
-      this.$refs.searchInput.$el.blur()
-    },
-    showSearchResults(visible) {
-      this.searchResultsVisible = visible
     }
   }
 }
