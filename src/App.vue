@@ -107,7 +107,7 @@ export default {
         return {
           ticker,
           ...this.companies[ticker],
-          href: '/tickers/' + ticker + this.query
+          location: { path: '/tickers/' + ticker, query: this.query }
         }
       })
     },
@@ -115,9 +115,11 @@ export default {
       return this.$route.meta.showUpdateTime
     },
     query() {
-      return this.$route.query.period
-        ? `?period=${this.$route.query.period}`
-        : ''
+      const query = {}
+      if (this.$route.query.period) {
+        query.period = this.$route.query.period
+      }
+      return query
     }
   },
 
@@ -134,11 +136,8 @@ export default {
       this.search = val
     },
     handleSearchSubmit() {
-      const query = { search: this.search }
-        if (this.$route.query.period) {
-          query.period = this.$route.query.period
-        }
-        this.$router.push({ path: '/', query: query })
+      const query = { search: this.search, ...this.query }
+      this.$router.push({ path: '/', query })
     }
   }
 }
