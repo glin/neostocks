@@ -21,7 +21,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  font-size: small;
+  font-size: 0.9rem;
   color: #777;
 }
 
@@ -31,11 +31,12 @@ footer {
 
 .copyright {
   text-align: right;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 575.98px) {
   .copyright {
-    font-size: smaller;
+    font-size: 0.7rem;
   }
 }
 
