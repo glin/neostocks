@@ -4,7 +4,7 @@
       <Header :search="search" :search-results="searchResults" :on-search-change="handleSearchChange" :on-search-submit="handleSearchSubmit" :query="query" />
       <b-container class="main-content">
         <keep-alive>
-          <router-view v-bind="stockData" :companies="companies" />
+          <router-view v-bind="stockData" :companies="companies" :query="query" />
         </keep-alive>
       </b-container>
       <UpdateTime v-if="showUpdateTime" :update-time="updateTime" />

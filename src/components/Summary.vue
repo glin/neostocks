@@ -5,7 +5,7 @@
     <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" :empty-filtered-text="emptyFilterText" class="summary" hover striped responsive show-empty>
       <template slot="ticker" slot-scope="data">
         <div class="ticker">
-          <router-link :to="'/tickers/' + data.value + query" class="ticker-link">
+          <router-link :to="{ path: '/tickers/' + data.value, query }" class="ticker-link">
             <img :src="getCompanyLogo(data.value)" :alt="data.value" class="company-logo">
             <span class="ticker-text">{{ data.value }}</span>
           </router-link>
@@ -150,6 +150,10 @@ export default {
       default: ''
     },
     companies: {
+      type: Object,
+      required: true
+    },
+    query: {
       type: Object,
       required: true
     }
@@ -314,11 +318,6 @@ export default {
         (this.filter ? `${this.filter} stocks ` : 'tickers ') +
         (this.search ? `matching <i> ${this.search}</i>` : 'at the moment')
       )
-    },
-    query() {
-      return this.$route.query.period
-        ? `?period=${this.$route.query.period}`
-        : ''
     }
   },
 
