@@ -36,6 +36,7 @@
 .summary th,
 .summary td {
   padding: 0.35rem 0.5rem;
+  white-space: nowrap;
 }
 
 .summary th:focus {
