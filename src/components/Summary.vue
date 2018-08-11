@@ -308,7 +308,7 @@ export default {
       return (
         'There are no ' +
         (this.filter ? `${this.filter} stocks ` : 'tickers ') +
-        (this.search ? `matching <i> ${this.search}</i>` : 'right now')
+        (this.search ? `matching <i> ${this.search}</i>` : 'at the moment')
       )
     },
     query() {
