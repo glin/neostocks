@@ -65,6 +65,18 @@
   transition: none;
 }
 
+@media (max-width: 575.98px) {
+  .search-form {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    width: 180px;
+  }
+}
+
 .search-input:focus {
   box-shadow: inset 0 0 0 1px rgba(0, 123, 255, 0.25);
 }
