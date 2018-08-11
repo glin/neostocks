@@ -20,7 +20,7 @@
   border-radius: 2px 2px 0 0;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
   .nav-item {
     flex-basis: 0;
     flex-grow: 1;
