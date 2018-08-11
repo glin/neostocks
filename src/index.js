@@ -76,10 +76,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // Convert all query parameters to lowercase
+  // Clean up query params
   Object.keys(to.query).map(key => {
     if (key === 'search') return
-    to.query[key] = to.query[key].toLowerCase()
+    if (key === 'period') {
+      to.query.period = to.query.period.toLowerCase()
+      if (!['1d', '5d', '1m', 'all'].includes(to.query.period)) {
+        to.query.period = '1d'
+      }
+    }
   })
   next()
 })

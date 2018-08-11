@@ -162,7 +162,10 @@ export default {
     },
     period: {
       type: String,
-      default: '1d'
+      default: '1d',
+      validator: function(value) {
+        return ['1d', '5d', '1m', 'all'].includes(value)
+      }
     },
     summaryData: {
       type: Object,

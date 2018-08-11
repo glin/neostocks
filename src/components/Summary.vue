@@ -128,7 +128,10 @@ export default {
   props: {
     period: {
       type: String,
-      default: '1d'
+      default: '1d',
+      validator: function(value) {
+        return ['1d', '5d', '1m', 'all'].includes(value)
+      }
     },
     summaryData: {
       type: Object,
@@ -285,6 +288,7 @@ export default {
       return this.currentSummary.filter(item => item.ticker !== 'NEODAQ')
     },
     currentFields() {
+      if (this.currentItems.length === 0) return
       const keys = Object.keys(this.currentItems[0])
       const fields = this.fields.filter(field => {
         if (field.periods && !field.periods.includes(this.period)) {
