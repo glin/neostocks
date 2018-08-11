@@ -195,12 +195,14 @@ export default {
       if (this.selectedIndex >= 0) {
         const selected = this.$refs.searchResultItems[this.selectedIndex]
         selected.$el.click()
-      } else if (this.search) {
+      } else if (this.search && this.searchResults.length > 0) {
         const query = { search: this.search }
         if (this.$route.query.period) {
           query.period = this.$route.query.period
         }
         this.$router.push({ path: '/', query: query })
+      } else {
+        return
       }
       this.clearSearch()
       this.$refs.searchInput.$el.blur()
