@@ -56,6 +56,7 @@
   padding-left: 36px;
   width: 200px;
   border-radius: 2px;
+  background-color: transparent;
   transition: none;
 }
 
