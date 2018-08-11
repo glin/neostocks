@@ -48,6 +48,11 @@
   height: 25px;
 }
 
+.nav-link.active {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
 .search-form {
   position: relative;
 }
