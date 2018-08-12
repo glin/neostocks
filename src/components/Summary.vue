@@ -24,6 +24,9 @@
       <template slot="high" slot-scope="data">
         <span v-b-tooltip.hover :title="formatDate(data, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="num-high">{{ data.value }}</span>
       </template>
+      <template slot="num_peaks" slot-scope="data">
+        <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="num-peaks">{{ data.value }}</span>
+      </template>
     </b-table>
   </div>
 </template>
@@ -75,7 +78,8 @@
   color: #6c757d;
 }
 
-.num-high {
+.num-high,
+.num-peaks {
   border-bottom: 1px dotted #888;
 }
 
@@ -210,6 +214,20 @@ export default {
           sortDirection: 'desc'
         },
         {
+          key: 'num_peaks',
+          label: '# Peaks',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc'
+        },
+        // {
+        //   key: 'avg_days_peak',
+        //   label: 'Peak Frequency',
+        //   class: 'numeric',
+        //   sortable: true,
+        //   sortDirection: 'asc'
+        // },
+        {
           key: 'pct_95',
           label: 'Top 5%',
           class: 'numeric',
@@ -333,7 +351,7 @@ export default {
     },
     formatDate(val, time = true) {
       const date = new Date(val.item.time_high)
-      return time ? (date.toLocaleString() + ' NST') : date.toLocaleDateString()
+      return time ? date.toLocaleString() + ' NST' : date.toLocaleDateString()
     },
     // Adapted from https://stackoverflow.com/questions/9461621
     formatNum(num) {

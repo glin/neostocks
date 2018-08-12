@@ -25,7 +25,7 @@
       </Heading>
 
       <PeriodNav :period="period" />
-      <Dygraph :data="data" :annotation="annotation" class="price-graph" />
+      <Dygraph :data="prices" :annotations="annotations" class="price-graph" />
 
       <hr class="divider">
 
@@ -35,7 +35,14 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">{{ data.value }}</span>
+            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
+              {{ data.value }}
+            </span>
+          </template>
+          <template slot="num_peaks" slot-scope="data">
+            <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="num-peaks" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
+              {{ data.value }}
+            </span>
           </template>
         </b-table>
       </div>
@@ -52,9 +59,9 @@
   margin-bottom: 0;
 }
 
-.current-high-annotation {
-  font-weight: 600;
-  color: #444 !important;
+.peak-annotation {
+  font-size: 20px !important;
+  color: #e36209 !important;
   border: none;
   background: transparent;
 }
@@ -179,7 +186,8 @@ export default {
 
   data() {
     return {
-      data: null,
+      prices: null,
+      peaks: null,
       fields: [
         {
           key: 'volume',
@@ -232,13 +240,18 @@ export default {
           class: 'numeric'
         },
         {
+          key: 'num_peaks',
+          label: '# Peaks',
+          class: 'numeric'
+        },
+        {
           key: 'pct_95',
           label: 'Top 5%',
           class: 'numeric'
         }
       ],
-      annotation: null,
-      showHighAnnotation: false
+      highAnnotation: null,
+      peakAnnotations: null
     }
   },
 
@@ -307,15 +320,25 @@ export default {
     },
     currentKeys() {
       if (this.period === 'all') {
-        return [['pct_95', 'median'], ['high', 'avg_peak'], ['avg', 'sd']]
+        return [['avg_peak', 'num_peaks'], ['high', 'median'], ['avg', 'sd']]
       }
       return [['volume', 'open'], ['high', 'low'], ['avg', 'sd']]
     },
     currentKeysCompact() {
       if (this.period === 'all') {
-        return [['avg', 'median', 'sd'], ['high', 'avg_peak', 'pct_95']]
+        return [['avg', 'median', 'sd'], ['high', 'avg_peak', 'num_peaks']]
       }
       return [['volume', 'open', 'sd'], ['high', 'low', 'avg']]
+    },
+    annotations() {
+      let annotations = []
+      if (this.highAnnotation) {
+        annotations.push(this.highAnnotation)
+      }
+      if (this.peakAnnotations) {
+        annotations.push(...this.peakAnnotations)
+      }
+      return annotations
     }
   },
 
@@ -335,8 +358,9 @@ export default {
   },
 
   created() {
-    Shiny.addCustomMessageHandler('stock-prices', msg => {
-      this.data = msg.data
+    Shiny.addCustomMessageHandler('ticker-data', msg => {
+      this.prices = msg.data.prices
+      this.peaks = msg.data.peaks
     })
 
     $(document).on('shiny:connected', () => {
@@ -349,9 +373,9 @@ export default {
       if (!window.Shiny || !window.Shiny.onInputChange) return
 
       // clear data to prevent graph flickering when switching tickers
-      this.data = null
+      this.prices = null
 
-      Shiny.onInputChange('stock_price', {
+      Shiny.onInputChange('ticker', {
         ticker: this.ticker,
         period: this.period
       })
@@ -367,17 +391,38 @@ export default {
     },
     handleHighHover(hovered) {
       if (hovered) {
-        this.annotation = {
+        this.highAnnotation = {
           series: this.ticker,
           x: this.currentHighTime,
-          shortText: 'High',
-          cssClass: 'current-high-annotation',
-          width: 36,
-          height: 24,
-          tickHeight: null
+          shortText: '•',
+          text: '',
+          height: 20,
+          cssClass: 'peak-annotation',
+          tickColor: '#e36209',
+          tickHeight: -5,
+          tickWidth: 0
         }
       } else {
-        this.annotation = null
+        this.highAnnotation = null
+      }
+    },
+    handlePeaksHover(hovered) {
+      if (hovered) {
+        this.peakAnnotations = this.peaks.map(date => {
+          return {
+            series: this.ticker,
+            x: date,
+            shortText: '•',
+            text: '',
+            height: 20,
+            cssClass: 'peak-annotation',
+            tickColor: '#e36209',
+            tickHeight: -5,
+            tickWidth: 0
+          }
+        })
+      } else {
+        this.peakAnnotations = null
       }
     }
   }

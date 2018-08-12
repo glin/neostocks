@@ -44,8 +44,8 @@ export default {
       type: Object,
       default: null
     },
-    annotation: {
-      type: Object,
+    annotations: {
+      type: Array,
       default: null
     }
   },
@@ -61,7 +61,7 @@ export default {
   },
 
   watch: {
-    annotation() {
+    annotations() {
       this.setAnnotations()
     }
   },
@@ -108,9 +108,8 @@ export default {
       this.g.updateOptions({ file: plotData })
     },
     setAnnotations() {
-      if (!this.g) return
-      const annotations = this.annotation ? [this.annotation] : []
-      this.g.setAnnotations(annotations)
+      if (!this.g || !this.annotations) return
+      this.g.setAnnotations(this.annotations)
     }
   }
 }
