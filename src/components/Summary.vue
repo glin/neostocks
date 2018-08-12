@@ -22,7 +22,7 @@
         <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip.hover :title="formatDate(data)" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="num-high">{{ data.value }}</span>
+        <span v-b-tooltip.hover :title="formatDate(data, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="num-high">{{ data.value }}</span>
       </template>
     </b-table>
   </div>
@@ -331,9 +331,9 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(val) {
+    formatDate(val, time = true) {
       const date = new Date(val.item.time_high)
-      return date.toLocaleString() + ' NST'
+      return time ? (date.toLocaleString() + ' NST') : date.toLocaleDateString()
     },
     // Adapted from https://stackoverflow.com/questions/9461621
     formatNum(num) {
