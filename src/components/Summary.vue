@@ -22,10 +22,16 @@
         <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip.hover :title="formatDate(data, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="num-high">{{ data.value }}</span>
+        <span v-b-tooltip.hover :title="formatDate(data.item.time_high, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="hoverable">{{ data.value }}</span>
       </template>
       <template slot="num_peaks" slot-scope="data">
-        <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="num-peaks">{{ data.value }}</span>
+        <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable">{{ data.value }}</span>
+      </template>
+      <template slot="avg_days_peak" slot-scope="data">
+        <span class="time-period">{{ `${data.value} days` }}</span>
+      </template>
+      <template slot="last_peak" slot-scope="data">
+        <span :title="formatDate(data.value, false)" class="time-period">{{ formatTimeSince(data.value) }}</span>
       </template>
     </b-table>
   </div>
@@ -78,9 +84,12 @@
   color: #6c757d;
 }
 
-.num-high,
-.num-peaks {
+.hoverable {
   border-bottom: 1px dotted #888;
+}
+
+.time-period {
+  font-size: 0.85rem;
 }
 
 .current-high {
@@ -122,6 +131,7 @@
 <script>
 import Heading from './Heading'
 import PeriodNav from './PeriodNav'
+import { timeSince } from '../date'
 
 export default {
   components: {
@@ -214,25 +224,26 @@ export default {
           sortDirection: 'desc'
         },
         {
-          key: 'num_peaks',
-          label: '# Peaks',
+          key: 'last_peak',
+          label: 'Last Peak',
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc'
         },
-        // {
-        //   key: 'avg_days_peak',
-        //   label: 'Peak Frequency',
-        //   class: 'numeric',
-        //   sortable: true,
-        //   sortDirection: 'asc'
-        // },
+        {
+          key: 'avg_days_peak',
+          label: 'Peak Frequency',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'asc'
+        },
         {
           key: 'pct_95',
           label: 'Top 5%',
           class: 'numeric',
           sortable: true,
-          sortDirection: 'desc'
+          sortDirection: 'desc',
+          periods: ['none']
         },
         {
           key: 'avg',
@@ -246,7 +257,7 @@ export default {
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc',
-          periods: ['all']
+          periods: ['none']
         },
         {
           key: 'sd',
@@ -350,8 +361,13 @@ export default {
       return val
     },
     formatDate(val, time = true) {
-      const date = new Date(val.item.time_high)
-      return time ? date.toLocaleString() + ' NST' : date.toLocaleDateString()
+      const date = new Date(val)
+      return time
+        ? date.toLocaleString() + ' NST'
+        : date.toLocaleDateString({}, { timeZone: 'UTC' })
+    },
+    formatTimeSince(then) {
+      return timeSince(new Date(then)) + ' ago'
     },
     // Adapted from https://stackoverflow.com/questions/9461621
     formatNum(num) {

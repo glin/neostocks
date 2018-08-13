@@ -35,13 +35,21 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="num-high" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
+            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="hoverable" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
               {{ data.value }}
             </span>
           </template>
-          <template slot="num_peaks" slot-scope="data">
-            <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="num-peaks" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
+          <template slot="avg_peak" slot-scope="data">
+            <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
               {{ data.value }}
+            </span>
+          </template>
+          <template slot="avg_days_peak" slot-scope="data">
+            <span class="time-period">{{ `${data.value} days` }}</span>
+          </template>
+          <template slot="last_peak" slot-scope="data">
+            <span v-b-tooltip.hover :title="formatDate(data.value, false)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
+              {{ formatTimeSince(data.value) }}
             </span>
           </template>
         </b-table>
@@ -153,6 +161,7 @@ import Dygraph from './Dygraph'
 import Heading from './Heading'
 import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
+import { timeSince } from '../date'
 
 export default {
   components: {
@@ -245,13 +254,24 @@ export default {
           class: 'numeric'
         },
         {
+          key: 'avg_days_peak',
+          label: 'Peak Freq',
+          class: 'numeric'
+        },
+        {
+          key: 'last_peak',
+          label: 'Last Peak',
+          class: 'numeric'
+        },
+        {
           key: 'pct_95',
           label: 'Top 5%',
           class: 'numeric'
         }
       ],
       highAnnotation: null,
-      peakAnnotations: null
+      peakAnnotations: null,
+      lastPeakAnnotation: null
     }
   },
 
@@ -320,13 +340,20 @@ export default {
     },
     currentKeys() {
       if (this.period === 'all') {
-        return [['avg_peak', 'num_peaks'], ['high', 'median'], ['avg', 'sd']]
+        return [
+          ['avg_peak', 'last_peak'],
+          ['high', 'low'],
+          ['avg', 'sd']
+        ]
       }
       return [['volume', 'open'], ['high', 'low'], ['avg', 'sd']]
     },
     currentKeysCompact() {
       if (this.period === 'all') {
-        return [['avg', 'median', 'sd'], ['high', 'avg_peak', 'num_peaks']]
+        return [
+          ['avg_peak', 'last_peak', 'sd'],
+          ['high', 'low', 'avg']
+        ]
       }
       return [['volume', 'open', 'sd'], ['high', 'low', 'avg']]
     },
@@ -337,6 +364,9 @@ export default {
       }
       if (this.peakAnnotations) {
         annotations.push(...this.peakAnnotations)
+      }
+      if (this.lastPeakAnnotation) {
+        annotations.push(this.lastPeakAnnotation)
       }
       return annotations
     }
@@ -389,6 +419,15 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
+    formatDate(val, time = true) {
+      const date = new Date(val)
+      return time
+        ? date.toLocaleString() + ' NST'
+        : date.toLocaleDateString({}, { timeZone: 'UTC' })
+    },
+    formatTimeSince(then) {
+      return timeSince(new Date(then)) + ' ago'
+    },
     handleHighHover(hovered) {
       if (hovered) {
         this.highAnnotation = {
@@ -423,6 +462,23 @@ export default {
         })
       } else {
         this.peakAnnotations = null
+      }
+    },
+    handleLastPeakHover(hovered) {
+      if (hovered) {
+        this.lastPeakAnnotation = {
+          series: this.ticker,
+          x: this.summary.period_all.last_peak,
+          shortText: '•',
+          text: '',
+          height: 20,
+          cssClass: 'peak-annotation',
+          tickColor: '#e36209',
+          tickHeight: -5,
+          tickWidth: 0
+        }
+      } else {
+        this.lastPeakAnnotation = null
       }
     }
   }
