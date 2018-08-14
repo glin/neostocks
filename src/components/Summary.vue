@@ -245,15 +245,15 @@ export default {
           sortDirection: 'asc'
         },
         {
-          key: 'pct_95',
-          label: 'Top 5%',
+          key: 'avg',
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc',
           periods: ['none']
         },
         {
-          key: 'avg',
+          key: 'pct_95',
+          label: 'Top 5%',
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc',
@@ -264,14 +264,15 @@ export default {
           class: 'numeric',
           sortable: true,
           sortDirection: 'desc',
-          periods: ['none']
+          periods: ['all']
         },
         {
           key: 'sd',
           label: 'Volatility',
           class: 'numeric',
           sortable: true,
-          sortDirection: 'desc'
+          sortDirection: 'desc',
+          periods: ['none']
         },
         {
           key: 'avg_volume',

@@ -347,19 +347,19 @@ export default {
         return [
           ['avg_peak', 'last_peak'],
           ['high', 'low'],
-          ['avg', 'sd']
+          ['pct_95', 'median']
         ]
       }
-      return [['volume', 'open'], ['high', 'low'], ['avg', 'sd']]
+      return [['volume', 'open'], ['high', 'low'], ['range', 'median']]
     },
     currentKeysCompact() {
       if (this.period === 'all') {
         return [
-          ['avg_peak', 'last_peak', 'sd'],
-          ['high', 'low', 'avg']
+          ['avg_peak', 'last_peak', 'pct_95'],
+          ['high', 'low', 'median']
         ]
       }
-      return [['volume', 'open', 'sd'], ['high', 'low', 'avg']]
+      return [['volume', 'open', 'range'], ['high', 'low', 'median']]
     },
     annotations() {
       let annotations = []
