@@ -3,8 +3,8 @@
     <h3>About</h3>
     <hr>
     <h5>What is this?</h5>
-    <p>A stock price tracker for the
-      <a href="http://www.neopets.com/stockmarket.phtml" target="_blank" rel="noopener noreferrer">Neopets Stock Market</a>, much like the old Neodaq.com (RIP).
+    <p>A real-time stock tracker for the
+      <a href="http://www.neopets.com/stockmarket.phtml" target="_blank" rel="noopener noreferrer">Neopets Stock Market</a>, similar to the former Neodaq.com (RIP).
     </p>
 
     <h5>When does the site update?</h5>
@@ -14,7 +14,7 @@
 
     <h5>When does the Neopets Stock Market update?</h5>
     <p>
-      <i>Approximately</i> every 30 minutes, but it's not exact. It's hard to predict the minute stocks update at a given hour, so data shown here may be a little behind.
+      About every 30 minutes, but it's not exact. It's hard to predict what minute stocks will update at a given hour, so the site may be a couple minutes behind.
     </p>
 
     <h5>Credits</h5>
