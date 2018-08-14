@@ -225,6 +225,10 @@ export default {
           class: 'numeric'
         },
         {
+          key: 'range',
+          class: 'numeric'
+        },
+        {
           key: 'avg',
           class: 'numeric'
         },

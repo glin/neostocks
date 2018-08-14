@@ -217,6 +217,13 @@ export default {
           periods: ['1d', '5d', '1m']
         },
         {
+          key: 'range',
+          class: 'numeric',
+          sortable: true,
+          sortDirection: 'desc',
+          periods: ['1d', '5d', '1m']
+        },
+        {
           key: 'avg_peak',
           label: 'Avg Peak',
           class: 'numeric',
