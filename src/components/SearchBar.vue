@@ -25,8 +25,10 @@
   padding-left: 36px;
   width: 200px;
   border-radius: 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   background-color: transparent;
-  transition: none;
 }
 
 @media (max-width: 575.98px) {
@@ -42,7 +44,8 @@
 }
 
 .search-input:focus {
-  box-shadow: inset 0 0 0 1px rgba(0, 123, 255, 0.25);
+  border-color: #f4a549;
+  box-shadow: 0 2px 0px -1px #f4a549;
 }
 
 .search-icon {
