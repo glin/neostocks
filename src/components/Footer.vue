@@ -1,8 +1,8 @@
 <template>
   <footer>
     <b-container class="footer-content">
-      <b-link :to="'/about'" class="about-link">About</b-link>
       <div class="copyright">© 1999-2018 Neopets, Inc.<br class="copyright-break"> All rights reserved. Used with permission.</div>
+      <b-link :to="'/about'" class="about-link">About</b-link>
     </b-container>
   </footer>
 </template>
@@ -12,7 +12,7 @@ footer {
   flex-shrink: 0;
   width: 100%;
   /* border-top: 1px solid #ddd; */
-  padding: 10px 0;
+  padding: 15px 0;
   background-color: #f0f0f0;
 }
 
