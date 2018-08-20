@@ -37,6 +37,7 @@ body {
 
 .main-container {
   flex: 1 0 auto;
+  margin-top: 56px;
   margin-bottom: 30px;
 }
 

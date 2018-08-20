@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable sticky variant="light" type="light" class="header">
+  <b-navbar toggleable fixed="top" variant="light" type="light" class="header">
     <b-container>
       <b-navbar-toggle target="nav-menu-collapse" />
       <b-navbar-brand :to="{ path: '/', query }" class="brand">
