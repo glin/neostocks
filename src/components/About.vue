@@ -7,14 +7,9 @@
       <a href="http://www.neopets.com/stockmarket.phtml" target="_blank" rel="noopener noreferrer">Neopets Stock Market</a>, similar to the former Neodaq.com (RIP).
     </p>
 
-    <h5>When does the site update?</h5>
-    <p>
-      Every 30 minutes at :00 and :30.
-    </p>
-
     <h5>When does the Neopets Stock Market update?</h5>
     <p>
-      About every 30 minutes, but it's not exact. It's hard to predict what minute stocks will update at a given hour, so the site may be a couple minutes behind.
+      About every 30 minutes, but it's not exact. It's hard to predict when stocks will update during a given hour.
     </p>
 
     <h5>Credits</h5>
