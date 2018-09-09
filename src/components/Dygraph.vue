@@ -1,5 +1,5 @@
 <template>
-  <div ref="el" :id="id" :style="style" />
+  <div ref="el" :style="style" />
 </template>
 
 <style>
@@ -24,10 +24,6 @@ import 'dygraphs/dist/dygraph.css'
 
 export default {
   props: {
-    id: {
-      type: String,
-      default: null
-    },
     data: {
       type: Object,
       required: true
@@ -40,13 +36,9 @@ export default {
       type: String,
       default: '300px'
     },
-    seriesLabels: {
-      type: Object,
-      default: null
-    },
     annotations: {
       type: Array,
-      default: null
+      default: () => []
     }
   },
 
@@ -74,26 +66,9 @@ export default {
           this.resetGraph()
           return
         }
-
-        // copy data before mutating it
-        let data = { ...this.data }
-
-        const isDateTime = data.time[0].indexOf(':') > 0
-
-        if (!isNaN(data.time[0])) {
-          data.time = data.time.map(timeSec => new Date(timeSec * 1000))
-        }
-
-        if (this.seriesLabels) {
-          const keys = Object.keys(data)
-          data = keys.reduce((newData, key) => {
-            const label = this.seriesLabels[key] ? this.seriesLabels[key] : key
-            newData[label] = data[key]
-            return newData
-          }, {})
-        }
-        const csv = dataFrameToCSV(data)
-        const valueFormatter = isDateTime ? dateTimeValueFormatter : dateValueFormatter
+        const csv = columnsToCsv(this.data)
+        const isDateOnly = this.data.time[0].indexOf(':') < 0
+        const valueFormatter = isDateOnly ? dateValueFormatter : dateTimeValueFormatter
         this.g = renderDygraph(this.$refs.el, csv, defaultOptions(valueFormatter))
         this.setAnnotations()
       },
@@ -108,7 +83,7 @@ export default {
       this.g.updateOptions({ file: plotData })
     },
     setAnnotations() {
-      if (!this.g || !this.annotations) return
+      if (!this.g) return
       this.g.setAnnotations(this.annotations)
     }
   }
@@ -141,17 +116,17 @@ function renderDygraph(el, data, options) {
   return g
 }
 
-function dataFrameToCSV(data) {
-  const headers = Object.keys(data)
-  const csv = [headers.join(',')]
-  const numRows = data[headers[0]].length
+function columnsToCsv(columns) {
+  const headers = Object.keys(columns)
+  const rows = [headers.join(',')]
+  const numRows = columns[headers[0]].length
   for (let i = 0; i < numRows; i++) {
     const row = headers.map(header => {
-      const val = data[header][i]
+      const val = columns[header][i]
       return val != null ? val : ''
     })
-    csv.push(row.join(','))
+    rows.push(row.join(','))
   }
-  return csv.join('\n')
+  return rows.join('\n')
 }
 </script>
