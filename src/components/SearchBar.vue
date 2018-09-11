@@ -54,7 +54,11 @@
   position: absolute;
   left: 0;
   width: 36px;
-  opacity: 0.6;
+  opacity: 0.5;
+}
+
+.search-icon:hover {
+  opacity: 0.8;
 }
 
 .search-results {
