@@ -5,7 +5,7 @@
       <b-navbar-brand :to="{ path: '/', query }" class="brand">
         <img class="logo" src="../assets/neostocks.png"> neostocks
       </b-navbar-brand>
-      <b-collapse id="nav-menu-collapse" is-nav>
+      <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="{ path: '/bargain', query }">Bargain</b-nav-item>
           <b-nav-item :to="{ path: '/hot', query }">Hot</b-nav-item>
@@ -32,6 +32,10 @@
 .logo {
   width: 25px;
   height: 25px;
+}
+
+#nav-menu-collapse {
+  transition: none;
 }
 
 .nav-link.active {
@@ -68,6 +72,18 @@ export default {
     query: {
       type: Object,
       required: true
+    }
+  },
+
+  data() {
+    return {
+      showNavMenuCollapse: false
+    }
+  },
+
+  watch: {
+    $route() {
+      this.showNavMenuCollapse = false
     }
   }
 }
