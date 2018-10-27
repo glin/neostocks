@@ -133,8 +133,8 @@ export default {
   },
 
   methods: {
-    handleSearchChange(val) {
-      this.search = val
+    handleSearchChange(value) {
+      this.search = value
     },
     handleSearchSubmit() {
       const query = { search: this.search, ...this.query }
