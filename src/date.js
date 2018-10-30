@@ -3,19 +3,21 @@ export function timeSince(then, now = new Date()) {
 
   let interval = Math.floor(seconds / 86400)
   if (interval > 1) {
-    return interval + ' days'
+    return interval + ' days ago'
   } else if (interval === 1) {
-    return interval + ' day'
+    return interval + ' day ago'
   }
   interval = Math.floor(seconds / 3600)
   if (interval > 1) {
-    return interval + ' hours'
+    return interval + ' hours ago'
+  } else if (interval === 1) {
+    return interval + ' hour ago'
   }
   interval = Math.floor(seconds / 60)
   if (interval > 1) {
-    return interval + ' mins'
+    return interval + ' mins ago'
   } else if (interval === 1) {
-    return interval + ' min'
+    return interval + ' min ago'
   }
-  return 'less than 1 min'
+  return 'just now'
 }

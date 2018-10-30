@@ -430,7 +430,7 @@ export default {
         : date.toLocaleDateString({}, { timeZone: 'UTC' })
     },
     formatTimeSince(then) {
-      return timeSince(new Date(then)) + ' ago'
+      return timeSince(new Date(then))
     },
     handleHighHover(hovered) {
       if (hovered) {

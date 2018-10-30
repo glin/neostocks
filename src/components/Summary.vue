@@ -375,7 +375,7 @@ export default {
         : date.toLocaleDateString({}, { timeZone: 'UTC' })
     },
     formatTimeSince(then) {
-      return timeSince(new Date(then)) + ' ago'
+      return timeSince(new Date(then))
     },
     // Adapted from https://stackoverflow.com/questions/9461621
     formatNum(num) {
