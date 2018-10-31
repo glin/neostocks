@@ -1,7 +1,7 @@
 const DEFAULT_SETTINGS = {
   enableNotifications: true,
   enableDesktopNotifications: false,
-  notifyOnPeaks: false,
+  notifyOnPeaks: true,
   notifyOnTickers: []
 }
 
