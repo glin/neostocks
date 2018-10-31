@@ -39,7 +39,7 @@
 
 @media (max-width: 768px) {
   .search-input {
-    width: 180px;
+    width: 160px;
   }
 }
 
