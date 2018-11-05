@@ -1,7 +1,7 @@
 <template>
   <b-container class="update-time">
     <div v-if="updateTimeString" :title="updateTimeString">
-      updated {{ updateTimeSince }}
+      last updated {{ updateTimeSince }}
     </div>
   </b-container>
 </template>
