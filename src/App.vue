@@ -45,8 +45,7 @@ body {
   margin-top: 15px;
   padding: 10px;
   background-color: #fff;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
+  box-shadow: 0 1px 5px #ccc;
 }
 
 @media (max-width: 575.98px) {
