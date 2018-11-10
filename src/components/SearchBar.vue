@@ -75,11 +75,14 @@
 
 .search-result-item,
 .search-result-item.active {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
   padding: 0.35rem 0.7rem;
   border-radius: 0;
   color: #495057;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid #fff;
   border-right: none;
   border-left: none;
 }
@@ -89,11 +92,11 @@
 }
 
 .search-result-item:hover {
-  background-color: #fff;
+  background-color: #efefef;
 }
 
 .search-result-item.hover {
-  background-color: #eee;
+  background-color: #efefef;
 }
 
 .no-results {
@@ -101,7 +104,7 @@
 }
 
 .company-logo {
-  margin-right: 0.25em;
+  margin-right: 10px;
   height: 25px;
 }
 </style>
