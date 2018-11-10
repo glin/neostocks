@@ -10,7 +10,7 @@
         <span>{{ company.ticker }}</span>
       </b-list-group-item>
       <b-list-group-item v-if="value && results.length === 0" class="search-result-item">
-        <span class="no-results">No tickers found</span>
+        <span class="no-results">No results found</span>
       </b-list-group-item>
     </b-list-group>
   </b-nav-form>
@@ -98,7 +98,6 @@
 
 .no-results {
   font-size: 0.9rem;
-  font-weight: 600;
 }
 
 .company-logo {
