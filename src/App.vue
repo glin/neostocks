@@ -43,9 +43,7 @@ body {
 
 .main-content {
   margin-top: 15px;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 1px 4px #ddd;
+  padding: 0;
 }
 
 @media (max-width: 575.98px) {
@@ -62,6 +60,7 @@ body {
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Card from './components/Card'
 import UpdateTime from './components/UpdateTime'
 import companies from './companies'
 import { getSettingsStore } from './settings'
@@ -73,6 +72,7 @@ export default {
   components: {
     Header,
     Footer,
+    Card,
     UpdateTime
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="settings">
+  <Card class="settings">
     <h1 class="title">Settings</h1>
 
     <div class="settings-section">
@@ -84,12 +84,12 @@
         </b-list-group-item>
       </b-list-group>
     </div>
-  </div>
+  </Card>
 </template>
 
 <style scoped>
 .settings {
-  padding: 10px 15px 10px;
+  padding: 20px 25px 20px;
 }
 
 .title {
@@ -267,7 +267,7 @@ import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-import Heading from './Heading'
+import Card from './Card'
 import companies from '../companies'
 import { notificationsBlocked } from '../notifications'
 
@@ -275,7 +275,7 @@ Vue.use(ToggleButton)
 
 export default {
   components: {
-    Heading,
+    Card,
     Multiselect
   },
 

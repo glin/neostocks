@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card>
     <PageNotFound v-if="!showTicker" />
 
     <div v-if="showTicker">
@@ -55,7 +55,7 @@
         </b-table>
       </div>
     </div>
-  </div>
+  </Card>
 </template>
 
 <style>
@@ -157,6 +157,7 @@
 </style>
 
 <script>
+import Card from './Card'
 import Dygraph from './Dygraph'
 import Heading from './Heading'
 import PeriodNav from './PeriodNav'
@@ -165,6 +166,7 @@ import { timeSince } from '../date'
 
 export default {
   components: {
+    Card,
     Dygraph,
     Heading,
     PeriodNav,

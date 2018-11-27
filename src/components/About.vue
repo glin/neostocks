@@ -33,7 +33,7 @@
 
 <style scoped>
 .about {
-  padding: 10px 15px 10px;
+  padding: 20px 25px 20px;
 }
 
 .title {

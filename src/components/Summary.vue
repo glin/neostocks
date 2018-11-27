@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card>
     <PeriodNav :period="period" />
 
     <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" :empty-filtered-text="emptyFilterText" class="summary" hover striped responsive show-empty>
@@ -34,7 +34,7 @@
         <span :title="formatDate(data.value, false)" class="time-period">{{ formatTimeSince(data.value) }}</span>
       </template>
     </b-table>
-  </div>
+  </Card>
 </template>
 
 <style>
@@ -130,12 +130,14 @@
 
 <script>
 import Heading from './Heading'
+import Card from './Card'
 import PeriodNav from './PeriodNav'
 import { timeSince } from '../date'
 
 export default {
   components: {
     Heading,
+    Card,
     PeriodNav
   },
 
