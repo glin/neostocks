@@ -45,7 +45,7 @@ body {
   margin-top: 15px;
   padding: 10px;
   background-color: #fff;
-  box-shadow: 0 1px 5px #ccc;
+  box-shadow: 0 1px 4px #ddd;
 }
 
 @media (max-width: 575.98px) {
