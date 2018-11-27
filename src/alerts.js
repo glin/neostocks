@@ -91,7 +91,16 @@ function isCurrentHigh(data) {
   return data.curr === data.high && data.curr >= 30
 }
 
-export function sendNotifications(alerts, { onClick, onClose, timeout = 10000 }) {
+export function sendNotifications(alerts, { onClick, onClose, timeout = 30000, maxShown = 3 }) {
+  if (alerts.length > maxShown) {
+    const numRemaining = alerts.length - maxShown
+    alerts = alerts.slice(0, maxShown)
+    alerts[alerts.length - 1] = {
+      ...alerts[alerts.length - 1],
+      message: `...and ${numRemaining} more ${numRemaining > 1 ? 'alerts' : 'alert'}`
+    }
+  }
+
   alerts.forEach(alert => {
     const title = alert.title
     const options = {
@@ -103,10 +112,12 @@ export function sendNotifications(alerts, { onClick, onClose, timeout = 10000 })
     const notification = sendNotification(title, options)
     let isExpired = false
 
-    setTimeout(() => {
-      isExpired = true
-      notification.close()
-    }, timeout)
+    if (timeout) {
+      setTimeout(() => {
+        isExpired = true
+        notification.close()
+      }, timeout)
+    }
 
     notification.onclose = function() {
       if (!isExpired) {
