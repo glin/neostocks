@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
-
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -9,6 +8,7 @@ import App from './App'
 import About from './components/About'
 import Summary from './components/Summary'
 import Ticker from './components/Ticker'
+import Settings from './components/Settings'
 import PageNotFound from './components/PageNotFound'
 import companies from './companies'
 
@@ -58,6 +58,10 @@ const routes = [
     meta: {
       showUpdateTime: true
     }
+  },
+  {
+    path: '/settings',
+    component: Settings
   },
   {
     path: '/about',
