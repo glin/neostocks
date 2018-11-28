@@ -122,7 +122,6 @@
 <style>
 .tooltip {
   font-family: 'Open Sans';
-  font-size: 0.825rem;
 }
 
 .tooltip-inner {
