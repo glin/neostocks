@@ -135,6 +135,7 @@
 .alerts-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .alerts-list-item {
@@ -176,7 +177,8 @@
 }
 
 .new-alert-btn {
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
 }
