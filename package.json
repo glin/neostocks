@@ -12,7 +12,6 @@
   "dependencies": {
     "@mdi/svg": "^2.5.94",
     "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.5",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
@@ -20,8 +19,6 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
     "dygraphs": "^2.1.0",
-    "eslint": "^5.0.1",
-    "eslint-plugin-vue": "^4.5.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "url-loader": "^1.0.1",
@@ -34,7 +31,12 @@
     "vue-svg-loader": "^0.5.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8",
+    "webpack-cli": "^3.0.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "eslint": "^5.0.1",
+    "eslint-plugin-vue": "^4.5.0",
     "webpack-dev-server": "^3.1.4"
   }
 }
