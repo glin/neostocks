@@ -129,7 +129,7 @@
 }
 
 .alerts-section {
-  max-width: 430px;
+  max-width: 440px;
 }
 
 .alerts-header {
