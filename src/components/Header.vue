@@ -81,10 +81,11 @@
 
 .unread-notifications {
   position: absolute;
-  top: -4px;
+  top: -3px;
   right: -3px;
   color: #dc3545;
   /* color: #e36209; */
+  font-family: Arial;
 }
 
 .notifications-heading {
