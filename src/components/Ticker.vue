@@ -1,8 +1,7 @@
 <template>
-  <Card>
+  <div>
     <PageNotFound v-if="!showTicker" />
-
-    <div v-if="showTicker">
+    <Card v-if="showTicker">
       <Heading>
         <div class="company-title">
           <img :src="company.logo" :alt="ticker" class="company-logo">
@@ -54,8 +53,8 @@
           </template>
         </b-table>
       </div>
-    </div>
-  </Card>
+    </Card>
+  </div>
 </template>
 
 <style>

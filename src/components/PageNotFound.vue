@@ -1,13 +1,17 @@
 <template>
-  <b-container class="text-center">
+  <div class="text-center">
     <img src="/static/404.png" alt="404, page not found">
-    <h4>page not found</h4>
-  </b-container>
+    <h1>page not found</h1>
+  </div>
 </template>
 
 <style scoped>
 img {
-  margin: 10px auto;
-  max-width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
 }
 </style>
