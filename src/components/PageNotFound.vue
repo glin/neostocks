@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <img src="/static/404.png" alt="404, page not found">
+    <b-link to="/"><img src="/static/404.png" alt="404, page not found"></b-link>
     <h1>page not found</h1>
   </div>
 </template>
