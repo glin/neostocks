@@ -47,7 +47,7 @@
             <span class="time-period">{{ `${data.value} days` }}</span>
           </template>
           <template slot="last_peak" slot-scope="data">
-            <span v-b-tooltip.hover :title="formatDate(data.value, false)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
+            <span v-b-tooltip.hover :title="formatDate(data.item.last_peak_nst)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
               {{ formatTimeSince(data.value) }}
             </span>
           </template>
@@ -471,9 +471,10 @@ export default {
     },
     handleLastPeakHover(hovered) {
       if (hovered) {
+        const date = new Date(this.summary.period_all.last_peak).toLocaleDateString()
         this.lastPeakAnnotation = {
           series: this.ticker,
-          x: this.summary.period_all.last_peak,
+          x: date,
           shortText: '•',
           text: '',
           height: 20,

@@ -31,7 +31,7 @@
         <span class="time-period">{{ `${data.value} days` }}</span>
       </template>
       <template slot="last_peak" slot-scope="data">
-        <span :title="formatDate(data.value, false)" class="time-period">{{ formatTimeSince(data.value) }}</span>
+        <span :title="formatDate(data.item.last_peak_nst)" class="time-period">{{ formatTimeSince(data.value) }}</span>
       </template>
     </b-table>
   </Card>
