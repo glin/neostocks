@@ -471,7 +471,7 @@ export default {
     },
     handleLastPeakHover(hovered) {
       if (hovered) {
-        const date = new Date(this.summary.period_all.last_peak).toLocaleDateString()
+        const date = new Date(this.summary.period_all.last_peak_nst).toLocaleDateString()
         this.lastPeakAnnotation = {
           series: this.ticker,
           x: date,
