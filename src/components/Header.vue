@@ -26,7 +26,7 @@
                 Notifications
               </div>
               <b-link id="settings-btn" :to="'/settings'" class="icon-btn">
-                <SettingsIcon />
+                <SettingsIcon class="settings-icon" />
               </b-link>
               <b-tooltip target="settings-btn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
             </div>
@@ -117,6 +117,10 @@
 
 .icon-btn:active {
   opacity: 1;
+}
+
+.settings-icon {
+  display: block;
 }
 </style>
 
