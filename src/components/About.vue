@@ -4,7 +4,7 @@
     <div class="section">
       <h2 class="section-heading">What is this?</h2>
       <p>A real-time stock tracker for the
-        <a href="http://www.neopets.com/stockmarket.phtml" target="_blank" rel="noopener noreferrer">Neopets Stock Market</a>, similar to the former Neodaq.com (RIP).
+        <a href="http://www.neopets.com/stockmarket.phtml">Neopets Stock Market</a>, similar to the former Neodaq.com (RIP).
       </p>
     </div>
 
@@ -20,10 +20,10 @@
       <p>
         All data from 2006 to 2018 originally came from
         <strong>Neodaq.com</strong>. Pieces of it were recovered from WaybackMachine snapshots by
-        <a href="https://www.reddit.com/r/neopets/comments/7rwxwd/neodaqs_data_collected_from_old_neodaqs_website/" target="_blank" rel="noopener noreferrer">/u/HostilePride</a>.
+        <a href="https://www.reddit.com/r/neopets/comments/7rwxwd/neodaqs_data_collected_from_old_neodaqs_website/">/u/HostilePride</a>.
         <br>
         Data from Feb to June 2018 was generously contributed by
-        <a href="https://www.reddit.com/user/HostilePride" target="_blank" rel="noopener noreferrer">/u/HostilePride</a>.
+        <a href="https://www.reddit.com/user/HostilePride">/u/HostilePride</a>.
         <br>
         Thanks!
       </p>

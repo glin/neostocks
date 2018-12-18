@@ -16,9 +16,9 @@
           </div>
 
           <div v-if="company.buyUrl && company.profileUrl" class="company-links">
-            <a :href="company.buyUrl" target="_blank" rel="noopener noreferrer">buy</a>
+            <a :href="company.buyUrl">buy</a>
             <span class="v-divider"> | </span>
-            <a :href="company.profileUrl" target="_blank" rel="noopener noreferrer">profile</a>
+            <a :href="company.profileUrl">profile</a>
           </div>
         </div>
       </Heading>

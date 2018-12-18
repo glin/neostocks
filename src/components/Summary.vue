@@ -9,7 +9,7 @@
             <img :src="getCompanyLogo(data.value)" :alt="data.value" class="company-logo">
             <span class="ticker-text">{{ data.value }}</span>
           </router-link>
-          <a v-if="filter === 'bargain'" :href="getBuyUrl(data.value)" target="_blank" rel="noopener noreferrer">
+          <a v-if="filter === 'bargain'" :href="getBuyUrl(data.value)">
             <span class="buy-link">(buy)</span>
           </a>
           <span v-if="filter === 'hot' && isHotStockNew(data.value)" class="new-hot-tag">new!</span>
