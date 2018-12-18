@@ -140,6 +140,14 @@
   overflow: hidden;
   border-radius: 0.3rem;
 }
+
+.popover .arrow::before {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.popover .arrow::after {
+  border-bottom-color: #f3f3f3;
+}
 </style>
 
 <script>
