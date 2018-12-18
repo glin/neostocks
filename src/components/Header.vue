@@ -137,6 +137,8 @@
 
 .popover-body {
   padding: 0;
+  overflow: hidden;
+  border-radius: 0.3rem;
 }
 </style>
 

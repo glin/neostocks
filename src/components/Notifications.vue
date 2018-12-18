@@ -37,6 +37,10 @@
   border-top: none;
 }
 
+.notification-item:last-child {
+  border-bottom: none;
+}
+
 .notification-item:hover {
   background-color: #f7f8f8;
 }
