@@ -26,6 +26,10 @@ body {
   background-color: #f7f7f7 !important;
   font-family: 'Open Sans';
 }
+
+#shiny-disconnected-overlay {
+  display: none;
+}
 </style>
 
 <style scoped>
