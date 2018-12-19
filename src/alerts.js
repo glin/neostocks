@@ -27,7 +27,7 @@ export function getPriceAlerts(summaryData, filters = {}) {
       updateTime: data.update_time,
       updateTimeNST: data.update_time_nst,
       updateTimestamp: new Date(data.update_time).getTime(),
-      title: `${data.ticker} is at ${data.curr}`,
+      title: `${data.ticker} at ${data.curr}`,
       icon: companies[data.ticker].logo,
       tag: data.ticker,
       location: { path: '/tickers/' + data.ticker }
