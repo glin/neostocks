@@ -5,11 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import App from './App'
-import About from './components/About'
-import Summary from './components/Summary'
-import Ticker from './components/Ticker'
-import Settings from './components/Settings'
-import PageNotFound from './components/PageNotFound'
 import companies from './companies'
 
 Vue.use(VueRouter)
@@ -18,7 +13,7 @@ const routes = [
   {
     path: '/summary',
     alias: ['/', '/bargain', '/hot'],
-    component: Summary,
+    component: () => import(/* webpackPrefetch: true */ './components/Summary'),
     props: route => {
       let filter = route.query.filter
       switch (route.path) {
@@ -37,7 +32,7 @@ const routes = [
   },
   {
     path: '/tickers/:ticker',
-    component: Ticker,
+    component: () => import(/* webpackPrefetch: true */ './components/Ticker'),
     props: route => ({ ticker: route.params.ticker, period: route.query.period }),
     meta: {
       showUpdateTime: true
@@ -52,7 +47,7 @@ const routes = [
   {
     path: '/index',
     alias: '/tickers/NEODAQ',
-    component: Ticker,
+    component: () => import(/* webpackPrefetch: true */ './components/Ticker'),
     props: route => ({ ticker: 'NEODAQ', period: route.query.period }),
     meta: {
       showUpdateTime: true
@@ -60,15 +55,15 @@ const routes = [
   },
   {
     path: '/settings',
-    component: Settings
+    component: () => import(/* webpackPrefetch: true */ './components/Settings')
   },
   {
     path: '/about',
-    component: About
+    component: () => import('./components/About')
   },
   {
     path: '*',
-    component: PageNotFound
+    component: () => import('./components/PageNotFound')
   }
 ]
 

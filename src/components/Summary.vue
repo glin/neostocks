@@ -68,35 +68,6 @@
 .numeric {
   text-align: right;
 }
-
-.num-change {
-  font-weight: 600;
-}
-
-.num-positive {
-  color: green;
-}
-
-.num-negative {
-  color: red;
-}
-
-.num-zero {
-  color: #6c757d;
-}
-
-.hoverable {
-  border-bottom: 1px dotted #888;
-}
-
-.time-period {
-  font-size: 0.85rem;
-}
-
-.current-high {
-  font-weight: 600;
-  color: #e36209;
-}
 </style>
 
 <style scoped>
@@ -125,6 +96,35 @@
 
 .new-hot-tag {
   font-size: small;
+  color: #e36209;
+}
+
+.num-change {
+  font-weight: 600;
+}
+
+.num-positive {
+  color: green;
+}
+
+.num-negative {
+  color: red;
+}
+
+.num-zero {
+  color: #6c757d;
+}
+
+.hoverable {
+  border-bottom: 1px dotted #888;
+}
+
+.time-period {
+  font-size: 0.85rem;
+}
+
+.current-high {
+  font-weight: 600;
   color: #e36209;
 }
 </style>
