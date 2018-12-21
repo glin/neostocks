@@ -22,10 +22,10 @@
         <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip.hover :title="formatDate(data.item.time_high, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="hoverable">{{ data.value }}</span>
+        <span v-b-tooltip="{ boundary: 'window' }" :title="formatDate(data.item.time_high, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="hoverable">{{ data.value }}</span>
       </template>
       <template slot="num_peaks" slot-scope="data">
-        <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable">{{ data.value }}</span>
+        <span v-b-tooltip="{ boundary: 'window' }" :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable">{{ data.value }}</span>
       </template>
       <template slot="avg_days_peak" slot-scope="data">
         <span class="time-period">{{ `${data.value} days` }}</span>

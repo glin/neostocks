@@ -34,12 +34,12 @@
             <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip.hover :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="hoverable" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
+            <span v-b-tooltip :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="hoverable" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
               {{ data.value }}
             </span>
           </template>
           <template slot="avg_peak" slot-scope="data">
-            <span v-b-tooltip.hover :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
+            <span v-b-tooltip :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
               {{ data.value }}
             </span>
           </template>
@@ -47,7 +47,7 @@
             <span class="time-period">{{ `${data.value} days` }}</span>
           </template>
           <template slot="last_peak" slot-scope="data">
-            <span v-b-tooltip.hover :title="formatDate(data.item.last_peak_nst)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
+            <span v-b-tooltip :title="formatDate(data.item.last_peak_nst)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
               {{ formatTimeSince(data.value) }}
             </span>
           </template>
