@@ -264,6 +264,14 @@
 </style>
 
 <script>
+import bCol from 'bootstrap-vue/es/components/layout/col'
+import bRow from 'bootstrap-vue/es/components/layout/row'
+import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select'
+import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
+
 import Vue from 'vue'
 import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
@@ -277,6 +285,13 @@ Vue.use(ToggleButton)
 
 export default {
   components: {
+    bCol,
+    bRow,
+    bFormSelect,
+    bFormInput,
+    bListGroup,
+    bListGroupItem,
+    bTooltip,
     Card,
     Multiselect
   },

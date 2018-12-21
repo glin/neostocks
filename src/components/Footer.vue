@@ -46,3 +46,15 @@ footer {
   }
 }
 </style>
+
+<script>
+import bContainer from 'bootstrap-vue/es/components/layout/container'
+import bLink from 'bootstrap-vue/es/components/link/link'
+
+export default {
+  components: {
+    bContainer,
+    bLink
+  }
+}
+</script>

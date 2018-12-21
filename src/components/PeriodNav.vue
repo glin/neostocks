@@ -31,7 +31,15 @@
 </style>
 
 <script>
+import bNav from 'bootstrap-vue/es/components/nav/nav'
+import bNavItem from 'bootstrap-vue/es/components/nav/nav-item'
+
 export default {
+  components: {
+    bNav,
+    bNavItem
+  },
+
   props: {
     period: {
       type: String,

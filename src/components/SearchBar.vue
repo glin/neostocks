@@ -110,10 +110,19 @@
 </style>
 
 <script>
+import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+import bNavForm from 'bootstrap-vue/es/components/nav/nav-form'
+
 import SearchIcon from '@mdi/svg/svg/magnify.svg'
 
 export default {
   components: {
+    bFormInput,
+    bListGroup,
+    bListGroupItem,
+    bNavForm,
     SearchIcon
   },
 

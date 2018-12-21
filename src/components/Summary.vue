@@ -130,6 +130,9 @@
 </style>
 
 <script>
+import bTable from 'bootstrap-vue/es/components/table/table'
+import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
+
 import Heading from './Heading'
 import Card from './Card'
 import PeriodNav from './PeriodNav'
@@ -137,9 +140,14 @@ import { timeSince } from '../date'
 
 export default {
   components: {
+    bTable,
     Heading,
     Card,
     PeriodNav
+  },
+
+  directives: {
+    bTooltip
   },
 
   props: {

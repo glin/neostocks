@@ -19,7 +19,6 @@
 
 <script>
 import Dygraph from 'dygraphs'
-
 import 'dygraphs/dist/dygraph.css'
 
 export default {

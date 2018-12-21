@@ -78,9 +78,17 @@
 </style>
 
 <script>
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+
 import { timeSince } from '../date'
 
 export default {
+  components: {
+    bListGroup,
+    bListGroupItem
+  },
+
   props: {
     notifications: {
       type: Array,

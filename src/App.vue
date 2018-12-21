@@ -62,6 +62,8 @@ body {
 </style>
 
 <script>
+import bContainer from 'bootstrap-vue/es/components/layout/container'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Card from './components/Card'
@@ -74,6 +76,7 @@ import { DAY } from './date'
 
 export default {
   components: {
+    bContainer,
     Header,
     Footer,
     Card,

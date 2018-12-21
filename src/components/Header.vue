@@ -155,17 +155,39 @@
 </style>
 
 <script>
-import SearchBar from './SearchBar'
-import Notifications from './Notifications'
+import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
+import bContainer from 'bootstrap-vue/es/components/layout/container'
+import bLink from 'bootstrap-vue/es/components/link/link'
+import bNavItem from 'bootstrap-vue/es/components/nav/nav-item'
+import bNavbar from 'bootstrap-vue/es/components/navbar/navbar'
+import bNavbarBrand from 'bootstrap-vue/es/components/navbar/navbar-brand'
+import bNavbarNav from 'bootstrap-vue/es/components/navbar/navbar-nav'
+import bNavbarToggle from 'bootstrap-vue/es/components/navbar/navbar-toggle'
+import bPopover from 'bootstrap-vue/es/components/popover/popover'
+import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
+
 import BellIcon from '@mdi/svg/svg/bell-outline.svg'
 import SettingsIcon from '@mdi/svg/svg/settings-outline.svg'
 
+import SearchBar from './SearchBar'
+import Notifications from './Notifications'
+
 export default {
   components: {
-    SearchBar,
-    Notifications,
+    bCollapse,
+    bContainer,
+    bLink,
+    bNavItem,
+    bNavbar,
+    bNavbarBrand,
+    bNavbarNav,
+    bNavbarToggle,
+    bPopover,
+    bTooltip,
     BellIcon,
-    SettingsIcon
+    SettingsIcon,
+    SearchBar,
+    Notifications
   },
 
   props: {

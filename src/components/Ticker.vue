@@ -160,6 +160,9 @@
 </style>
 
 <script>
+import bTable from 'bootstrap-vue/es/components/table/table'
+import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
+
 import Card from './Card'
 import Dygraph from './Dygraph'
 import Heading from './Heading'
@@ -169,11 +172,16 @@ import { timeSince } from '../date'
 
 export default {
   components: {
+    bTable,
     Card,
     Dygraph,
     Heading,
     PeriodNav,
     PageNotFound
+  },
+
+  directives: {
+    bTooltip
   },
 
   props: {

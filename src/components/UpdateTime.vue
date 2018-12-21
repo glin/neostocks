@@ -24,9 +24,15 @@
 </style>
 
 <script>
+import bContainer from 'bootstrap-vue/es/components/layout/container'
+
 import { timeSince } from '../date'
 
 export default {
+  components: {
+    bContainer
+  },
+
   props: {
     updateTime: {
       type: Object,
