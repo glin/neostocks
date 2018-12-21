@@ -46,6 +46,7 @@
 .summary td {
   padding: 0.35rem 0.5rem;
   white-space: nowrap;
+  border-color: #e9ecef;
 }
 
 .summary th:focus {

@@ -62,6 +62,10 @@
   border: none;
 }
 
+.summary-table th, .summary-table td {
+  border-color: #e9ecef;
+}
+
 .summary-table.table {
   margin-bottom: 0;
 }
