@@ -74,7 +74,7 @@
 }
 
 @media (max-width: 575.98px) {
-  #notifications-btn {
+  .notifications {
     display: none;
   }
 }
