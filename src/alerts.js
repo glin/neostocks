@@ -97,7 +97,7 @@ export function sendNotifications(alerts, { onClick, onClose, timeout = 30000, m
     alerts = alerts.slice(0, maxShown)
     alerts[alerts.length - 1] = {
       ...alerts[alerts.length - 1],
-      message: `...and ${numRemaining} more ${numRemaining > 1 ? 'alerts' : 'alert'}`
+      message: `and ${numRemaining} more ${numRemaining > 1 ? 'alerts' : 'alert'}`
     }
   }
 
