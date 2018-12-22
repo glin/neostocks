@@ -5,26 +5,26 @@
       <b-navbar-brand :to="{ path: '/', query }" class="brand">
         <img class="logo" src="../assets/neostocks.png" alt="neostocks-logo"> neostocks
       </b-navbar-brand>
-      <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" is-nav>
+      <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" class="order-2" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="{ path: '/bargain', query }">Bargain</b-nav-item>
           <b-nav-item :to="{ path: '/hot', query }">Hot</b-nav-item>
           <b-nav-item :to="{ path: '/index', query }">Index</b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto mr-3">
           <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
-          <div class="notifications">
-            <button ref="notificationsBtn" class="notifications-btn icon-btn" @click="handleNotificationsBtnClick">
-              <BellIcon />
-            </button>
-            <span v-if="showUnreadNotifications" class="unread-notifications">●</span>
-          </div>
-          <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
-          <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
-            <Notifications :notifications="notifications" />
-          </b-popover>
         </b-navbar-nav>
       </b-collapse>
+      <div class="order-1 order-sm-last">
+        <button ref="notificationsBtn" class="notifications-btn icon-btn" @click="handleNotificationsBtnClick">
+          <BellIcon />
+        </button>
+        <span v-if="showUnreadNotifications" class="unread-notifications">●</span>
+        <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
+        <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
+          <Notifications :notifications="notifications" />
+        </b-popover>
+      </div>
     </b-container>
   </b-navbar>
 </template>
@@ -52,22 +52,11 @@
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.notifications {
-  display: flex;
-  position: relative;
-}
-
 .notifications-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0 0 16px;
-}
-
-@media (max-width: 575.98px) {
-  .notifications {
-    display: none;
-  }
+  padding: 0;
 }
 
 .unread-notifications {
