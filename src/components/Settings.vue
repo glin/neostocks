@@ -12,7 +12,7 @@
           </span>
           <span v-else>
             Blocked
-            <span class="notifications-blocked">(allow notifications via your browser settings)</span>
+            <span class="notifications-blocked">(allow via browser settings)</span>
           </span>
         </label>
       </div>
@@ -123,7 +123,7 @@
 }
 
 .notifications-blocked {
-  margin-left: 8px;
+  margin-left: 0.4rem;
   font-size: 0.8rem;
   color: #6c757d;
 }
