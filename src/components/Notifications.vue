@@ -1,117 +1,85 @@
 <template>
-  <b-list-group class="notifications-list">
-    <b-list-group-item v-for="(item, index) in notifications" :key="index" :to="item.location" class="notification-item">
-      <img :src="item.icon" :alt="item.ticker" class="notification-icon">
-      <div>
-        <div class="notification-title">{{ item.title }}</div>
-        <div class="notification-message">{{ item.message }}</div>
-      </div>
-      <div :title="formatTimeNST(item.updateTimeNST)" class="notification-time ml-auto">{{ timeSince(item.updateTime) }}</div>
-    </b-list-group-item>
-    <b-list-group-item v-if="notifications.length === 0" class="notification-item no-notifications">
-      No notifications
-    </b-list-group-item>
-  </b-list-group>
+  <div>
+    <div class="notifications-heading">
+      <div class="notifications-title">Notifications</div>
+      <b-link id="settings-btn" :to="'/settings'" class="icon-btn">
+        <SettingsIcon class="settings-icon" />
+      </b-link>
+      <b-tooltip target="settings-btn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
+    </div>
+    <NotificationsList :notifications="notifications" />
+  </div>
 </template>
 
 <style scoped>
-.notifications-list {
-  width: 290px;
-  max-height: 420px;
-  overflow-y: auto;
+.notifications-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #eee;
+  background-color: #f3f3f3;
   font-family: 'Open Sans';
 }
 
-.notification-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  min-height: 65px;
-  border-radius: 0;
-  border-right: none;
-  border-left: none;
-  border-color: #eaeaea;
-}
-
-.notification-item:first-child {
-  border-top: none;
-}
-
-.notification-item:last-child {
-  border-bottom: none;
-}
-
-.notification-item:hover {
-  background-color: #f7f8f8;
-}
-
-.notification-item.active {
-  color: #495057;
-  background-color: #fff;
-  border-color: #eaeaea;
-}
-
-.notification-icon {
-  align-self: center;
-  margin-right: 0.75rem;
-  height: 35px;
-}
-
-.notification-title {
+.notifications-title {
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
-.notification-time {
-  font-size: 0.8rem;
-  color: #999;
+.icon-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
-.notification-message {
-  font-size: 0.8rem;
-  color: #737373;
+.icon-btn:hover {
+  opacity: 0.65;
 }
 
-.no-notifications {
-  font-size: 0.9rem;
-  color: #737373;
+.icon-btn:active {
+  opacity: 1;
+}
+
+.settings-icon {
+  display: block;
+}
+</style>
+
+<style>
+.tooltip {
+  font-family: 'Open Sans';
+}
+
+.tooltip-inner {
+  padding: 0.3rem 0.6rem;
 }
 </style>
 
 <script>
-import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
-import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+import bLink from 'bootstrap-vue/es/components/link/link'
+import bPopover from 'bootstrap-vue/es/components/popover/popover'
+import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
 
-import { timeSince } from '../date'
+import SettingsIcon from '@mdi/svg/svg/settings-outline.svg'
+
+import NotificationsList from './NotificationsList'
 
 export default {
   components: {
-    bListGroup,
-    bListGroupItem
+    bLink,
+    bPopover,
+    bTooltip,
+    SettingsIcon,
+    NotificationsList
   },
 
   props: {
     notifications: {
       type: Array,
       required: true
-    }
-  },
-
-  data() {
-    return {
-      now: new Date()
-    }
-  },
-
-  created() {
-    setInterval(() => (this.now = new Date()), 60 * 1000)
-  },
-
-  methods: {
-    timeSince(time) {
-      return timeSince(new Date(time), this.now)
-    },
-    formatTimeNST(time) {
-      return new Date(time).toLocaleString() + ' NST'
     }
   }
 }

@@ -21,15 +21,6 @@
           </div>
           <b-tooltip :show.sync="showNotificationsTooltip" target="notifications-btn" placement="bottomleft" title="Notifications" no-fade />
           <b-popover target="notifications-btn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
-            <div class="notifications-heading">
-              <div class="notifications-title">
-                Notifications
-              </div>
-              <b-link id="settings-btn" :to="'/settings'" class="icon-btn">
-                <SettingsIcon class="settings-icon" />
-              </b-link>
-              <b-tooltip target="settings-btn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
-            </div>
             <Notifications :notifications="notifications" />
           </b-popover>
         </b-navbar-nav>
@@ -88,21 +79,6 @@
   font-family: Arial;
 }
 
-.notifications-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #eee;
-  background-color: #f3f3f3;
-  font-family: 'Open Sans';
-}
-
-.notifications-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
 .icon-btn {
   border: none;
   outline: none;
@@ -117,10 +93,6 @@
 
 .icon-btn:active {
   opacity: 1;
-}
-
-.settings-icon {
-  display: block;
 }
 </style>
 
@@ -157,7 +129,6 @@
 <script>
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
-import bLink from 'bootstrap-vue/es/components/link/link'
 import bNavItem from 'bootstrap-vue/es/components/nav/nav-item'
 import bNavbar from 'bootstrap-vue/es/components/navbar/navbar'
 import bNavbarBrand from 'bootstrap-vue/es/components/navbar/navbar-brand'
@@ -167,7 +138,6 @@ import bPopover from 'bootstrap-vue/es/components/popover/popover'
 import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
 
 import BellIcon from '@mdi/svg/svg/bell-outline.svg'
-import SettingsIcon from '@mdi/svg/svg/settings-outline.svg'
 
 import SearchBar from './SearchBar'
 import Notifications from './Notifications'
@@ -176,7 +146,6 @@ export default {
   components: {
     bCollapse,
     bContainer,
-    bLink,
     bNavItem,
     bNavbar,
     bNavbarBrand,
@@ -185,7 +154,6 @@ export default {
     bPopover,
     bTooltip,
     BellIcon,
-    SettingsIcon,
     SearchBar,
     Notifications
   },
