@@ -14,13 +14,13 @@
         <b-navbar-nav class="ml-auto">
           <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
           <div class="notifications">
-            <button id="notifications-btn" class="icon-btn" @click="handleNotificationsBtnClick">
+            <button ref="notificationsBtn" class="notifications-btn icon-btn" @click="handleNotificationsBtnClick">
               <BellIcon />
             </button>
             <span v-if="showUnreadNotifications" class="unread-notifications">●</span>
           </div>
-          <b-tooltip :show.sync="showNotificationsTooltip" target="notifications-btn" placement="bottomleft" title="Notifications" no-fade />
-          <b-popover target="notifications-btn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
+          <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
+          <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
             <Notifications :notifications="notifications" />
           </b-popover>
         </b-navbar-nav>
@@ -57,7 +57,7 @@
   position: relative;
 }
 
-#notifications-btn {
+.notifications-btn {
   display: flex;
   align-items: center;
   justify-content: center;

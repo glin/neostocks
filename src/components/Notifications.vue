@@ -2,10 +2,10 @@
   <div>
     <div class="notifications-heading">
       <div class="notifications-title">Notifications</div>
-      <b-link id="settings-btn" :to="'/settings'" class="icon-btn">
+      <b-link ref="settingsBtn" :to="'/settings'" class="icon-btn">
         <SettingsIcon class="settings-icon" />
       </b-link>
-      <b-tooltip target="settings-btn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
+      <b-tooltip :target="() => $refs.settingsBtn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
     </div>
     <NotificationsList :notifications="notifications" />
   </div>
