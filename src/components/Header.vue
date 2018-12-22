@@ -15,16 +15,16 @@
           <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
         </b-navbar-nav>
       </b-collapse>
-      <div class="order-1 order-sm-last">
+      <div class="notifications order-1 order-sm-last">
         <button ref="notificationsBtn" class="notifications-btn icon-btn" @click="handleNotificationsBtnClick">
           <BellIcon />
         </button>
-        <span v-if="showUnreadNotifications" class="unread-notifications">●</span>
-        <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
-        <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
-          <Notifications :notifications="notifications" />
-        </b-popover>
+        <span v-if="showUnreadNotifications" class="unread-notifications" />
       </div>
+      <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
+      <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
+        <Notifications :notifications="notifications" />
+      </b-popover>
     </b-container>
   </b-navbar>
 </template>
@@ -52,6 +52,10 @@
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
+.notifications {
+  position: relative;
+}
+
 .notifications-btn {
   display: flex;
   align-items: center;
@@ -61,11 +65,13 @@
 
 .unread-notifications {
   position: absolute;
-  top: -3px;
-  right: -3px;
-  color: #dc3545;
-  /* color: #e36209; */
-  font-family: Arial;
+  top: -1px;
+  right: -2px;
+  background: #dc3545;
+  /* background: #e36209; */
+  border-radius: 50%;
+  height: 7px;
+  width: 7px;
 }
 
 .icon-btn {
