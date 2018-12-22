@@ -56,7 +56,7 @@ body {
   }
 
   .main-content {
-    margin-top: 7.5px;
+    margin-top: 0;
   }
 }
 </style>
