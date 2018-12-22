@@ -439,8 +439,10 @@ export default {
 
   created() {
     Shiny.addCustomMessageHandler('ticker-data', msg => {
-      this.prices = msg.data.prices
-      this.peaks = msg.data.peaks
+      if (msg.data) {
+        this.prices = msg.data.prices
+        this.peaks = msg.data.peaks
+      }
     })
 
     $(document).on('shiny:connected', () => {
