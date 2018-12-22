@@ -3,7 +3,8 @@
     <h1 class="title">Settings</h1>
 
     <div class="settings-section">
-      <h2 class="settings-heading">Desktop Notifications</h2>
+      <h2 class="settings-heading d-none d-sm-block">Desktop Notifications</h2>
+      <h2 class="settings-heading d-block d-sm-none">Notifications</h2>
       <div class="toggle-group">
         <label class="toggle-label">
           <toggle-button :value="settings.enableDesktopNotifications" :sync="true" :width="48" class="settings-toggle" color="#007bff" @click.native.stop.prevent="handleDesktopNotificationsChange" />
@@ -77,7 +78,7 @@
             </b-row>
           </b-col>
 
-          <button :id="`delete-btn-${i}`" type="button" class="close delete-btn" @click="handleDeleteAlert(i)">
+          <button :id="`delete-btn-${i}`" type="button" class="close delete-btn d-sm-none d-block" @click="handleDeleteAlert(i)">
             <span aria-hidden="true">&times;</span>
           </button>
           <b-tooltip :target="`delete-btn-${i}`" placement="bottomleft" title="Remove alert" delay="700" no-fade />
@@ -151,12 +152,11 @@
 }
 
 .delete-btn {
-  display: none;
   align-self: flex-start;
 }
 
 .alerts-list-item:hover .delete-btn {
-  display: block;
+  display: block !important;
 }
 
 .icon-btn {
