@@ -94,7 +94,8 @@ export default {
       notifications: [],
       now: new Date(),
       isPageVisible: true,
-      companies
+      companies,
+      title: document.title
     }
   },
 
@@ -218,18 +219,23 @@ export default {
 
       this.notifications = notifications.concat(this.notifications)
 
+      const unreadNotifications = notifications.filter(item => !item.isRead)
       if (this.settings.enableDesktopNotifications && !this.isPageVisible) {
-        const unreadNotifications = notifications.filter(item => !item.isRead)
         sendNotifications(unreadNotifications, {
           onRead: this.handleNotificationsRead
         })
       }
+
+      if (unreadNotifications.length > 0) {
+        document.title = `(${unreadNotifications.length}) ${this.title}`
+      }
     },
     handleNotificationsRead() {
-      if (this.notifications.length > 0) {
+      if (this.notifications.some(item => !item.isRead)) {
         this.notifications = this.notifications.map(item => ({ ...item, isRead: true }))
         const timestamps = this.notifications.map(item => item.updateTimestamp)
         this.settings.lastReadTimestamp = Math.max(...timestamps)
+        document.title = this.title
       }
     },
     handleVisibilityChange() {
