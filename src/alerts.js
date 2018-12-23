@@ -91,14 +91,20 @@ function isCurrentHigh(data) {
   return data.curr === data.high && data.curr >= 30
 }
 
-export function sendNotifications(alerts, { onClick, onClose, timeout = 30000, maxShown = 3 }) {
+export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
   if (alerts.length > maxShown) {
-    const numRemaining = alerts.length - maxShown
-    alerts = alerts.slice(0, maxShown)
-    alerts[alerts.length - 1] = {
-      ...alerts[alerts.length - 1],
-      message: `and ${numRemaining} more ${numRemaining > 1 ? 'alerts' : 'alert'}`
-    }
+    // Collapse all alerts into one, showing titles only
+    const numAlerts = alerts.length
+    const messages = alerts.map(alert => alert.title).join('\n')
+    alerts = [{
+      title: `${numAlerts} new ${numAlerts > 1 ? 'alerts' : 'alert'}`,
+      message: messages,
+      icon: require('./assets/neostocks.png'),
+      tag: 'neostocks',
+      data: {
+        collapsed: true
+      }
+    }]
   }
 
   alerts.forEach(alert => {
@@ -106,28 +112,21 @@ export function sendNotifications(alerts, { onClick, onClose, timeout = 30000, m
     const options = {
       body: alert.message,
       icon: alert.icon,
-      tag: alert.tag
+      tag: alert.tag,
+      badge: require('./assets/neostocks-badge.png'),
+      data: alert.data
     }
 
     const notification = sendNotification(title, options)
-    let isExpired = false
 
-    if (timeout) {
-      setTimeout(() => {
-        isExpired = true
+    if ('onclick' in notification) {
+      notification.onclick = () => {
         notification.close()
-      }, timeout)
-    }
-
-    notification.onclose = function() {
-      if (!isExpired) {
-        onClose && onClose()
+        if (notification.data && !notification.data.collapsed) {
+          onRead()
+        }
+        window.focus()
       }
-    }
-
-    notification.onclick = function() {
-      onClick && onClick()
-      notification.close()
     }
   })
 }

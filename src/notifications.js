@@ -1,5 +1,13 @@
 export function sendNotification(title, options) {
-  return new Notification(title, options)
+  if (swNotificationsSupported()) {
+    return navigator.serviceWorker.ready.then(registration => {
+      return registration.showNotification(title, options)
+    })
+  }
+
+  if (notificationsSupported()) {
+    return new Notification(title, options)
+  }
 }
 
 export function requestPermission() {
@@ -27,4 +35,12 @@ export function notificationsEnabled() {
 
 export function notificationsBlocked() {
   return notificationsSupported() && Notification.permission === 'denied'
+}
+
+export function swNotificationsSupported() {
+  return serviceWorkerSupported() && 'showNotification' in ServiceWorkerRegistration.prototype
+}
+
+export function serviceWorkerSupported() {
+  return 'serviceWorker' in navigator
 }

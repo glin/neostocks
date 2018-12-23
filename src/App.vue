@@ -70,7 +70,7 @@ import Card from './components/Card'
 import UpdateTime from './components/UpdateTime'
 import companies from './companies'
 import { getSettingsStore } from './settings'
-import { notificationsEnabled, requestPermission } from './notifications'
+import { notificationsEnabled, requestPermission, swNotificationsSupported } from './notifications'
 import { getPriceAlerts, sendNotifications } from './alerts'
 import { DAY } from './date'
 
@@ -158,6 +158,15 @@ export default {
     setInterval(() => (this.now = new Date()), 60 * 1000)
 
     document.addEventListener('visibilitychange', this.handleVisibilityChange)
+
+    if (swNotificationsSupported()) {
+      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data.readNotifications) {
+          this.handleNotificationsRead()
+        }
+      })
+    }
   },
 
   methods: {
@@ -211,8 +220,7 @@ export default {
       if (this.settings.enableDesktopNotifications && !this.isPageVisible) {
         const unreadNotifications = notifications.filter(item => !item.isRead)
         sendNotifications(unreadNotifications, {
-          onClick: this.handleNotificationsRead,
-          onClose: this.handleNotificationsRead
+          onRead: this.handleNotificationsRead
         })
       }
     },
