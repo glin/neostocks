@@ -147,6 +147,9 @@ export default {
       this.notifications = this.notifications.filter(item => {
         return this.now - new Date(item.updateTime) <= DAY * 5
       })
+    },
+    notifications() {
+      this.updateUnreadCount()
     }
   },
 
@@ -218,25 +221,21 @@ export default {
 
       this.notifications = notifications.concat(this.notifications)
 
-      const unreadNotifications = notifications.filter(item => !item.isRead)
-
       if (this.settings.enableDesktopNotifications && !document.hasFocus()) {
+        const unreadNotifications = notifications.filter(item => !item.isRead)
         sendNotifications(unreadNotifications, {
           onRead: this.handleNotificationsRead
         })
       }
-
-      if (unreadNotifications.length > 0) {
-        document.title = `(${unreadNotifications.length}) ${this.title}`
-      }
     },
     handleNotificationsRead() {
-      if (this.notifications.some(item => !item.isRead)) {
-        this.notifications = this.notifications.map(item => ({ ...item, isRead: true }))
-        const timestamps = this.notifications.map(item => item.updateTimestamp)
-        this.settings.lastReadTimestamp = Math.max(...timestamps)
-        document.title = this.title
-      }
+      this.notifications = this.notifications.map(item => ({ ...item, isRead: true }))
+      const timestamps = this.notifications.map(item => item.updateTimestamp)
+      this.settings.lastReadTimestamp = Math.max(...timestamps)
+    },
+    updateUnreadCount() {
+      const unreadCount = this.notifications.filter(item => !item.isRead).length
+      document.title = unreadCount > 0 ? `(${unreadCount}) ${this.title}` : this.title
     }
   }
 }
