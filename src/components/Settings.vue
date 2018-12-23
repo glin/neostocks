@@ -4,7 +4,7 @@
 
     <div class="settings-section">
       <h2 class="settings-heading d-none d-sm-block">Desktop Notifications</h2>
-      <h2 class="settings-heading d-block d-sm-none">Notifications</h2>
+      <h2 class="settings-heading d-block d-sm-none">Browser Notifications</h2>
       <div class="toggle-group">
         <label class="toggle-label">
           <toggle-button :value="settings.enableDesktopNotifications" :sync="true" :width="48" class="settings-toggle" color="#007bff" @click.native.stop.prevent="handleDesktopNotificationsChange" />
