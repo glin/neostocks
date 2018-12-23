@@ -7,11 +7,14 @@ export function requestPermission() {
     return new Promise(resolve => resolve(false))
   }
 
-  const granted = Notification.requestPermission().then(permission => {
-    return permission === 'granted'
-  })
-
-  return granted
+  try {
+    return Notification.requestPermission().then(permission => permission === 'granted')
+  } catch (error) {
+    // For browsers that don't support the promise-based syntax (e.g. Safari)
+    return new Promise(resolve => {
+      Notification.requestPermission(permission => resolve(permission === 'granted'))
+    })
+  }
 }
 
 export function notificationsSupported() {
@@ -19,9 +22,9 @@ export function notificationsSupported() {
 }
 
 export function notificationsEnabled() {
-  return Notification.permission === 'granted'
+  return notificationsSupported() && Notification.permission === 'granted'
 }
 
 export function notificationsBlocked() {
-  return Notification.permission === 'denied'
+  return notificationsSupported() && Notification.permission === 'denied'
 }
