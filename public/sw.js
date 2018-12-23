@@ -12,7 +12,7 @@ self.addEventListener('notificationclick', event => {
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
       clients.forEach(client => {
-        if (event.notification.data && !event.notification.data.collapsed) {
+        if (!(event.notification.data && event.notification.data.collapsed)) {
           client.postMessage({ readNotifications: true })
         }
       })

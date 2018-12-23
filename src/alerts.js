@@ -122,7 +122,7 @@ export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
     if ('onclick' in notification) {
       notification.onclick = () => {
         notification.close()
-        if (notification.data && !notification.data.collapsed) {
+        if (!(notification.data && notification.data.collapsed)) {
           onRead()
         }
         window.focus()
