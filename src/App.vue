@@ -27,7 +27,8 @@ body {
   font-family: 'Open Sans';
 }
 
-#shiny-disconnected-overlay, #ss-overlay {
+#shiny-disconnected-overlay,
+#ss-overlay {
   display: none !important;
 }
 </style>
