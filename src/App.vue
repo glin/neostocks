@@ -93,7 +93,6 @@ export default {
       settings: {},
       notifications: [],
       now: new Date(),
-      isPageVisible: true,
       companies,
       title: document.title
     }
@@ -220,7 +219,8 @@ export default {
       this.notifications = notifications.concat(this.notifications)
 
       const unreadNotifications = notifications.filter(item => !item.isRead)
-      if (this.settings.enableDesktopNotifications && !this.isPageVisible) {
+
+      if (this.settings.enableDesktopNotifications && !document.hasFocus()) {
         sendNotifications(unreadNotifications, {
           onRead: this.handleNotificationsRead
         })
@@ -237,9 +237,6 @@ export default {
         this.settings.lastReadTimestamp = Math.max(...timestamps)
         document.title = this.title
       }
-    },
-    handleVisibilityChange() {
-      this.isPageVisible = !document.hidden
     }
   }
 }
