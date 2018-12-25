@@ -68,11 +68,23 @@ export default {
         const csv = columnsToCsv(this.data)
         const isDateOnly = this.data.time[0].indexOf(':') < 0
         const valueFormatter = isDateOnly ? dateValueFormatter : dateTimeValueFormatter
-        this.g = renderDygraph(this.$refs.el, csv, defaultOptions(valueFormatter))
+        const options = defaultOptions(valueFormatter)
+        if (!this.g) {
+          this.g = new Dygraph(this.$refs.el, csv, options)
+        } else {
+          // Redraw so we don't have to destroy and recreate the existing Dygraph
+          this.g.updateOptions({ ...options, file: csv })
+        }
         this.setAnnotations()
       },
       { immediate: true }
     )
+  },
+
+  beforeDestroy() {
+    if (this.g) {
+      this.g.destroy()
+    }
   },
 
   methods: {
