@@ -35,6 +35,10 @@ export default {
       type: String,
       default: '300px'
     },
+    labelsKmb: {
+      type: Boolean,
+      default: false
+    },
     annotations: {
       type: Array,
       default: () => []
@@ -68,7 +72,7 @@ export default {
         const csv = columnsToCsv(this.data)
         const isDateOnly = this.data.time[0].indexOf(':') < 0
         const valueFormatter = isDateOnly ? dateValueFormatter : dateTimeValueFormatter
-        const options = defaultOptions(valueFormatter)
+        const options = { ...defaultOptions(valueFormatter), labelsKMB: this.labelsKmb }
         if (!this.g) {
           this.g = new Dygraph(this.$refs.el, csv, options)
         } else {
