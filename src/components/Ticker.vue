@@ -24,8 +24,9 @@
       </Heading>
 
       <PeriodNav :period="period" />
-      <Dygraph :data="prices" :annotations="annotations" class="price-graph" />
-
+      <div class="price-graph-container">
+        <Dygraph v-show="!isFetching" :data="prices" :annotations="annotations" class="price-graph" />
+      </div>
       <hr class="divider">
 
       <div v-for="tbl in summaryTables" :class="tbl.class" :key="tbl.class">
@@ -132,7 +133,15 @@
   margin: 15px 0 5px;
 }
 
+.price-graph-container {
+  height: 300px;
+}
+
 @media (max-width: 575.98px) {
+  .price-graph-container {
+    height: 200px;
+  }
+
   .price-graph {
     max-height: 200px;
   }
@@ -442,6 +451,7 @@ export default {
       if (msg.data) {
         this.prices = msg.data.prices
         this.peaks = msg.data.peaks
+        this.isFetching = false
       }
     })
 
@@ -454,8 +464,7 @@ export default {
     updateInputs() {
       if (!window.Shiny || !window.Shiny.onInputChange) return
 
-      // clear data to prevent graph flickering when switching tickers
-      this.prices = null
+      this.isFetching = true
 
       Shiny.onInputChange('ticker', {
         ticker: this.ticker,

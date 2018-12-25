@@ -25,7 +25,7 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true
+      default: null
     },
     width: {
       type: String,
@@ -66,7 +66,7 @@ export default {
       'data',
       () => {
         if (this.data == null) {
-          this.resetGraph()
+          this.clearGraph()
           return
         }
         const csv = columnsToCsv(this.data)
@@ -92,7 +92,7 @@ export default {
   },
 
   methods: {
-    resetGraph() {
+    clearGraph() {
       if (!this.g) return
       const plotData = [[0, 0]]
       this.g.updateOptions({ file: plotData })
@@ -124,11 +124,6 @@ function dateTimeValueFormatter(d) {
 
 function dateValueFormatter(d) {
   return new Date(d).toLocaleDateString()
-}
-
-function renderDygraph(el, data, options) {
-  const g = new Dygraph(el, data, options)
-  return g
 }
 
 function columnsToCsv(columns) {
