@@ -18,7 +18,7 @@
 </style>
 
 <script>
-import Dygraph from 'dygraphs'
+import Dygraph from 'dygraphs/index.es5'
 import 'dygraphs/dist/dygraph.css'
 
 export default {
