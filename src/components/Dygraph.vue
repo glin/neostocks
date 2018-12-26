@@ -33,7 +33,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '100%'
     },
     labelsKmb: {
       type: Boolean,
