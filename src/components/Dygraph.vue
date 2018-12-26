@@ -106,7 +106,7 @@ export default {
 
 function defaultOptions(valueFormatter = dateTimeValueFormatter) {
   return {
-    gridLineColor: 'rgb(187, 187, 187)',
+    gridLineColor: 'rgb(200, 200, 200)',
     axes: {
       x: {
         valueFormatter,
