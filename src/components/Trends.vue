@@ -14,15 +14,13 @@
             <!-- <span class="subtitle">for a stock at 15 NP</span> -->
             <span class="subtitle">starting from 15 NP</span>
           </div>
-          <div class="graph-container">
-            <BarChart
-              :chart-data="daysFrom15"
-              :tooltip-name-formatter="value => value + ' NP'"
-              :tooltip-value-formatter="value => `<b>${value}</b> days`"
-              x-axis-name="Price"
-              y-axis-name="Days"
-            />
-          </div>
+          <BarChart
+            :chart-data="daysFrom15"
+            :tooltip-name-formatter="value => value + ' NP'"
+            :tooltip-value-formatter="value => `<b>${value}</b> days`"
+            x-axis-name="Price"
+            y-axis-name="Days"
+          />
         </Card>
       </b-col>
       <b-col
@@ -33,15 +31,13 @@
           <div class="heading">
             <span class="title">Price Distribution</span>
           </div>
-          <div class="graph-container">
-            <BarChart
-              :chart-data="priceDist"
-              :y-axis-label-formatter="value => value + '%'"
-              :tooltip-name-formatter="value => value + ' NP'"
-              :tooltip-value-formatter="value => `<b>${value}%</b>`"
-              x-axis-name="Price"
-            />
-          </div>
+          <BarChart
+            :chart-data="priceDist"
+            :y-axis-label-formatter="value => value + '%'"
+            :tooltip-name-formatter="value => value + ' NP'"
+            :tooltip-value-formatter="value => `<b>${value}%</b>`"
+            x-axis-name="Price"
+          />
         </Card>
       </b-col>
     </b-row>
@@ -56,7 +52,7 @@
             <!-- <span class="title">Shares Purchased By Day</span> -->
             <span class="title">Shares Bought by Day</span>
           </div>
-          <div class="graph-container">
+          <div class="dygraph-container">
             <Dygraph
               :data="volumeByDayData"
               :options="{ labelsKMB: true, colors: ['#3398db'] }"
@@ -73,15 +69,13 @@
             <span class="title">Shares Bought by Price</span>
             <!-- <span class="title">Shares Purchased by Price</span> -->
           </div>
-          <div class="graph-container">
-            <BarChart
-              :chart-data="volumeByPrice"
-              :y-axis-label-formatter="value => value + '%'"
-              :tooltip-name-formatter="value => value + ' NP'"
-              :tooltip-value-formatter="value => `<b>${value}%</b>`"
-              x-axis-name="Price"
-            />
-          </div>
+          <BarChart
+            :chart-data="volumeByPrice"
+            :y-axis-label-formatter="value => value + '%'"
+            :tooltip-name-formatter="value => value + ' NP'"
+            :tooltip-value-formatter="value => `<b>${value}%</b>`"
+            x-axis-name="Price"
+          />
         </Card>
       </b-col>
     </b-row>
@@ -122,7 +116,7 @@
   color: #6c757d;
 }
 
-.graph-container {
+.dygraph-container {
   flex: 1 1 0;
 }
 </style>
