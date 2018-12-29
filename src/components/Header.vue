@@ -10,6 +10,7 @@
           <b-nav-item :to="{ path: '/bargain', query }">Bargain</b-nav-item>
           <b-nav-item :to="{ path: '/hot', query }">Hot</b-nav-item>
           <b-nav-item :to="{ path: '/index', query }">Index</b-nav-item>
+          <b-nav-item :to="{ path: '/trends' }">Trends</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto mr-3">
           <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />

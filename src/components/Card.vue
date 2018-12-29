@@ -1,5 +1,5 @@
 <template>
-  <div class="content-card">
+  <div class="content-card d-flex flex-column">
     <slot />
   </div>
 </template>

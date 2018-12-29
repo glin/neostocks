@@ -1,13 +1,30 @@
 <template>
   <div class="main">
     <div class="main-container">
-      <Header :search="search" :search-results="searchResults" :on-search-change="handleSearchChange" :on-search-submit="handleSearchSubmit" :notifications="notifications" :on-notifications-read="handleNotificationsRead" :query="query" />
+      <Header
+        :search="search"
+        :search-results="searchResults"
+        :on-search-change="handleSearchChange"
+        :on-search-submit="handleSearchSubmit"
+        :notifications="notifications"
+        :on-notifications-read="handleNotificationsRead"
+        :query="query"
+      />
       <b-container class="main-content">
         <keep-alive>
-          <router-view v-bind="stockData" :companies="companies" :settings="settings" :on-settings-change="handleSettingsChange" :query="query" />
+          <router-view
+            v-bind="stockData"
+            :companies="companies"
+            :settings="settings"
+            :on-settings-change="handleSettingsChange"
+            :query="query"
+          />
         </keep-alive>
       </b-container>
-      <UpdateTime v-if="showUpdateTime" :update-time="updateTime" />
+      <UpdateTime
+        v-if="showUpdateTime"
+        :update-time="updateTime"
+      />
     </div>
     <Footer />
   </div>
@@ -67,7 +84,6 @@ import bContainer from 'bootstrap-vue/es/components/layout/container'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Card from './components/Card'
 import UpdateTime from './components/UpdateTime'
 import companies from './companies'
 import { getSettingsStore } from './settings'
@@ -80,7 +96,6 @@ export default {
     bContainer,
     Header,
     Footer,
-    Card,
     UpdateTime
   },
 
@@ -89,6 +104,10 @@ export default {
       summaryData: window.__data__.summary_data,
       hotStocks: window.__data__.hot_stocks,
       updateTime: window.__data__.update_time,
+      daysFrom15: window.__data__.days_from_15,
+      priceDist: window.__data__.price_dist,
+      volumeByDay: window.__data__.volume_by_day,
+      volumeByPrice: window.__data__.volume_by_price,
       search: '',
       settings: {},
       notifications: [],
@@ -102,7 +121,11 @@ export default {
     stockData() {
       return {
         summaryData: this.summaryData,
-        hotStocks: this.hotStocks
+        hotStocks: this.hotStocks,
+        daysFrom15: this.daysFrom15,
+        priceDist: this.priceDist,
+        volumeByDay: this.volumeByDay,
+        volumeByPrice: this.volumeByPrice
       }
     },
     searchResults() {
@@ -178,6 +201,10 @@ export default {
       this.summaryData = data.summary_data
       this.hotStocks = data.hot_stocks
       this.updateTime = data.update_time
+      this.daysFrom15 = data.days_from_15
+      this.priceDist = data.price_dist
+      this.volumeByDay = data.volume_by_day
+      this.volumeByPrice = data.volume_by_price
     },
     handleSearchChange(value) {
       this.search = value

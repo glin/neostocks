@@ -251,6 +251,7 @@ export default {
   data() {
     return {
       prices: null,
+      isFetching: false,
       peaks: null,
       fields: [
         {

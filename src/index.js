@@ -54,6 +54,13 @@ const routes = [
     }
   },
   {
+    path: '/trends',
+    component: () => import(/* webpackPrefetch: true */ './components/Trends'),
+    meta: {
+      showUpdateTime: true
+    }
+  },
+  {
     path: '/settings',
     component: () => import(/* webpackPrefetch: true */ './components/Settings')
   },
