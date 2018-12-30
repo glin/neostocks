@@ -91,6 +91,7 @@ import { getSettingsStore } from './settings'
 import { notificationsEnabled, requestPermission, swNotificationsSupported } from './notifications'
 import { getPriceAlerts, sendNotifications } from './alerts'
 import { DAY } from './date'
+import { updateDocumentTitle } from './document'
 
 export default {
   components: {
@@ -261,10 +262,8 @@ export default {
       this.settings.lastReadTimestamp = Math.max(...timestamps)
     },
     updateUnreadCount() {
-      const unreadCount = this.notifications.filter(item => !item.isRead).length
-       // Strip the existing (n) unread count
-      const title = document.title.replace(/^\(\d+\)\s/, '')
-      document.title = unreadCount > 0 ? `(${unreadCount}) ${title}` : title
+      const newUnreadCount = this.notifications.filter(item => !item.isRead).length
+      updateDocumentTitle({ newUnreadCount })
     }
   }
 }

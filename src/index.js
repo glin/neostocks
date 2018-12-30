@@ -6,6 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import App from './App'
 import companies from './companies'
+import { updateDocumentTitle } from './document'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,7 @@ const routes = [
           case '/hot':
             return 'Hot'
         }
+        return ''
       }
     }
   },
@@ -112,16 +114,13 @@ router.beforeEach((to, from, next) => {
       }
     }
   })
-  next()
-})
 
-const docTitle = document.title
-
-router.afterEach(to => {
-  // Update page title
+  // Update document title
   const title = to.meta.title
-  const pageTitle = typeof title === 'function' ? title(to) : title
-  document.title = pageTitle ? `${pageTitle} - ${docTitle}` : docTitle
+  const newPageTitle = typeof title === 'function' ? title(to) : title
+  updateDocumentTitle({ newPageTitle })
+
+  next()
 })
 
 new Vue({
