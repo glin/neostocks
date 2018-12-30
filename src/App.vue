@@ -113,8 +113,7 @@ export default {
       settings: {},
       notifications: [],
       now: new Date(),
-      companies,
-      title: document.title
+      companies
     }
   },
 
@@ -263,7 +262,9 @@ export default {
     },
     updateUnreadCount() {
       const unreadCount = this.notifications.filter(item => !item.isRead).length
-      document.title = unreadCount > 0 ? `(${unreadCount}) ${this.title}` : this.title
+       // Strip the existing (n) unread count
+      const title = document.title.replace(/^\(\d+\)\s/, '')
+      document.title = unreadCount > 0 ? `(${unreadCount}) ${title}` : title
     }
   }
 }

@@ -27,7 +27,15 @@ const routes = [
       return { period: route.query.period, search: route.query.search, filter }
     },
     meta: {
-      showUpdateTime: true
+      showUpdateTime: true,
+      title: route => {
+        switch (route.path) {
+          case '/bargain':
+            return 'Bargain'
+          case '/hot':
+            return 'Hot'
+        }
+      }
     }
   },
   {
@@ -35,11 +43,13 @@ const routes = [
     component: () => import(/* webpackPrefetch: true */ './components/Ticker'),
     props: route => ({ ticker: route.params.ticker, period: route.query.period }),
     meta: {
-      showUpdateTime: true
+      showUpdateTime: true,
+      title: route => route.params.ticker
     },
     beforeEnter(to, from, next) {
       if (!companies[to.params.ticker]) {
         to.meta.showUpdateTime = false
+        to.meta.title = 'page not found'
       }
       next()
     }
@@ -50,27 +60,38 @@ const routes = [
     component: () => import(/* webpackPrefetch: true */ './components/Ticker'),
     props: route => ({ ticker: 'NEODAQ', period: route.query.period }),
     meta: {
-      showUpdateTime: true
+      showUpdateTime: true,
+      title: 'Index'
     }
   },
   {
     path: '/trends',
     component: () => import(/* webpackPrefetch: true */ './components/Trends'),
     meta: {
-      showUpdateTime: true
+      showUpdateTime: true,
+      title: 'Trends'
     }
   },
   {
     path: '/settings',
-    component: () => import(/* webpackPrefetch: true */ './components/Settings')
+    component: () => import(/* webpackPrefetch: true */ './components/Settings'),
+    meta: {
+      title: 'Settings'
+    }
   },
   {
     path: '/about',
-    component: () => import('./components/About')
+    component: () => import('./components/About'),
+    meta: {
+      title: 'About'
+    }
   },
   {
     path: '*',
-    component: () => import('./components/PageNotFound')
+    component: () => import('./components/PageNotFound'),
+    meta: {
+      title: 'page not found'
+    }
   }
 ]
 
@@ -92,6 +113,15 @@ router.beforeEach((to, from, next) => {
     }
   })
   next()
+})
+
+const docTitle = document.title
+
+router.afterEach(to => {
+  // Update page title
+  const title = to.meta.title
+  const pageTitle = typeof title === 'function' ? title(to) : title
+  document.title = pageTitle ? `${pageTitle} - ${docTitle}` : docTitle
 })
 
 new Vue({
