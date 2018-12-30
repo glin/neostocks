@@ -6,20 +6,21 @@
         class="trends-col"
       >
         <Card class="trends-card">
-          <div class="heading">
+          <div class="chart-heading">
             <!-- <span class="title">Average Days Between Peaks</span> -->
-            <span class="title">Average Days to Sell Point</span>
-            <!-- <span class="title">Average Days to Peak</span> -->
-            <!-- <span class="title">Average Days to Reach Price</span> -->
-            <!-- <span class="subtitle">for a stock at 15 NP</span> -->
-            <span class="subtitle">starting from 15 NP</span>
+            <div class="d-flex flex-column align-items-center">
+              <span class="chart-title">Average Days to Sell Point</span>
+              <!-- <span class="title">Average Days to Peak</span> -->
+              <!-- <span class="title">Average Days to Reach Price</span> -->
+              <!-- <span class="subtitle">for a stock at 15 NP</span> -->
+              <span class="chart-subtitle">starting from 15 NP</span>
+            </div>
           </div>
           <BarChart
             :chart-data="daysFrom15"
-            :tooltip-name-formatter="value => value + ' NP'"
-            :tooltip-value-formatter="value => `<b>${value}</b> days`"
-            x-axis-name="Price"
-            y-axis-name="Days"
+            :tooltip-name-formatter="formatPrice"
+            :tooltip-value-formatter="formatDays"
+            :y-axis-label-formatter="formatDays"
           />
         </Card>
       </b-col>
@@ -28,15 +29,14 @@
         class="trends-col"
       >
         <Card class="trends-card">
-          <div class="heading">
-            <span class="title">Price Distribution</span>
+          <div class="chart-heading">
+            <span class="chart-title"> Price Distribution</span>
           </div>
           <BarChart
             :chart-data="priceDist"
-            :y-axis-label-formatter="value => value + '%'"
-            :tooltip-name-formatter="value => value + ' NP'"
-            :tooltip-value-formatter="value => `<b>${value}%</b>`"
-            x-axis-name="Price"
+            :y-axis-label-formatter="formatPercent"
+            :tooltip-name-formatter="formatPrice"
+            :tooltip-value-formatter="formatPercent"
           />
         </Card>
       </b-col>
@@ -48,9 +48,9 @@
         class="trends-col"
       >
         <Card class="trends-card">
-          <div class="heading">
+          <div class="chart-heading">
             <!-- <span class="title">Shares Purchased By Day</span> -->
-            <span class="title">Shares Bought by Day</span>
+            <span class="chart-title"> Shares Bought by Day</span>
           </div>
           <div class="dygraph-container">
             <Dygraph
@@ -65,16 +65,15 @@
         class="trends-col"
       >
         <Card class="trends-card">
-          <div class="heading">
-            <span class="title">Shares Bought by Price</span>
+          <div class="chart-heading">
+            <span class="chart-title">Shares Bought by Price</span>
             <!-- <span class="title">Shares Purchased by Price</span> -->
           </div>
           <BarChart
             :chart-data="volumeByPrice"
-            :y-axis-label-formatter="value => value + '%'"
-            :tooltip-name-formatter="value => value + ' NP'"
-            :tooltip-value-formatter="value => `<b>${value}%</b>`"
-            x-axis-name="Price"
+            :y-axis-label-formatter="formatPercent"
+            :tooltip-name-formatter="formatPrice"
+            :tooltip-value-formatter="formatPercent"
           />
         </Card>
       </b-col>
@@ -97,20 +96,18 @@
   margin-top: 15px;
 }
 
-.heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.chart-heading {
+  margin: 0 auto;
   margin-bottom: 8px;
 }
 
-.title {
+.chart-title {
   font-size: 1rem;
   font-weight: 600;
   color: #545b62;
 }
 
-.subtitle {
+.chart-subtitle {
   margin-top: 2px;
   font-size: 0.8rem;
   color: #6c757d;
@@ -125,9 +122,21 @@
 import bCol from 'bootstrap-vue/es/components/layout/col'
 import bRow from 'bootstrap-vue/es/components/layout/row'
 
-import BarChart from './BarChart'
 import Card from './Card'
-import Dygraph from './Dygraph'
+
+import LoadingSpinner from './LoadingSpinner'
+
+const BarChart = () => ({
+  component: import('./BarChart'),
+  loading: LoadingSpinner,
+  delay: 200
+})
+
+const Dygraph = () => ({
+  component: import('./Dygraph'),
+  loading: LoadingSpinner,
+  delay: 200
+})
 
 export default {
   components: {
@@ -163,6 +172,18 @@ export default {
         time: this.volumeByDay.map(data => data.date),
         Volume: this.volumeByDay.map(data => data.volume)
       }
+    }
+  },
+
+  methods: {
+    formatDays(value) {
+      return `${value.toLocaleString()} days`
+    },
+    formatPercent(value) {
+      return `${value}%`
+    },
+    formatPrice(value) {
+      return `${value} NP`
     }
   }
 }
