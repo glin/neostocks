@@ -11,9 +11,8 @@
 footer {
   flex-shrink: 0;
   width: 100%;
-  /* border-top: 1px solid #ddd; */
+  border-top: 1px solid #e2e5e8;
   padding: 15px 0;
-  background-color: #f0f0f0;
 }
 
 .footer-content {
@@ -22,11 +21,11 @@ footer {
   align-items: center;
   height: 100%;
   font-size: 0.9rem;
-  color: #777;
+  color: #999;
 }
 
 .about-link {
-  color: #777;
+  color: #6f6f6f;
 }
 
 .copyright {
