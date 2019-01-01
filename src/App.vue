@@ -173,7 +173,7 @@ export default {
       })
     },
     notifications() {
-      this.updateUnreadCount()
+      this.updateUnreadIndicator()
     }
   },
 
@@ -261,9 +261,13 @@ export default {
       const timestamps = this.notifications.map(item => item.updateTimestamp)
       this.settings.lastReadTimestamp = Math.max(...timestamps)
     },
-    updateUnreadCount() {
-      const newUnreadCount = this.notifications.filter(item => !item.isRead).length
-      updateDocumentTitle({ newUnreadCount })
+    updateUnreadIndicator() {
+      const hasUnread = this.notifications.some(item => !item.isRead)
+      if (!hasUnread) {
+        updateDocumentTitle({ newUnread: false })
+      } else if (!document.hasFocus()) {
+        updateDocumentTitle({ newUnread: true })
+      }
     }
   }
 }

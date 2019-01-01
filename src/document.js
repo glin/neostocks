@@ -1,15 +1,15 @@
-export function updateDocumentTitle({ newPageTitle = null, newUnreadCount = null }) {
-  // Document title format: (unreadCount) pageTitle - docTitle
-  const match = document.title.match(/^(\(\d+\) )?(.+ - )?(.+)/)
-  let [unreadCount = '', pageTitle = '', docTitle = ''] = match.slice(1)
+export function updateDocumentTitle({ newPageTitle = null, newUnread = null }) {
+  // Document title format: * pageTitle - docTitle
+  const match = document.title.match(/^(\* )?(.+ - )?(.+)/)
+  let [unreadIndicator = '', pageTitle = '', docTitle = ''] = match.slice(1)
 
-  if (newUnreadCount != null) {
-    unreadCount = newUnreadCount > 0 ? `(${newUnreadCount}) ` : ''
+  if (newUnread != null) {
+    unreadIndicator = newUnread ? `* ` : ''
   }
 
   if (newPageTitle != null) {
     pageTitle = newPageTitle.length ? `${newPageTitle} - ` : ''
   }
 
-  document.title = unreadCount + pageTitle + docTitle
+  document.title = unreadIndicator + pageTitle + docTitle
 }
