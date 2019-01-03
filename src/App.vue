@@ -154,6 +154,9 @@ export default {
     showUpdateTime() {
       return this.$route.meta.showUpdateTime
     },
+    hasUnreadNotifications() {
+      return this.notifications.some(item => !item.isRead)
+    },
     query() {
       const query = {}
       if (this.$route.query.period) {
@@ -166,13 +169,14 @@ export default {
   watch: {
     summaryData() {
       this.updateNotifications()
+      this.sendUnreadNotifications()
     },
     now() {
       this.notifications = this.notifications.filter(item => {
         return this.now - new Date(item.updateTime) <= DAY * 5
       })
     },
-    notifications() {
+    hasUnreadNotifications() {
       this.updateUnreadIndicator()
     }
   },
@@ -248,9 +252,10 @@ export default {
       })
 
       this.notifications = notifications.concat(this.notifications)
-
+    },
+    sendUnreadNotifications() {
       if (this.settings.enableDesktopNotifications && !document.hasFocus()) {
-        const unreadNotifications = notifications.filter(item => !item.isRead)
+        const unreadNotifications = this.notifications.filter(item => !item.isRead)
         sendNotifications(unreadNotifications, {
           onRead: this.handleNotificationsRead
         })
@@ -262,8 +267,7 @@ export default {
       this.settings.lastReadTimestamp = Math.max(...timestamps)
     },
     updateUnreadIndicator() {
-      const hasUnread = this.notifications.some(item => !item.isRead)
-      if (!hasUnread) {
+      if (!this.hasUnreadNotifications) {
         updateDocumentTitle({ newUnread: false })
       } else if (!document.hasFocus()) {
         updateDocumentTitle({ newUnread: true })
