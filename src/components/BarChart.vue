@@ -20,7 +20,7 @@ import Chart from 'chart.js/dist/Chart.min'
 
 export default {
   props: {
-    chartData: {
+    data: {
       type: Array,
       required: true
     },
@@ -60,11 +60,23 @@ export default {
     }
   },
 
-  mounted() {
-    const keys = Object.keys(this.chartData[0])
-    const labels = this.chartData.map(item => item[keys[0]])
-    const data = this.chartData.map(item => item[keys[1]])
+  computed: {
+    chartData() {
+      const keys = Object.keys(this.data[0])
+      const labels = this.data.map(item => item[keys[0]])
+      const data = this.data.map(item => item[keys[1]])
+      return { labels, data }
+    }
+  },
 
+  watch: {
+    chartData() {
+      this.chart.data.datasets[0].data = this.chartData.data
+      this.chart.update({ duration: 800, easing: 'easeOutQuart' })
+    }
+  },
+
+  mounted() {
     // Show tooltip anywhere on the chart
     Chart.Tooltip.positioners.cursor = function(chartElements, coordinates) {
       return coordinates
@@ -101,10 +113,10 @@ export default {
     this.chart = new Chart(this.$refs.chart, {
       type: 'BarWithCursor',
       data: {
-        labels,
+        labels: this.chartData.labels,
         datasets: [
           {
-            data,
+            data: this.chartData.data,
             backgroundColor: this.color
           }
         ]

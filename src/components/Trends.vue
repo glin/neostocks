@@ -17,7 +17,7 @@
             </div>
           </div>
           <BarChart
-            :chart-data="daysFrom15"
+            :data="daysFrom15"
             :tooltip-name-formatter="formatPrice"
             :tooltip-value-formatter="formatDays"
             :y-axis-label-formatter="formatDays"
@@ -33,7 +33,7 @@
             <span class="chart-title"> Price Distribution</span>
           </div>
           <BarChart
-            :chart-data="priceDist"
+            :data="priceDist"
             :y-axis-label-formatter="formatPercent"
             :tooltip-name-formatter="formatPrice"
             :tooltip-value-formatter="formatPercent"
@@ -70,7 +70,7 @@
             <!-- <span class="title">Shares Purchased by Price</span> -->
           </div>
           <BarChart
-            :chart-data="volumeByPrice"
+            :data="volumeByPrice"
             :y-axis-label-formatter="formatPercent"
             :tooltip-name-formatter="formatPrice"
             :tooltip-value-formatter="formatPercent"
