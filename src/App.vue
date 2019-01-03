@@ -189,8 +189,6 @@ export default {
 
     setInterval(() => (this.now = new Date()), 60 * 1000)
 
-    document.addEventListener('visibilitychange', this.handleVisibilityChange)
-
     if (swNotificationsSupported()) {
       navigator.serviceWorker.register('/sw.js')
       navigator.serviceWorker.addEventListener('message', event => {
