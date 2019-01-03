@@ -12,9 +12,7 @@ self.addEventListener('notificationclick', event => {
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
       clients.forEach(client => {
-        if (!(event.notification.data && event.notification.data.collapsed)) {
-          client.postMessage({ readNotifications: true })
-        }
+        client.postMessage({ readNotifications: true })
       })
 
       const isFocused = clients.some(client => client.focused)

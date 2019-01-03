@@ -96,15 +96,14 @@ export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
     // Collapse all alerts into one, showing titles only
     const numAlerts = alerts.length
     const messages = alerts.map(alert => alert.title).join('\n')
-    alerts = [{
-      title: `${numAlerts} new ${numAlerts > 1 ? 'alerts' : 'alert'}`,
-      message: messages,
-      icon: require('./assets/neostocks.png'),
-      tag: 'neostocks',
-      data: {
-        collapsed: true
+    alerts = [
+      {
+        title: `${numAlerts} new ${numAlerts > 1 ? 'alerts' : 'alert'}`,
+        message: messages,
+        icon: require('./assets/neostocks.png'),
+        tag: 'neostocks'
       }
-    }]
+    ]
   }
 
   alerts.forEach(alert => {
@@ -122,9 +121,7 @@ export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
     if ('onclick' in notification) {
       notification.onclick = () => {
         notification.close()
-        if (!(notification.data && notification.data.collapsed)) {
-          onRead()
-        }
+        onRead()
         window.focus()
       }
     }
