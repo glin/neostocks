@@ -3,7 +3,7 @@
     <b-container>
       <b-navbar-toggle target="nav-menu-collapse" />
       <b-navbar-brand :to="{ path: '/', query }" class="brand">
-        <img class="logo" src="../assets/neostocks.png" alt="neostocks-logo"> neostocks
+        <img class="logo" src="../../public/neostocks.png" alt="neostocks-logo"> neostocks
       </b-navbar-brand>
       <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" class="order-2" is-nav>
         <b-navbar-nav>

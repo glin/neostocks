@@ -100,7 +100,7 @@ export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
       {
         title: `${numAlerts} new ${numAlerts > 1 ? 'alerts' : 'alert'}`,
         message: messages,
-        icon: require('./assets/neostocks.png'),
+        icon: require('../public/neostocks.png'),
         tag: 'neostocks'
       }
     ]
@@ -112,7 +112,7 @@ export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
       body: alert.message,
       icon: alert.icon,
       tag: alert.tag,
-      badge: require('./assets/neostocks-badge.png'),
+      badge: require('../public/neostocks-badge.png'),
       data: alert.data
     }
 
