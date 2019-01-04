@@ -168,8 +168,8 @@ export default {
 
   watch: {
     summaryData() {
-      this.updateNotifications()
-      this.sendUnreadNotifications()
+      const notifications = this.updateNotifications()
+      this.sendNotifications(notifications)
     },
     now() {
       this.notifications = this.notifications.filter(item => {
@@ -250,11 +250,11 @@ export default {
       })
 
       this.notifications = notifications.concat(this.notifications)
+      return notifications
     },
-    sendUnreadNotifications() {
+    sendNotifications(notifications) {
       if (this.settings.enableDesktopNotifications && !document.hasFocus()) {
-        const unreadNotifications = this.notifications.filter(item => !item.isRead)
-        sendNotifications(unreadNotifications, {
+        sendNotifications(notifications, {
           onRead: this.handleNotificationsRead
         })
       }
