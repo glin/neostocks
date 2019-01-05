@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <b-container class="footer-content">
+    <b-container class="footer">
       <div class="copyright">© 1999-2018 Neopets, Inc.<br class="copyright-break"> All rights reserved. Used with permission.</div>
       <b-link :to="'/about'" class="about-link">About</b-link>
     </b-container>
@@ -8,18 +8,12 @@
 </template>
 
 <style scoped>
-footer {
-  flex-shrink: 0;
-  width: 100%;
-  border-top: 1px solid #e2e5e8;
-  padding: 15px 0;
-}
-
-.footer-content {
+.footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  padding: 1rem 0;
+  border-top: 1px solid #e2e5e8;
   font-size: 0.9rem;
   color: #999;
 }
@@ -34,6 +28,10 @@ footer {
 }
 
 @media (max-width: 575.98px) {
+  .footer {
+    padding: 1rem;
+  }
+
   .copyright {
     font-size: 0.7rem;
   }
