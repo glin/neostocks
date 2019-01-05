@@ -111,6 +111,9 @@ function defaultOptions(valueFormatter = dateTimeValueFormatter) {
       x: {
         valueFormatter,
         drawGrid: false
+      },
+      y: {
+        axisLabelWidth: 35
       }
     },
     colors: ['#2294ba', '#1e7e34'],
