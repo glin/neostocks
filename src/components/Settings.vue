@@ -81,7 +81,7 @@
           <button :id="`delete-btn-${i}`" type="button" class="close delete-btn d-sm-none d-block" @click="handleDeleteAlert(i)">
             <span aria-hidden="true">&times;</span>
           </button>
-          <b-tooltip :target="`delete-btn-${i}`" placement="bottomleft" title="Remove alert" delay="700" no-fade />
+          <b-tooltip :target="`delete-btn-${i}`" :disabled="isTouchCapable" placement="bottomleft" title="Remove alert" delay="700" no-fade />
         </b-list-group-item>
       </b-list-group>
     </div>
@@ -304,6 +304,10 @@ export default {
     onSettingsChange: {
       type: Function,
       required: true
+    },
+    isTouchCapable: {
+      type: Boolean,
+      default: false
     }
   },
 

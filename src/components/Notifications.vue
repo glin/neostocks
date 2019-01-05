@@ -5,7 +5,7 @@
       <b-link ref="settingsBtn" :to="'/settings'" class="icon-btn">
         <SettingsIcon class="settings-icon" />
       </b-link>
-      <b-tooltip :target="() => $refs.settingsBtn" placement="bottomleft" triggers="hover" title="Settings" no-fade />
+      <b-tooltip :target="() => $refs.settingsBtn" :disabled="isTouchCapable" placement="bottomleft" triggers="hover" title="Settings" no-fade />
     </div>
     <NotificationsList :notifications="notifications" />
   </div>
@@ -80,6 +80,10 @@ export default {
     notifications: {
       type: Array,
       required: true
+    },
+    isTouchCapable: {
+      type: Boolean,
+      default: false
     }
   }
 }

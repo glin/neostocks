@@ -9,6 +9,7 @@
         :notifications="notifications"
         :on-notifications-read="handleNotificationsRead"
         :query="query"
+        :is-touch-capable="isTouchCapable"
       />
       <b-container class="main-content">
         <keep-alive>
@@ -18,6 +19,7 @@
             :settings="settings"
             :on-settings-change="handleSettingsChange"
             :query="query"
+            :is-touch-capable="isTouchCapable"
           />
         </keep-alive>
       </b-container>
@@ -114,6 +116,7 @@ export default {
       settings: {},
       notifications: [],
       now: new Date(),
+      isTouchCapable: false,
       companies
     }
   },
@@ -197,6 +200,12 @@ export default {
         }
       })
     }
+
+    const onFirstTouch = () => {
+      this.isTouchCapable = true
+      document.removeEventListener('touchstart', onFirstTouch, false)
+    }
+    document.addEventListener('touchstart', onFirstTouch, false)
   },
 
   methods: {

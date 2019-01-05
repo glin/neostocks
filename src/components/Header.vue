@@ -22,9 +22,9 @@
         </button>
         <span v-if="showUnreadNotifications" class="unread-notifications" />
       </div>
-      <b-tooltip :show.sync="showNotificationsTooltip" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
+      <b-tooltip :show.sync="showNotificationsTooltip" :disabled="isTouchCapable" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Notifications" no-fade />
       <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
-        <Notifications :notifications="notifications" />
+        <Notifications :notifications="notifications" :is-touch-capable="isTouchCapable" />
       </b-popover>
     </b-container>
   </b-navbar>
@@ -182,6 +182,10 @@ export default {
     query: {
       type: Object,
       required: true
+    },
+    isTouchCapable: {
+      type: Boolean,
+      default: false
     }
   },
 
