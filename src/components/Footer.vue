@@ -1,7 +1,7 @@
 <template>
   <footer>
     <b-container class="footer">
-      <div class="copyright">© 1999-2018 Neopets, Inc.<br class="copyright-break"> All rights reserved. Used with permission.</div>
+      <div class="copyright">© 1999-2019 Neopets, Inc.<br class="copyright-break"> All rights reserved. Used with permission.</div>
       <b-link :to="'/about'" class="about-link">About</b-link>
     </b-container>
   </footer>
