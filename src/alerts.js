@@ -8,17 +8,12 @@ const HIGH_MESSAGES = {
   '1d': '1 day high'
 }
 
-export function getPriceAlerts(summaryData, filters = {}) {
-  if (
-    filters.minPrice == null &&
-    filters.maxPrice == null &&
-    filters.exactPrice == null &&
-    filters.highPeriod == null
-  ) {
+export function getPriceAlerts(summaryData, rule = {}) {
+  if (!isValidRule(rule)) {
     return []
   }
 
-  const filteredData = filterSummaryData(summaryData, filters)
+  const filteredData = filterSummaryData(summaryData, rule)
   const alertsByTicker = filteredData.period_all.reduce((obj, data) => {
     const alert = {
       ticker: data.ticker,
@@ -46,10 +41,19 @@ export function getPriceAlerts(summaryData, filters = {}) {
   })
 
   let alerts = Object.values(alertsByTicker)
-  if (filters.highPeriod) {
-    alerts = alerts.filter(alert => alert.highPeriods.includes(filters.highPeriod))
+  if (rule.highPeriod) {
+    alerts = alerts.filter(alert => alert.highPeriods.includes(rule.highPeriod))
   }
   return alerts
+}
+
+export function isValidRule(rule) {
+  return (
+    rule.minPrice != null ||
+    rule.maxPrice != null ||
+    rule.exactPrice != null ||
+    rule.highPeriod != null
+  )
 }
 
 function filterSummaryData(summaryData, filters = {}) {

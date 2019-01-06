@@ -8,8 +8,11 @@
       </div>
       <div :title="formatTimeNST(item.updateTimeNST)" class="notification-time ml-auto">{{ timeSince(item.updateTime) }}</div>
     </b-list-group-item>
-    <b-list-group-item v-if="notifications.length === 0" class="notification-item no-notifications">
-      No notifications
+    <b-list-group-item v-if="notifications.length === 0 && hasAlertsCreated" class="notification-item no-notifications">
+      No alerts yet
+    </b-list-group-item>
+    <b-list-group-item v-if="notifications.length === 0 && !hasAlertsCreated" to="/settings" class="notification-item no-alerts-created">
+      <a href="#" class="settings-link">Create a price alert</a>
     </b-list-group-item>
   </b-list-group>
 </template>
@@ -72,8 +75,21 @@
 }
 
 .no-notifications {
+  display: flex;
+  justify-content: center;
+  height: 75px;
   font-size: 0.9rem;
   color: #737373;
+}
+
+.no-alerts-created {
+  display: flex;
+  justify-content: center;
+  height: 75px;
+}
+
+.settings-link {
+  text-decoration: none;
 }
 </style>
 
@@ -92,6 +108,10 @@ export default {
   props: {
     notifications: {
       type: Array,
+      required: true
+    },
+    hasAlertsCreated: {
+      type: Boolean,
       required: true
     }
   },

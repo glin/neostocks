@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="notifications-heading">
-      <div class="notifications-title">Notifications</div>
+      <div class="notifications-title">Price Alerts</div>
       <b-link ref="settingsBtn" :to="'/settings'" class="icon-btn">
         <SettingsIcon class="settings-icon" />
       </b-link>
       <b-tooltip :target="() => $refs.settingsBtn" :disabled="isTouchCapable" placement="bottomleft" triggers="hover" title="Settings" no-fade />
     </div>
-    <NotificationsList :notifications="notifications" />
+    <NotificationsList :notifications="notifications" :has-alerts-created="hasAlertsCreated" />
   </div>
 </template>
 
@@ -79,6 +79,10 @@ export default {
   props: {
     notifications: {
       type: Array,
+      required: true
+    },
+    hasAlertsCreated: {
+      type: Boolean,
       required: true
     },
     isTouchCapable: {

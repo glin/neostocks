@@ -8,6 +8,7 @@
         :on-search-submit="handleSearchSubmit"
         :notifications="notifications"
         :on-notifications-read="handleNotificationsRead"
+        :has-alerts-created="hasAlertsCreated"
         :query="query"
         :is-touch-capable="isTouchCapable"
       />
@@ -89,7 +90,7 @@ import UpdateTime from './components/UpdateTime'
 import companies from './companies'
 import { getSettingsStore } from './settings'
 import { notificationsEnabled, requestPermission, swNotificationsSupported } from './notifications'
-import { getPriceAlerts, sendNotifications } from './alerts'
+import { getPriceAlerts, isValidRule, sendNotifications } from './alerts'
 import { DAY } from './date'
 import { updateDocumentTitle } from './document'
 
@@ -157,6 +158,9 @@ export default {
     },
     hasUnreadNotifications() {
       return this.notifications.some(item => !item.isRead)
+    },
+    hasAlertsCreated() {
+      return this.settings.alerts.some(rule => isValidRule(rule))
     },
     query() {
       const query = {}
