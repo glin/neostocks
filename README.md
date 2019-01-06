@@ -13,4 +13,8 @@ npm run build:watch
 # build (dev)
 npm run dev
 npm run dev:watch
+
+# test
+npm test
+npm run test:watch
 ```

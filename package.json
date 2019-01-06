@@ -6,7 +6,10 @@
     "build": "webpack-cli --mode production",
     "build:watch": "npm run build -- --watch",
     "dev": "webpack-cli --mode development",
-    "dev:watch": "npm run dev -- --watch"
+    "dev:watch": "npm run dev -- --watch",
+    "test": "jest",
+    "test:cover": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "license": "MIT",
   "dependencies": {
@@ -36,9 +39,15 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.6.0",
     "eslint": "^5.11.0",
+    "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-vue": "^4.7.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.13.1",
     "webpack-dev-server": "^3.1.14"
   }
 }
