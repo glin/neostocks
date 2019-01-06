@@ -43,15 +43,15 @@
               </label>
               <label v-if="alert.condition === 'exact'" class="mr-3">
                 <div class="settings-label">Price</div>
-                <b-form-input :value="alert.exactPrice" class="settings-input" type="number" min="0" @input="exactPrice => handleAlertChange(i, { exactPrice })" />
+                <b-form-input :value="alert.exactPrice" class="settings-num-input" type="number" min="0" @input="exactPrice => handleAlertChange(i, { exactPrice })" />
               </label>
               <label v-if="['above', 'between'].includes(alert.condition)" class=" mr-3">
                 <div class="settings-label">Min Price</div>
-                <b-form-input :value="alert.minPrice" class="settings-input" type="number" min="0" @input="minPrice => handleAlertChange(i, { minPrice })" />
+                <b-form-input :value="alert.minPrice" class="settings-num-input" type="number" min="0" @input="minPrice => handleAlertChange(i, { minPrice })" />
               </label>
               <label v-if="['below', 'between'].includes(alert.condition)">
                 <div class="settings-label">Max Price</div>
-                <b-form-input :value="alert.maxPrice" class="settings-input" type="number" min="0" @input="maxPrice => handleAlertChange(i, { maxPrice })" />
+                <b-form-input :value="alert.maxPrice" class="settings-num-input" type="number" min="0" @input="maxPrice => handleAlertChange(i, { maxPrice })" />
               </label>
               <label v-if="alert.condition === 'high'">
                 <div class="settings-label">Time Period</div>
@@ -199,22 +199,32 @@
   color: #555;
 }
 
+/* Hide spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .settings-select {
   border: 1px solid #dee2e6;
   transition: none;
 }
 
-.settings-select:focus {
-  box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.45);
-}
-
-.settings-input {
-  width: 100px;
+.settings-num-input {
+  width: 80px;
   border: 1px solid #dee2e6;
   transition: none;
 }
 
-.settings-input:focus {
+.settings-select:focus,
+.settings-num-input:focus {
   box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.45);
 }
 
