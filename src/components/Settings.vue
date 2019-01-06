@@ -22,7 +22,7 @@
     <div class="settings-section alerts-section">
       <div class="alerts-header">
         <h2 class="settings-heading">Price Alerts</h2>
-        <a href="#" class="new-alert-btn" @click.prevent="handleCreateAlert('above')">New alert</a>
+        <a href="" class="new-alert-btn" @click.prevent="handleCreateAlert('above')">New alert</a>
       </div>
 
       <b-list-group>

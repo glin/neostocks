@@ -8,11 +8,9 @@
       </div>
       <div :title="formatTimeNST(item.updateTimeNST)" class="notification-time ml-auto">{{ timeSince(item.updateTime) }}</div>
     </b-list-group-item>
-    <b-list-group-item v-if="notifications.length === 0 && hasAlertsCreated" class="notification-item no-notifications">
+    <b-list-group-item v-if="notifications.length === 0" class="notification-item no-notifications">
       No alerts yet
-    </b-list-group-item>
-    <b-list-group-item v-if="notifications.length === 0 && !hasAlertsCreated" to="/settings" class="notification-item no-alerts-created">
-      <a href="#" class="settings-link">Create a price alert</a>
+      <b-link v-if="!hasAlertsCreated" to="/settings" class="settings-link mt-2">Create a price alert</b-link>
     </b-list-group-item>
   </b-list-group>
 </template>
@@ -74,26 +72,24 @@
   color: #737373;
 }
 
-.no-notifications {
+.notification-item.no-notifications,
+.notification-item.no-notifications:hover {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  height: 75px;
-  font-size: 0.9rem;
+  height: 100px;
+  background-color: #fafafa;
   color: #737373;
-}
-
-.no-alerts-created {
-  display: flex;
-  justify-content: center;
-  height: 75px;
 }
 
 .settings-link {
   text-decoration: none;
+  font-weight: 600;
 }
 </style>
 
 <script>
+import bLink from 'bootstrap-vue/es/components/link/link'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
 import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
 
@@ -101,6 +97,7 @@ import { timeSince } from '../date'
 
 export default {
   components: {
+    bLink,
     bListGroup,
     bListGroupItem
   },
