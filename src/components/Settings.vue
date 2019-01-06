@@ -27,7 +27,7 @@
 
       <b-list-group>
         <b-list-group-item v-if="settings.alerts.length === 0" class="alerts-list-item no-alerts pl-1">
-          No alerts
+          No alerts created
         </b-list-group-item>
         <b-list-group-item v-for="(alert, i) in settings.alerts" :key="i" class="alerts-list-item pl-2">
           <b-col>
