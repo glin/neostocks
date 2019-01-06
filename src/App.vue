@@ -47,7 +47,8 @@ body {
 }
 
 #shiny-disconnected-overlay,
-#ss-overlay {
+#ss-overlay,
+.ss-reconnecting {
   display: none !important;
 }
 </style>
