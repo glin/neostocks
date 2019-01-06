@@ -30,6 +30,7 @@
 @media (max-width: 575.98px) {
   .footer {
     padding: 1rem;
+    border-top: none;
   }
 
   .copyright {
