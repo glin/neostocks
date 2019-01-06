@@ -185,115 +185,125 @@ export default {
   },
 
   data() {
+    const fields = {
+      ticker: { key: 'ticker', sortable: true },
+      volume: {
+        key: 'volume',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        formatter: value => value.toLocaleString()
+      },
+      open: {
+        key: 'open',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      curr: {
+        key: 'curr',
+        label: 'Current',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      change: {
+        key: 'change',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      high: {
+        key: 'high',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      low: {
+        key: 'low',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['1d', '5d', '1m']
+      },
+      range: {
+        key: 'range',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['1d', '5d', '1m']
+      },
+      avg_peak: {
+        key: 'avg_peak',
+        label: 'Avg Peak',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      last_peak: {
+        key: 'last_peak',
+        label: 'Last Peak',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc'
+      },
+      avg_days_peak: {
+        key: 'avg_days_peak',
+        label: 'Peak Frequency',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'asc'
+      },
+      avg: {
+        key: 'avg',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['none']
+      },
+      pct_95: {
+        key: 'pct_95',
+        label: 'Top 5%',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['all']
+      },
+      median: {
+        key: 'median',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['all']
+      },
+      sd: {
+        key: 'sd',
+        label: 'Volatility',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        periods: ['none']
+      },
+      avg_volume: {
+        key: 'avg_volume',
+        label: 'Avg Volume',
+        class: 'numeric',
+        sortable: true,
+        sortDirection: 'desc',
+        formatter: value => value.toLocaleString()
+      }
+    }
+
+    let fieldOrder
+    if (window.matchMedia('(min-width: 576px)').matches) {
+      fieldOrder = ['ticker', 'volume', 'open', 'curr', 'change', 'high', 'low', 'range']
+    } else {
+      fieldOrder = ['ticker', 'curr', 'change', 'high', 'low', 'open', 'volume', 'range']
+    }
+    fieldOrder.push('avg_peak', 'last_peak', 'avg_days_peak', 'pct_95', 'median')
+
     return {
-      fields: [
-        { key: 'ticker', sortable: true },
-        {
-          key: 'volume',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          formatter: value => value.toLocaleString()
-        },
-        {
-          key: 'open',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'curr',
-          label: 'Current',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'change',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'high',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'low',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['1d', '5d', '1m']
-        },
-        {
-          key: 'range',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['1d', '5d', '1m']
-        },
-        {
-          key: 'avg_peak',
-          label: 'Avg Peak',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'last_peak',
-          label: 'Last Peak',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
-          key: 'avg_days_peak',
-          label: 'Peak Frequency',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'asc'
-        },
-        {
-          key: 'avg',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['none']
-        },
-        {
-          key: 'pct_95',
-          label: 'Top 5%',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['all']
-        },
-        {
-          key: 'median',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['all']
-        },
-        {
-          key: 'sd',
-          label: 'Volatility',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          periods: ['none']
-        },
-        {
-          key: 'avg_volume',
-          label: 'Avg Volume',
-          class: 'numeric',
-          sortable: true,
-          sortDirection: 'desc',
-          formatter: value => value.toLocaleString()
-        }
-      ]
+      fields: fieldOrder.map(key => fields[key])
     }
   },
 
