@@ -57,6 +57,10 @@
   border-top: 0;
 }
 
+.summary thead th {
+  border-bottom: 0;
+}
+
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
