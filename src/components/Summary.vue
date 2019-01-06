@@ -294,6 +294,9 @@ export default {
       }
     }
 
+    // Adjust column order based on screen width. On large screens, we preserve
+    // the order used in the actual Neopets Stock Market page.
+    // On smaller screens, we reorder and prioritize more important information.
     let fieldOrder
     if (window.matchMedia('(min-width: 576px)').matches) {
       fieldOrder = ['ticker', 'volume', 'open', 'curr', 'change', 'high', 'low', 'range']
