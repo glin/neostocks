@@ -94,7 +94,7 @@
 
 <style>
 .tooltip {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 .tooltip-inner {

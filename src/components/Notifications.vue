@@ -19,7 +19,7 @@
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid #eee;
   background-color: #f3f3f3;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 .notifications-title {
@@ -50,7 +50,7 @@
 
 <style>
 .tooltip {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 .tooltip-inner {

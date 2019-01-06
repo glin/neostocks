@@ -33,8 +33,6 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
-
 html,
 body {
   height: 100%;
@@ -44,7 +42,7 @@ body {
 body {
   overflow-y: scroll;
   background-color: #f7f7f7 !important;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 #shiny-disconnected-overlay,
