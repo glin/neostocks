@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem 0 1.25rem;
   border-top: 1px solid #e2e5e8;
   font-size: 0.9rem;
   color: #999;
