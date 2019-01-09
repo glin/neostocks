@@ -95,7 +95,7 @@ function isCurrentHigh(data) {
   return data.curr === data.high && data.curr >= 30
 }
 
-export function sendNotifications(alerts, { onRead, maxShown = 2 }) {
+export function sendNotifications(alerts, { onRead, maxShown = 1 }) {
   if (alerts.length > maxShown) {
     // Collapse all alerts into one, showing titles only
     const numAlerts = alerts.length
