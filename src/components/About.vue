@@ -4,14 +4,14 @@
     <div class="section">
       <h2 class="section-heading">What is this?</h2>
       <p>A real-time stock tracker for the
-        <a href="http://www.neopets.com/stockmarket.phtml">Neopets Stock Market</a>, similar to the former Neodaq.com (RIP).
+        <a href="http://www.neopets.com/stockmarket.phtml">Neopets Stock Market</a>, similar to the former NeoDaq.com (RIP).
       </p>
     </div>
 
     <div class="section">
-      <h2 class="section-heading">When does the Neopets Stock Market update?</h2>
+      <h2 class="section-heading">When does the site update?</h2>
       <p>
-        About every 30 minutes, but it's not exact. It's hard to predict when stocks will update during a given hour.
+        About every 30 minutes, usually within a minute of Neopets Stock Market updates.
       </p>
     </div>
 
@@ -19,7 +19,7 @@
       <h2 class="section-heading">Credits</h2>
       <p>
         All data from 2006 to 2018 originally came from
-        <strong>Neodaq.com</strong>. Pieces of it were recovered from WaybackMachine snapshots by
+        <strong>NeoDaq.com</strong>. Pieces of it were recovered from WaybackMachine snapshots by
         <a href="https://www.reddit.com/r/neopets/comments/7rwxwd/neodaqs_data_collected_from_old_neodaqs_website/">/u/HostilePride</a>.
         <br>
         Data from Feb to June 2018 was generously contributed by
