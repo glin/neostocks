@@ -116,6 +116,7 @@ function defaultOptions(valueFormatter = dateTimeValueFormatter) {
         axisLabelWidth: 35
       }
     },
+    xRangePad: 4,
     colors: ['#2294ba', '#1e7e34'],
     fillGraph: true
   }
