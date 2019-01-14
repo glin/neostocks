@@ -134,6 +134,7 @@
 }
 
 .price-graph-container {
+  padding-top: 0.5rem;
   height: 300px;
 }
 
