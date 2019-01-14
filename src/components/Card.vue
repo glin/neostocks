@@ -8,6 +8,7 @@
 .content-card {
   padding: 10px;
   background-color: #fff;
-  box-shadow: 0 1px 4px #ddd;
+  box-shadow: 0 1px 4px 0 hsla(0, 0%, 0%, 0.2);
+  border-radius: 2px;
 }
 </style>
