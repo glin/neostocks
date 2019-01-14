@@ -10,6 +10,14 @@
   width: auto;
 }
 
+.dygraph-axis-label {
+  color: #495057;
+}
+
+.dygraph-axis-label-y {
+  margin-top: -3px;
+}
+
 @media (max-width: 575.98px) {
   .dygraph-legend {
     margin-right: 10px;
@@ -106,14 +114,17 @@ export default {
 
 function defaultOptions(valueFormatter = dateTimeValueFormatter) {
   return {
-    gridLineColor: 'rgb(200, 200, 200)',
+    gridLineColor: 'rgb(216, 216, 216)',
     axes: {
       x: {
+        axisLineColor: 'rgb(200, 200, 200)',
         valueFormatter,
         drawGrid: false
       },
       y: {
-        axisLabelWidth: 35
+        axisLabelWidth: 32,
+        axisLineColor: 'rgba(0, 0, 0, 0)',
+        axisTickSize: 6
       }
     },
     xRangePad: 4,
