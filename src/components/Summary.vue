@@ -379,7 +379,7 @@ export default {
     },
     emptyFilterText() {
       return (
-        'There are no ' +
+        'No ' +
         (this.filter ? `${this.filter} stocks ` : 'tickers ') +
         (this.search ? `matching <i> ${this.search}</i>` : 'at the moment')
       )
