@@ -51,7 +51,7 @@ export default {
     },
     ...mapState({
       updateTime: state => state.stocks.updateTime,
-      now: state => state.time.now
+      now: state => state.now
     })
   }
 }

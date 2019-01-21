@@ -116,7 +116,7 @@ export default {
 
   computed: {
     ...mapState({
-      now: state => state.time.now
+      now: state => state.now
     })
   },
 

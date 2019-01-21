@@ -1,5 +1,5 @@
+export const TIMER_START = 'TIMER_START'
+export const TIMER_TICK = 'TIMER_TICK'
+
 export const STOCKS_SUBSCRIBE = 'STOCKS_SUBSCRIBE'
 export const STOCKS_SET_DATA = 'STOCKS_SET_DATA'
-
-export const TIME_START_TIMER = 'TIME_START_TIMER'
-export const TIME_TICK_TIMER = 'TIME_TICK_TIMER'

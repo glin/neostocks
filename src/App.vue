@@ -155,7 +155,7 @@ export default {
     },
     ...mapState({
       summaryData: state => state.stocks.summaryData,
-      now: state => state.time.now
+      now: state => state.now
     })
   },
 
@@ -176,7 +176,7 @@ export default {
 
   created() {
     this.$store.dispatch(types.STOCKS_SUBSCRIBE)
-    this.$store.dispatch(types.TIME_START_TIMER)
+    this.$store.dispatch(types.TIMER_START)
 
     this.loadSettings()
     this.updateNotifications()
