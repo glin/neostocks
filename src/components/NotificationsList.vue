@@ -89,6 +89,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bLink from 'bootstrap-vue/es/components/link/link'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
 import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
@@ -113,14 +114,10 @@ export default {
     }
   },
 
-  data() {
-    return {
-      now: new Date()
-    }
-  },
-
-  created() {
-    setInterval(() => (this.now = new Date()), 60 * 1000)
+  computed: {
+    ...mapState({
+      now: state => state.time.now
+    })
   },
 
   methods: {

@@ -34,12 +34,6 @@ export default {
     bContainer
   },
 
-  data() {
-    return {
-      now: new Date()
-    }
-  },
-
   computed: {
     updateTimeUTC() {
       return this.updateTime ? new Date(this.updateTime.UTC) : null
@@ -56,12 +50,9 @@ export default {
       return timeSince(this.updateTimeUTC, this.now)
     },
     ...mapState({
-      updateTime: state => state.stocks.updateTime
+      updateTime: state => state.stocks.updateTime,
+      now: state => state.time.now
     })
-  },
-
-  created() {
-    setInterval(() => (this.now = new Date()), 60 * 1000)
   }
 }
 </script>

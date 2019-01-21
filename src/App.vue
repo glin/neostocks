@@ -109,7 +109,6 @@ export default {
       search: '',
       settings: {},
       notifications: [],
-      now: new Date(),
       isTouchCapable: false,
       companies
     }
@@ -155,7 +154,8 @@ export default {
       return query
     },
     ...mapState({
-      summaryData: state => state.stocks.summaryData
+      summaryData: state => state.stocks.summaryData,
+      now: state => state.time.now
     })
   },
 
@@ -176,11 +176,10 @@ export default {
 
   created() {
     this.$store.dispatch(types.STOCKS_SUBSCRIBE)
+    this.$store.dispatch(types.TIME_START_TIMER)
 
     this.loadSettings()
     this.updateNotifications()
-
-    setInterval(() => (this.now = new Date()), 60 * 1000)
 
     if (swNotificationsSupported()) {
       navigator.serviceWorker.register('/sw.js')
