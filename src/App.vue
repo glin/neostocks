@@ -240,7 +240,8 @@ export default {
     },
     sendNotifications(notifications) {
       if (this.settings.enableDesktopNotifications && !document.hasFocus()) {
-        sendNotifications(notifications, {
+        const unreadNotifications = notifications.filter(item => !item.isRead)
+        sendNotifications(unreadNotifications, {
           onRead: this.handleNotificationsRead
         })
       }
