@@ -5,6 +5,15 @@ const state = {
   isTouchCapable: false
 }
 
+export const getters = {
+  query(state, getters, rootState) {
+    if (rootState.route.query.period) {
+      return { period: rootState.route.query.period }
+    }
+    return null
+  }
+}
+
 export const actions = {
   [types.TIMER_START]({ commit }) {
     setInterval(() => commit(types.TIMER_TICK), 60 * 1000)
@@ -25,6 +34,7 @@ export const mutations = {
 
 export default {
   state,
+  getters,
   actions,
   mutations
 }

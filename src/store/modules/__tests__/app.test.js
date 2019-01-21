@@ -1,7 +1,19 @@
-import { mutations, actions } from '../app'
+import { getters, mutations, actions } from '../app'
 import * as types from '../../types'
 
 jest.useFakeTimers()
+
+describe('getters', () => {
+  test('query', () => {
+    let route = { query: { period: '5d' } }
+    let query = getters.query(null, null, { route })
+    expect(query).toEqual({ period: '5d' })
+
+    route = { query: {} }
+    query = getters.query(null, null, { route })
+    expect(query).toBeNull()
+  })
+})
 
 describe('mutations', () => {
   test('TIMER_TICK', () => {

@@ -123,7 +123,7 @@
 </style>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 import bNavItem from 'bootstrap-vue/es/components/nav/nav-item'
@@ -183,10 +183,6 @@ export default {
     hasAlertsCreated: {
       type: Boolean,
       required: true
-    },
-    query: {
-      type: Object,
-      required: true
     }
   },
 
@@ -203,7 +199,8 @@ export default {
     },
     ...mapState({
       isTouchCapable: state => state.app.isTouchCapable
-    })
+    }),
+    ...mapGetters(['query'])
   },
 
   watch: {

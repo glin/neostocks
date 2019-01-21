@@ -9,7 +9,6 @@
         :notifications="notifications"
         :on-notifications-read="handleNotificationsRead"
         :has-alerts-created="hasAlertsCreated"
-        :query="query"
       />
       <b-container class="main-content">
         <keep-alive>
@@ -17,7 +16,6 @@
             :companies="companies"
             :settings="settings"
             :on-settings-change="handleSettingsChange"
-            :query="query"
           />
         </keep-alive>
       </b-container>
@@ -77,7 +75,7 @@ body {
 </style>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -143,17 +141,11 @@ export default {
     hasAlertsCreated() {
       return this.settings.alerts.some(rule => isValidRule(rule))
     },
-    query() {
-      const query = {}
-      if (this.$route.query.period) {
-        query.period = this.$route.query.period
-      }
-      return query
-    },
     ...mapState({
       summaryData: state => state.stocks.summaryData,
       now: state => state.app.now
-    })
+    }),
+    ...mapGetters(['query'])
   },
 
   watch: {

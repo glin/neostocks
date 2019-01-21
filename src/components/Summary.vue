@@ -136,7 +136,7 @@
 <script>
 import bTable from 'bootstrap-vue/es/components/table/table'
 import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import Heading from './Heading'
 import Card from './Card'
@@ -172,10 +172,6 @@ export default {
       default: ''
     },
     companies: {
-      type: Object,
-      required: true
-    },
-    query: {
       type: Object,
       required: true
     }
@@ -380,7 +376,8 @@ export default {
     ...mapState({
       summaryData: state => state.stocks.summaryData,
       hotStocks: state => state.stocks.hotStocks
-    })
+    }),
+    ...mapGetters(['query'])
   },
 
   methods: {
