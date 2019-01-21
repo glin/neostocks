@@ -1,5 +1,5 @@
-import { mutations, actions } from '..'
-import * as types from '../types'
+import { mutations, actions } from '../app'
+import * as types from '../../types'
 
 jest.useFakeTimers()
 

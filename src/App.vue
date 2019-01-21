@@ -152,7 +152,7 @@ export default {
     },
     ...mapState({
       summaryData: state => state.stocks.summaryData,
-      now: state => state.now
+      now: state => state.app.now
     })
   },
 

@@ -202,7 +202,7 @@ export default {
       return this.notifications.some(item => !item.isRead)
     },
     ...mapState({
-      isTouchCapable: state => state.isTouchCapable
+      isTouchCapable: state => state.app.isTouchCapable
     })
   },
 

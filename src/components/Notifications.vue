@@ -90,7 +90,7 @@ export default {
 
   computed: {
     ...mapState({
-      isTouchCapable: state => state.isTouchCapable
+      isTouchCapable: state => state.app.isTouchCapable
     })
   }
 }
