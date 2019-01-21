@@ -1,5 +1,6 @@
 export const TIMER_START = 'TIMER_START'
 export const TIMER_TICK = 'TIMER_TICK'
+export const SET_TOUCH_CAPABLE = 'SET_TOUCH_CAPABLE'
 
 export const STOCKS_SUBSCRIBE = 'STOCKS_SUBSCRIBE'
 export const STOCKS_SET_DATA = 'STOCKS_SET_DATA'

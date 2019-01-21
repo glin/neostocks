@@ -13,6 +13,12 @@ describe('mutations', () => {
     expect(state).toEqual({ now })
     global.Date = originalDate
   })
+
+  test('SET_TOUCH_CAPABLE', () => {
+    const state = { isTouchCapable: false }
+    mutations[types.SET_TOUCH_CAPABLE](state, true)
+    expect(state).toEqual({ isTouchCapable: true })
+  })
 })
 
 describe('actions', () => {
@@ -25,5 +31,12 @@ describe('actions', () => {
     jest.advanceTimersByTime(60 * 1000)
     expect(commit).toHaveBeenCalledTimes(1)
     expect(commit).toHaveBeenCalledWith(types.TIMER_TICK)
+  })
+
+  test('SET_TOUCH_CAPABLE', () => {
+    const commit = jest.fn()
+    actions[types.SET_TOUCH_CAPABLE]({ commit }, true)
+    expect(commit).toHaveBeenCalledTimes(1)
+    expect(commit).toHaveBeenCalledWith(types.SET_TOUCH_CAPABLE, true)
   })
 })

@@ -24,7 +24,7 @@
       </div>
       <b-tooltip :show.sync="showNotificationsTooltip" :disabled="isTouchCapable" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Price Alerts" no-fade />
       <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
-        <Notifications :notifications="notifications" :has-alerts-created="hasAlertsCreated" :is-touch-capable="isTouchCapable" />
+        <Notifications :notifications="notifications" :has-alerts-created="hasAlertsCreated" />
       </b-popover>
     </b-container>
   </b-navbar>
@@ -123,6 +123,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 import bNavItem from 'bootstrap-vue/es/components/nav/nav-item'
@@ -186,10 +187,6 @@ export default {
     query: {
       type: Object,
       required: true
-    },
-    isTouchCapable: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -203,7 +200,10 @@ export default {
   computed: {
     showUnreadNotifications() {
       return this.notifications.some(item => !item.isRead)
-    }
+    },
+    ...mapState({
+      isTouchCapable: state => state.isTouchCapable
+    })
   },
 
   watch: {

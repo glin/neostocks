@@ -59,6 +59,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bLink from 'bootstrap-vue/es/components/link/link'
 import bPopover from 'bootstrap-vue/es/components/popover/popover'
 import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
@@ -84,11 +85,13 @@ export default {
     hasAlertsCreated: {
       type: Boolean,
       required: true
-    },
-    isTouchCapable: {
-      type: Boolean,
-      default: false
     }
+  },
+
+  computed: {
+    ...mapState({
+      isTouchCapable: state => state.isTouchCapable
+    })
   }
 }
 </script>
