@@ -15,7 +15,6 @@
       <b-container class="main-content">
         <keep-alive>
           <router-view
-            v-bind="stockData"
             :companies="companies"
             :settings="settings"
             :on-settings-change="handleSettingsChange"
@@ -24,10 +23,7 @@
           />
         </keep-alive>
       </b-container>
-      <UpdateTime
-        v-if="showUpdateTime"
-        :update-time="updateTime"
-      />
+      <UpdateTime v-if="showUpdateTime" />
     </div>
     <Footer />
   </div>
@@ -83,6 +79,7 @@ body {
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -91,6 +88,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import UpdateTime from './components/UpdateTime'
+import * as types from './store/types'
 import companies from './companies'
 import { getSettingsStore } from './settings'
 import { notificationsEnabled, requestPermission, swNotificationsSupported } from './notifications'
@@ -108,13 +106,6 @@ export default {
 
   data() {
     return {
-      summaryData: window.__data__.summary_data,
-      hotStocks: window.__data__.hot_stocks,
-      updateTime: window.__data__.update_time,
-      daysFrom15: window.__data__.days_from_15,
-      priceDist: window.__data__.price_dist,
-      volumeByDay: window.__data__.volume_by_day,
-      volumeByPrice: window.__data__.volume_by_price,
       search: '',
       settings: {},
       notifications: [],
@@ -125,16 +116,6 @@ export default {
   },
 
   computed: {
-    stockData() {
-      return {
-        summaryData: this.summaryData,
-        hotStocks: this.hotStocks,
-        daysFrom15: this.daysFrom15,
-        priceDist: this.priceDist,
-        volumeByDay: this.volumeByDay,
-        volumeByPrice: this.volumeByPrice
-      }
-    },
     searchResults() {
       if (!this.search) return []
 
@@ -172,7 +153,10 @@ export default {
         query.period = this.$route.query.period
       }
       return query
-    }
+    },
+    ...mapState({
+      summaryData: state => state.stocks.summaryData
+    })
   },
 
   watch: {
@@ -191,7 +175,7 @@ export default {
   },
 
   created() {
-    Shiny.addCustomMessageHandler('stock-data', this.handleStockDataChange)
+    this.$store.dispatch(types.STOCKS_SUBSCRIBE)
 
     this.loadSettings()
     this.updateNotifications()
@@ -215,15 +199,6 @@ export default {
   },
 
   methods: {
-    handleStockDataChange(data) {
-      this.summaryData = data.summary_data
-      this.hotStocks = data.hot_stocks
-      this.updateTime = data.update_time
-      this.daysFrom15 = data.days_from_15
-      this.priceDist = data.price_dist
-      this.volumeByDay = data.volume_by_day
-      this.volumeByPrice = data.volume_by_price
-    },
     handleSearchChange(value) {
       this.search = value
     },

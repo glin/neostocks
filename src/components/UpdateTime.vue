@@ -24,6 +24,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
 import { timeSince } from '../date'
@@ -31,13 +32,6 @@ import { timeSince } from '../date'
 export default {
   components: {
     bContainer
-  },
-
-  props: {
-    updateTime: {
-      type: Object,
-      default: null
-    }
   },
 
   data() {
@@ -60,7 +54,10 @@ export default {
     },
     updateTimeSince() {
       return timeSince(this.updateTimeUTC, this.now)
-    }
+    },
+    ...mapState({
+      updateTime: state => state.stocks.updateTime
+    })
   },
 
   created() {

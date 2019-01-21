@@ -136,6 +136,7 @@
 <script>
 import bTable from 'bootstrap-vue/es/components/table/table'
 import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
+import { mapState } from 'vuex'
 
 import Heading from './Heading'
 import Card from './Card'
@@ -161,14 +162,6 @@ export default {
       validator: function(value) {
         return ['1d', '5d', '1m', 'all'].includes(value)
       }
-    },
-    summaryData: {
-      type: Object,
-      default: null
-    },
-    hotStocks: {
-      type: Array,
-      default: null
     },
     filter: {
       type: String,
@@ -383,7 +376,11 @@ export default {
         (this.filter ? `${this.filter} stocks ` : 'tickers ') +
         (this.search ? `matching <i> ${this.search}</i>` : 'at the moment')
       )
-    }
+    },
+    ...mapState({
+      summaryData: state => state.stocks.summaryData,
+      hotStocks: state => state.stocks.hotStocks
+    })
   },
 
   methods: {

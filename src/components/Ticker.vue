@@ -203,6 +203,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bTable from 'bootstrap-vue/es/components/table/table'
 import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
 
@@ -238,10 +239,6 @@ export default {
       validator: function(value) {
         return ['1d', '5d', '1m', 'all'].includes(value)
       }
-    },
-    summaryData: {
-      type: Object,
-      default: null
     },
     companies: {
       type: Object,
@@ -430,7 +427,10 @@ export default {
         annotations.push(this.lastPeakAnnotation)
       }
       return annotations
-    }
+    },
+    ...mapState({
+      summaryData: state => state.stocks.summaryData
+    })
   },
 
   watch: {

@@ -119,6 +119,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import bCol from 'bootstrap-vue/es/components/layout/col'
 import bRow from 'bootstrap-vue/es/components/layout/row'
 
@@ -147,32 +148,19 @@ export default {
     Dygraph
   },
 
-  props: {
-    daysFrom15: {
-      type: Array,
-      required: true
-    },
-    priceDist: {
-      type: Array,
-      required: true
-    },
-    volumeByPrice: {
-      type: Array,
-      required: true
-    },
-    volumeByDay: {
-      type: Array,
-      required: true
-    }
-  },
-
   computed: {
     volumeByDayData() {
       return {
         time: this.volumeByDay.map(data => data.date),
         Volume: this.volumeByDay.map(data => data.volume)
       }
-    }
+    },
+    ...mapState({
+      daysFrom15: state => state.stocks.daysFrom15,
+      priceDist: state => state.stocks.priceDist,
+      volumeByPrice: state => state.stocks.volumeByPrice,
+      volumeByDay: state => state.stocks.volumeByDay
+    })
   },
 
   methods: {

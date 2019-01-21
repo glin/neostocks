@@ -1,0 +1,3 @@
+export const STOCKS_SUBSCRIBE = 'STOCKS_SUBSCRIBE'
+export const STOCKS_SET_DATA = 'STOCKS_SET_DATA'
+
