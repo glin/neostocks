@@ -165,7 +165,7 @@ export default {
 
   created() {
     this.$store.dispatch(types.STOCKS_SUBSCRIBE)
-    this.$store.dispatch(types.TIMER_START)
+    this.$store.dispatch(types.APP_TIMER_START)
 
     this.loadSettings()
     this.updateNotifications()
@@ -180,7 +180,7 @@ export default {
     }
 
     const onFirstTouch = () => {
-      this.$store.dispatch(types.SET_TOUCH_CAPABLE, true)
+      this.$store.dispatch(types.APP_SET_TOUCH_CAPABLE, true)
       document.removeEventListener('touchstart', onFirstTouch, false)
     }
     document.addEventListener('touchstart', onFirstTouch, false)
