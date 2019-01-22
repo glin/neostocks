@@ -1,4 +1,4 @@
-import { addMessageHandler } from './shiny'
+import { addMessageHandler, setInputValue } from './shiny'
 
 export function getInitialStockData() {
   return getStockData(window.__data__)
@@ -19,5 +19,22 @@ function getStockData(data) {
     volumeByDay: data.volume_by_day,
     volumeByPrice: data.volume_by_price,
     updateTime: data.update_time
+  }
+}
+
+export function subscribeToTickerData(handler) {
+  addMessageHandler('ticker-data', data => {
+    handler(getTickerData(data))
+  })
+}
+
+export function selectTicker(ticker, period) {
+  setInputValue('ticker', { ticker, period })
+}
+
+function getTickerData(data) {
+  return {
+    prices: data.data.prices,
+    peaks: data.data.peaks
   }
 }

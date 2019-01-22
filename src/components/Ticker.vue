@@ -25,7 +25,7 @@
 
       <PeriodNav :period="period" />
       <div class="price-graph-container">
-        <Dygraph v-show="!isFetching" :data="prices" :annotations="annotations" class="price-graph" />
+        <Dygraph v-show="!isLoading" :data="prices" :annotations="annotations" class="price-graph" />
       </div>
       <hr class="divider">
 
@@ -212,6 +212,7 @@ import Dygraph from './Dygraph'
 import Heading from './Heading'
 import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
+import * as types from '../store/types'
 import { timeSince } from '../date'
 
 export default {
@@ -248,9 +249,6 @@ export default {
 
   data() {
     return {
-      prices: null,
-      isFetching: false,
-      peaks: null,
       fields: [
         {
           key: 'volume',
@@ -429,46 +427,36 @@ export default {
       return annotations
     },
     ...mapState({
-      summaryData: state => state.stocks.summaryData
+      summaryData: state => state.stocks.summaryData,
+      isLoading: state => state.ticker.isLoading,
+      prices: state => state.ticker.prices,
+      peaks: state => state.ticker.peaks
     })
   },
 
   watch: {
     ticker: {
       handler() {
-        this.updateInputs()
+        this.selectTicker()
       },
       immediate: true
     },
     period: {
       handler() {
-        this.updateInputs()
+        this.selectTicker()
       },
       immediate: true
     }
   },
 
   created() {
-    Shiny.addCustomMessageHandler('ticker-data', msg => {
-      if (msg.data) {
-        this.prices = msg.data.prices
-        this.peaks = msg.data.peaks
-        this.isFetching = false
-      }
-    })
-
-    $(document).on('shiny:connected', () => {
-      this.updateInputs()
-    })
+    this.$store.dispatch(types.TICKER_SUBSCRIBE)
+    this.selectTicker()
   },
 
   methods: {
-    updateInputs() {
-      if (!window.Shiny || !window.Shiny.onInputChange) return
-
-      this.isFetching = true
-
-      Shiny.onInputChange('ticker', {
+    selectTicker() {
+      this.$store.dispatch(types.TICKER_SELECT_TICKER, {
         ticker: this.ticker,
         period: this.period
       })
