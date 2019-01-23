@@ -5,7 +5,7 @@ export function getInitialStockData() {
 }
 
 export function subscribeToStockData(handler) {
-  addMessageHandler('stock-data', data => {
+  addMessageHandler('stock_data', data => {
     handler(getStockData(data))
   })
 }
@@ -23,7 +23,7 @@ function getStockData(data) {
 }
 
 export function subscribeToTickerData(handler) {
-  addMessageHandler('ticker-data', data => {
+  addMessageHandler('ticker_data', data => {
     handler(getTickerData(data))
   })
 }
@@ -34,7 +34,7 @@ export function selectTicker(ticker, period) {
 
 function getTickerData(data) {
   return {
-    prices: data.data.prices,
-    peaks: data.data.peaks
+    prices: data.prices,
+    peaks: data.peaks
   }
 }

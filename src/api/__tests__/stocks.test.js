@@ -41,7 +41,7 @@ describe('stocks', () => {
   test('subscribeToStockData', () => {
     const handler = jest.fn()
     subscribeToStockData(handler)
-    expect(addMessageHandler).toHaveBeenCalledWith('stock-data', expect.any(Function))
+    expect(addMessageHandler).toHaveBeenCalledWith('stock_data', expect.any(Function))
 
     const msgHandler = addMessageHandler.mock.calls[0][1]
     msgHandler(data)
@@ -60,17 +60,15 @@ describe('ticker', () => {
   test('subscribeToTickerData', () => {
     const handler = jest.fn()
     subscribeToTickerData(handler)
-    expect(addMessageHandler).toHaveBeenCalledWith('ticker-data', expect.any(Function))
+    expect(addMessageHandler).toHaveBeenCalledWith('ticker_data', expect.any(Function))
 
     const data = {
-      data: {
-        prices: { a: [1] },
-        peaks: [3, 4]
-      }
+      prices: { a: [1] },
+      peaks: [3, 4]
     }
     const msgHandler = addMessageHandler.mock.calls[0][1]
     msgHandler(data)
     expect(handler).toHaveBeenCalledTimes(1)
-    expect(handler).toHaveBeenCalledWith(data.data)
+    expect(handler).toHaveBeenCalledWith(data)
   })
 })
