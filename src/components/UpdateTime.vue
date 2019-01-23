@@ -12,7 +12,7 @@
   justify-content: flex-end;
   padding: 6px 4px;
   font-style: italic;
-  font-size: small;
+  font-size: 0.8125rem;
   color: #555;
 }
 

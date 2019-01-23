@@ -90,11 +90,11 @@
 
 .ticker-text {
   display: inline-block;
-  width: 50px;
+  width: 3.125rem;
 }
 
 .buy-link {
-  font-size: small;
+  font-size: 0.8125rem;
   color: #1e7e34;
 }
 
