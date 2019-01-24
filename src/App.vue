@@ -84,6 +84,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import UpdateTime from './components/UpdateTime'
+import { setLastUpdate } from './api/stocks'
 import * as types from './store/types'
 import companies from './companies'
 import { getSettingsStore } from './settings'
@@ -143,6 +144,7 @@ export default {
     },
     ...mapState({
       summaryData: state => state.stocks.summaryData,
+      updateTime: state => state.stocks.updateTime,
       now: state => state.app.now
     }),
     ...mapGetters(['query'])
@@ -152,6 +154,12 @@ export default {
     summaryData() {
       const notifications = this.updateNotifications()
       this.sendNotifications(notifications)
+    },
+    updateTime: {
+      handler() {
+        setLastUpdate(this.updateTime)
+      },
+      immediate: true
     },
     now() {
       this.notifications = this.notifications.filter(item => {

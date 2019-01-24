@@ -38,3 +38,7 @@ function getTickerData(data) {
     peaks: data.peaks
   }
 }
+
+export function setLastUpdate(time) {
+  setInputValue('last_update', { time })
+}

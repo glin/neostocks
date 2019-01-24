@@ -2,7 +2,8 @@ import {
   getInitialStockData,
   subscribeToStockData,
   subscribeToTickerData,
-  selectTicker
+  selectTicker,
+  setLastUpdate
 } from '../stocks'
 import { addMessageHandler, setInputValue } from '../shiny'
 
@@ -10,7 +11,7 @@ jest.mock('../shiny')
 
 afterEach(() => {
   jest.clearAllMocks()
-});
+})
 
 describe('stocks', () => {
   const data = {
@@ -71,4 +72,10 @@ describe('ticker', () => {
     expect(handler).toHaveBeenCalledTimes(1)
     expect(handler).toHaveBeenCalledWith(data)
   })
+})
+
+test('setLastUpdate', () => {
+  setLastUpdate('tuesday')
+  expect(setInputValue).toHaveBeenCalledTimes(1)
+  expect(setInputValue).toHaveBeenCalledWith('last_update', { time: 'tuesday' })
 })
