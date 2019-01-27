@@ -18,53 +18,6 @@
   </div>
 </template>
 
-<style scoped>
-.notifications-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #eee;
-  background-color: #f3f3f3;
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-.notifications-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.icon-btn {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.icon-btn:hover {
-  opacity: 0.65;
-}
-
-.icon-btn:active {
-  opacity: 1;
-}
-
-.settings-icon {
-  display: block;
-}
-</style>
-
-<style>
-.tooltip {
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-.tooltip-inner {
-  padding: 0.3rem 0.6rem;
-}
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import bLink from 'bootstrap-vue/es/components/link/link'
@@ -102,3 +55,50 @@ export default {
   }
 }
 </script>
+
+<style>
+.tooltip {
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
+}
+
+.tooltip-inner {
+  padding: 0.3rem 0.6rem;
+}
+</style>
+
+<style scoped>
+.notifications-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #eee;
+  background-color: #f3f3f3;
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
+}
+
+.notifications-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.icon-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  opacity: 0.65;
+}
+
+.icon-btn:active {
+  opacity: 1;
+}
+
+.settings-icon {
+  display: block;
+}
+</style>

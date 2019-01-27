@@ -4,16 +4,6 @@
   </div>
 </template>
 
-<style scoped>
-.chart-wrapper {
-  width: 100%;
-  height: 100%;
-}
-</style>
-
-<style>
-</style>
-
 <script>
 // Non-bundle build since we don't need the time axis
 import Chart from 'chart.js/dist/Chart.min'
@@ -233,3 +223,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+}
+</style>

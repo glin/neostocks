@@ -86,151 +86,6 @@
   </div>
 </template>
 
-<style>
-.summary-table.table td:first-child {
-  border: none;
-}
-
-.summary-table th,
-.summary-table td {
-  border-color: #e9ecef;
-}
-
-.summary-table.table {
-  margin-bottom: 0;
-}
-
-.peak-annotation {
-  font-size: 20px !important;
-  color: #e36209 !important;
-  border: none;
-  background: transparent;
-}
-
-.numeric {
-  text-align: right;
-}
-</style>
-
-<style scoped>
-.company-title {
-  font-size: 1.2rem;
-}
-
-.company-logo {
-  margin-right: 0.15em;
-  height: 25px;
-}
-
-.company-name {
-  margin-left: 0.5em;
-  font-size: 0.9rem;
-  color: #6c757d;
-}
-
-.company-subtitle {
-  display: flex;
-  justify-content: space-between;
-}
-
-.current-price {
-  font-size: 2.25rem;
-  margin-bottom: -8px;
-}
-
-.current-change {
-  margin-left: 0.2em;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.company-links {
-  margin-top: auto;
-  white-space: nowrap;
-  font-size: small;
-}
-
-.company-links a {
-  color: #1e7e34;
-}
-
-.v-divider {
-  color: #aaa;
-}
-
-.divider {
-  margin: 15px 0 5px;
-}
-
-.price-graph-container {
-  padding-top: 0.5rem;
-  height: 300px;
-}
-
-@media (max-width: 575.98px) {
-  .price-graph-container {
-    height: 200px;
-  }
-
-  .price-graph {
-    max-height: 200px;
-  }
-}
-
-.summary-tables {
-  display: flex;
-}
-
-.summary-tables-compact {
-  display: none;
-}
-
-@media (max-width: 575.98px) {
-  .summary-tables {
-    display: none;
-  }
-
-  .summary-tables-compact {
-    display: flex;
-  }
-}
-
-.summary-table {
-  flex-basis: 0;
-  flex-grow: 1;
-  white-space: nowrap;
-}
-
-.num-change {
-  font-weight: 600;
-}
-
-.num-positive {
-  color: green;
-}
-
-.num-negative {
-  color: red;
-}
-
-.num-zero {
-  color: #6c757d;
-}
-
-.hoverable {
-  border-bottom: 1px dotted #888;
-}
-
-.time-period {
-  font-size: 0.85rem;
-}
-
-.current-high {
-  font-weight: 600;
-  color: #e36209;
-}
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import bTable from 'bootstrap-vue/es/components/table/table'
@@ -553,3 +408,148 @@ export default {
   }
 }
 </script>
+
+<style>
+.summary-table.table td:first-child {
+  border: none;
+}
+
+.summary-table th,
+.summary-table td {
+  border-color: #e9ecef;
+}
+
+.summary-table.table {
+  margin-bottom: 0;
+}
+
+.peak-annotation {
+  font-size: 20px !important;
+  color: #e36209 !important;
+  border: none;
+  background: transparent;
+}
+
+.numeric {
+  text-align: right;
+}
+</style>
+
+<style scoped>
+.company-title {
+  font-size: 1.2rem;
+}
+
+.company-logo {
+  margin-right: 0.15em;
+  height: 25px;
+}
+
+.company-name {
+  margin-left: 0.5em;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.company-subtitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-price {
+  font-size: 2.25rem;
+  margin-bottom: -8px;
+}
+
+.current-change {
+  margin-left: 0.2em;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.company-links {
+  margin-top: auto;
+  white-space: nowrap;
+  font-size: small;
+}
+
+.company-links a {
+  color: #1e7e34;
+}
+
+.v-divider {
+  color: #aaa;
+}
+
+.divider {
+  margin: 15px 0 5px;
+}
+
+.price-graph-container {
+  padding-top: 0.5rem;
+  height: 300px;
+}
+
+@media (max-width: 575.98px) {
+  .price-graph-container {
+    height: 200px;
+  }
+
+  .price-graph {
+    max-height: 200px;
+  }
+}
+
+.summary-tables {
+  display: flex;
+}
+
+.summary-tables-compact {
+  display: none;
+}
+
+@media (max-width: 575.98px) {
+  .summary-tables {
+    display: none;
+  }
+
+  .summary-tables-compact {
+    display: flex;
+  }
+}
+
+.summary-table {
+  flex-basis: 0;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.num-change {
+  font-weight: 600;
+}
+
+.num-positive {
+  color: green;
+}
+
+.num-negative {
+  color: red;
+}
+
+.num-zero {
+  color: #6c757d;
+}
+
+.hoverable {
+  border-bottom: 1px dotted #888;
+}
+
+.time-period {
+  font-size: 0.85rem;
+}
+
+.current-high {
+  font-weight: 600;
+  color: #e36209;
+}
+</style>

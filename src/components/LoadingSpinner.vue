@@ -4,16 +4,6 @@
   </div>
 </template>
 
-<style scoped>
-.loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-</style>
-
 <script>
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
@@ -30,3 +20,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+</style>

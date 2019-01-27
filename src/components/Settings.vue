@@ -88,6 +88,116 @@
   </Card>
 </template>
 
+<script>
+import Vue from 'vue'
+import { mapState } from 'vuex'
+import ToggleButton from 'vue-js-toggle-button'
+import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
+
+import bCol from 'bootstrap-vue/es/components/layout/col'
+import bRow from 'bootstrap-vue/es/components/layout/row'
+import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select'
+import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
+
+import Card from './Card'
+import companies from '../companies'
+import { notificationsBlocked } from '../notifications'
+
+Vue.use(ToggleButton)
+
+export default {
+  components: {
+    bCol,
+    bRow,
+    bFormSelect,
+    bFormInput,
+    bListGroup,
+    bListGroupItem,
+    bTooltip,
+    Card,
+    Multiselect
+  },
+
+  props: {
+    settings: {
+      type: Object,
+      required: true
+    },
+    onSettingsChange: {
+      type: Function,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      tickers: Object.keys(companies).filter(ticker => ticker !== 'NEODAQ'),
+      companies
+    }
+  },
+
+  computed: {
+    notificationsBlocked() {
+      // Update on changes from Disabled -> Blocked
+      return !this.settings.enableDesktopNotifications && notificationsBlocked()
+    },
+    ...mapState({
+      isTouchCapable: state => state.app.isTouchCapable
+    })
+  },
+
+  methods: {
+    handleDesktopNotificationsChange() {
+      this.onSettingsChange({
+        enableDesktopNotifications: !this.settings.enableDesktopNotifications
+      })
+    },
+    handleCreateAlert(condition) {
+      const newAlerts = this.settings.alerts.concat({ condition })
+      this.onSettingsChange({ alerts: newAlerts })
+    },
+    handleDeleteAlert(index) {
+      const newAlerts = this.settings.alerts.filter((item, i) => i !== index)
+      this.onSettingsChange({ alerts: newAlerts })
+    },
+    handleAlertChange(index, value) {
+      if (value.condition) {
+        const conditionDefaults = {
+          high: { highPeriod: '1d', minPrice: null, maxPrice: null, exactPrice: null },
+          above: { highPeriod: null, maxPrice: null, exactPrice: null },
+          between: { highPeriod: null, exactPrice: null },
+          exact: { highPeriod: null, minPrice: null, maxPrice: null }
+        }
+        value = { ...value, ...conditionDefaults[value.condition] }
+      }
+
+      if (value.minPrice != null) {
+        value.minPrice = this.parseInt(value.minPrice)
+      }
+      if (value.maxPrice != null) {
+        value.maxPrice = this.parseInt(value.maxPrice)
+      }
+      if (value.exactPrice != null) {
+        value.exactPrice = this.parseInt(value.exactPrice)
+      }
+
+      const newAlerts = this.settings.alerts.map((item, i) => {
+        if (i !== index) return item
+        return { ...item, ...value }
+      })
+      this.onSettingsChange({ alerts: newAlerts })
+    },
+    parseInt(value) {
+      return value !== '' ? parseInt(value) : null
+    }
+  }
+}
+</script>
+
 <style scoped>
 .settings {
   padding: 20px 25px 20px;
@@ -272,113 +382,3 @@ input[type=number] {
   background: #efefef;
 }
 </style>
-
-<script>
-import Vue from 'vue'
-import { mapState } from 'vuex'
-import ToggleButton from 'vue-js-toggle-button'
-import Multiselect from 'vue-multiselect'
-import 'vue-multiselect/dist/vue-multiselect.min.css'
-
-import bCol from 'bootstrap-vue/es/components/layout/col'
-import bRow from 'bootstrap-vue/es/components/layout/row'
-import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select'
-import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
-import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
-import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
-import bTooltip from 'bootstrap-vue/es/components/tooltip/tooltip'
-
-import Card from './Card'
-import companies from '../companies'
-import { notificationsBlocked } from '../notifications'
-
-Vue.use(ToggleButton)
-
-export default {
-  components: {
-    bCol,
-    bRow,
-    bFormSelect,
-    bFormInput,
-    bListGroup,
-    bListGroupItem,
-    bTooltip,
-    Card,
-    Multiselect
-  },
-
-  props: {
-    settings: {
-      type: Object,
-      required: true
-    },
-    onSettingsChange: {
-      type: Function,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      tickers: Object.keys(companies).filter(ticker => ticker !== 'NEODAQ'),
-      companies
-    }
-  },
-
-  computed: {
-    notificationsBlocked() {
-      // Update on changes from Disabled -> Blocked
-      return !this.settings.enableDesktopNotifications && notificationsBlocked()
-    },
-    ...mapState({
-      isTouchCapable: state => state.app.isTouchCapable
-    })
-  },
-
-  methods: {
-    handleDesktopNotificationsChange() {
-      this.onSettingsChange({
-        enableDesktopNotifications: !this.settings.enableDesktopNotifications
-      })
-    },
-    handleCreateAlert(condition) {
-      const newAlerts = this.settings.alerts.concat({ condition })
-      this.onSettingsChange({ alerts: newAlerts })
-    },
-    handleDeleteAlert(index) {
-      const newAlerts = this.settings.alerts.filter((item, i) => i !== index)
-      this.onSettingsChange({ alerts: newAlerts })
-    },
-    handleAlertChange(index, value) {
-      if (value.condition) {
-        const conditionDefaults = {
-          high: { highPeriod: '1d', minPrice: null, maxPrice: null, exactPrice: null },
-          above: { highPeriod: null, maxPrice: null, exactPrice: null },
-          between: { highPeriod: null, exactPrice: null },
-          exact: { highPeriod: null, minPrice: null, maxPrice: null }
-        }
-        value = { ...value, ...conditionDefaults[value.condition] }
-      }
-
-      if (value.minPrice != null) {
-        value.minPrice = this.parseInt(value.minPrice)
-      }
-      if (value.maxPrice != null) {
-        value.maxPrice = this.parseInt(value.maxPrice)
-      }
-      if (value.exactPrice != null) {
-        value.exactPrice = this.parseInt(value.exactPrice)
-      }
-
-      const newAlerts = this.settings.alerts.map((item, i) => {
-        if (i !== index) return item
-        return { ...item, ...value }
-      })
-      this.onSettingsChange({ alerts: newAlerts })
-    },
-    parseInt(value) {
-      return value !== '' ? parseInt(value) : null
-    }
-  }
-}
-</script>

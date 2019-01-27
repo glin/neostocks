@@ -2,29 +2,6 @@
   <div ref="el" :style="style" />
 </template>
 
-<style>
-.dygraph-legend {
-  position: static;
-  float: right;
-  margin-right: 40px;
-  width: auto;
-}
-
-.dygraph-axis-label {
-  color: #495057;
-}
-
-.dygraph-axis-label-y {
-  margin-top: -3px;
-}
-
-@media (max-width: 575.98px) {
-  .dygraph-legend {
-    margin-right: 10px;
-  }
-}
-</style>
-
 <script>
 import Dygraph from 'dygraphs/index.es5'
 import 'dygraphs/dist/dygraph.css'
@@ -155,3 +132,26 @@ function columnsToCsv(columns) {
   return rows.join('\n')
 }
 </script>
+
+<style>
+.dygraph-legend {
+  position: static;
+  float: right;
+  margin-right: 40px;
+  width: auto;
+}
+
+.dygraph-axis-label {
+  color: #495057;
+}
+
+.dygraph-axis-label-y {
+  margin-top: -3px;
+}
+
+@media (max-width: 575.98px) {
+  .dygraph-legend {
+    margin-right: 10px;
+  }
+}
+</style>

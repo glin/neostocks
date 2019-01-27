@@ -7,6 +7,16 @@
   </div>
 </template>
 
+<script>
+import bLink from 'bootstrap-vue/es/components/link/link'
+
+export default {
+  components: {
+    bLink
+  }
+}
+</script>
+
 <style scoped>
 img {
   margin-top: 2rem;
@@ -17,13 +27,3 @@ h1 {
   font-size: 1.75rem;
 }
 </style>
-
-<script>
-import bLink from 'bootstrap-vue/es/components/link/link'
-
-export default {
-  components: {
-    bLink
-  }
-}
-</script>

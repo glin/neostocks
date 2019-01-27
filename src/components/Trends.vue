@@ -62,43 +62,6 @@
   </div>
 </template>
 
-<style scoped>
-.trends-card {
-  height: 300px;
-}
-
-@media (max-width: 991.98px) {
-  .trends-col:not(:first-of-type) {
-    margin-top: 16px;
-  }
-}
-
-.row {
-  margin-top: 15px;
-}
-
-.chart-heading {
-  margin: 0 auto;
-  margin-bottom: 8px;
-}
-
-.chart-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #545b62;
-}
-
-.chart-subtitle {
-  margin-top: 2px;
-  font-size: 0.8rem;
-  color: #6c757d;
-}
-
-.dygraph-container {
-  flex: 1 1 0;
-}
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import bCol from 'bootstrap-vue/es/components/layout/col'
@@ -157,3 +120,40 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.trends-card {
+  height: 300px;
+}
+
+@media (max-width: 991.98px) {
+  .trends-col:not(:first-of-type) {
+    margin-top: 16px;
+  }
+}
+
+.row {
+  margin-top: 15px;
+}
+
+.chart-heading {
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+
+.chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #545b62;
+}
+
+.chart-subtitle {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.dygraph-container {
+  flex: 1 1 0;
+}
+</style>

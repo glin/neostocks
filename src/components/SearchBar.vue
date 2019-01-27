@@ -46,99 +46,6 @@
   </b-nav-form>
 </template>
 
-<style scoped>
-.search-form {
-  position: relative;
-}
-
-.search-input {
-  padding-left: 36px;
-  width: 200px;
-  border-radius: 2px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background-color: transparent;
-}
-
-@media (max-width: 575.98px) {
-  .search-form {
-    margin: 10px 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-input {
-    width: 160px;
-  }
-}
-
-.search-input:focus {
-  border-color: #f4a549;
-  box-shadow: 0 2px 0px -1px #f4a549;
-}
-
-.search-icon {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  width: 36px;
-  opacity: 0.5;
-}
-
-.search-icon:hover {
-  opacity: 0.8;
-}
-
-.search-results {
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  max-height: 420px;
-  overflow-y: auto;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-top: none;
-  border-bottom: none;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.search-result-item,
-.search-result-item.active {
-  display: flex;
-  align-items: center;
-  min-height: 45px;
-  padding: 0.35rem 0.7rem;
-  border-radius: 0;
-  color: #495057;
-  background-color: #fff;
-  border: 1px solid #fff;
-  border-right: none;
-  border-left: none;
-}
-
-.search-result-item:first-child {
-  border-top: none;
-}
-
-.search-result-item:hover {
-  background-color: #efefef;
-}
-
-.search-result-item.hover {
-  background-color: #efefef;
-}
-
-.no-results {
-  font-size: 0.9rem;
-}
-
-.company-logo {
-  margin-right: 10px;
-  height: 25px;
-}
-</style>
-
 <script>
 import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
@@ -234,3 +141,96 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.search-form {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 36px;
+  width: 200px;
+  border-radius: 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+}
+
+@media (max-width: 575.98px) {
+  .search-form {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    width: 160px;
+  }
+}
+
+.search-input:focus {
+  border-color: #f4a549;
+  box-shadow: 0 2px 0px -1px #f4a549;
+}
+
+.search-icon {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  width: 36px;
+  opacity: 0.5;
+}
+
+.search-icon:hover {
+  opacity: 0.8;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: none;
+  border-bottom: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.search-result-item,
+.search-result-item.active {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-right: none;
+  border-left: none;
+}
+
+.search-result-item:first-child {
+  border-top: none;
+}
+
+.search-result-item:hover {
+  background-color: #efefef;
+}
+
+.search-result-item.hover {
+  background-color: #efefef;
+}
+
+.no-results {
+  font-size: 0.9rem;
+}
+
+.company-logo {
+  margin-right: 10px;
+  height: 25px;
+}
+</style>

@@ -30,98 +30,6 @@
   </b-navbar>
 </template>
 
-<style scoped>
-.header {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
-}
-
-.brand:hover {
-  color: rgb(0, 0, 0, 0.7);
-}
-
-.logo {
-  width: 25px;
-  height: 25px;
-}
-
-#nav-menu-collapse {
-  transition: none;
-}
-
-.nav-link.active {
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.7) !important;
-}
-
-.notifications {
-  position: relative;
-}
-
-.notifications-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-.unread-notifications {
-  position: absolute;
-  top: -1px;
-  right: -2px;
-  background: #dc3545;
-  /* background: #e36209; */
-  border-radius: 50%;
-  height: 7px;
-  width: 7px;
-}
-
-.icon-btn {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.icon-btn:hover {
-  opacity: 0.65;
-}
-
-.icon-btn:active {
-  opacity: 1;
-}
-</style>
-
-<style>
-.tooltip {
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-.tooltip-inner {
-  padding: 0.3rem 0.6rem;
-}
-
-.popover {
-  max-width: 100%;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.popover-body {
-  padding: 0;
-  overflow: hidden;
-  border-radius: 0.3rem;
-}
-
-.popover .arrow::before {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-.popover .arrow::after {
-  border-bottom-color: #f3f3f3;
-}
-</style>
-
 <script>
 import { mapState, mapGetters } from 'vuex'
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
@@ -219,3 +127,95 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.header {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+}
+
+.brand:hover {
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.logo {
+  width: 25px;
+  height: 25px;
+}
+
+#nav-menu-collapse {
+  transition: none;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.notifications {
+  position: relative;
+}
+
+.notifications-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.unread-notifications {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  background: #dc3545;
+  /* background: #e36209; */
+  border-radius: 50%;
+  height: 7px;
+  width: 7px;
+}
+
+.icon-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  opacity: 0.65;
+}
+
+.icon-btn:active {
+  opacity: 1;
+}
+</style>
+
+<style>
+.tooltip {
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
+}
+
+.tooltip-inner {
+  padding: 0.3rem 0.6rem;
+}
+
+.popover {
+  max-width: 100%;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.popover-body {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0.3rem;
+}
+
+.popover .arrow::before {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.popover .arrow::after {
+  border-bottom-color: #f3f3f3;
+}
+</style>

@@ -6,23 +6,6 @@
   </b-container>
 </template>
 
-<style scoped>
-.update-time {
-  display: flex;
-  justify-content: flex-end;
-  padding: 6px 4px;
-  font-style: italic;
-  font-size: 0.8125rem;
-  color: #555;
-}
-
-@media (max-width: 575.98px) {
-  .update-time {
-    justify-content: center;
-  }
-}
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
@@ -56,3 +39,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.update-time {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 4px;
+  font-style: italic;
+  font-size: 0.8125rem;
+  color: #555;
+}
+
+@media (max-width: 575.98px) {
+  .update-time {
+    justify-content: center;
+  }
+}
+</style>

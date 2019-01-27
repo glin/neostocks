@@ -59,102 +59,6 @@
   </Card>
 </template>
 
-<style>
-.summary table {
-  margin-bottom: 0;
-}
-
-.summary th,
-.summary td {
-  padding: 0.35rem 0.5rem;
-  white-space: nowrap;
-  border-color: #e9ecef;
-}
-
-.summary th:focus {
-  outline: 0;
-}
-
-.summary th {
-  border-top: 0;
-}
-
-.summary thead th {
-  border-bottom: 0;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f9f9f9;
-}
-
-.table-hover tbody tr:hover {
-  background-color: #f6f6f6;
-}
-
-.numeric {
-  text-align: right;
-}
-</style>
-
-<style scoped>
-.ticker {
-  white-space: nowrap;
-}
-
-.ticker-link:hover {
-  text-decoration: none;
-}
-
-.company-logo {
-  margin: -5px 5px -2px 0;
-  height: 25px;
-}
-
-.ticker-text {
-  display: inline-block;
-  width: 3.125rem;
-}
-
-.buy-link {
-  font-size: 0.8125rem;
-  color: #1e7e34;
-}
-
-.new-hot-tag {
-  font-size: small;
-  color: #e36209;
-}
-
-.num-change {
-  font-weight: 600;
-}
-
-.num-positive {
-  color: green;
-}
-
-.num-negative {
-  color: red;
-}
-
-.num-zero {
-  color: #6c757d;
-}
-
-.hoverable {
-  border-bottom: 1px dotted #888;
-}
-
-.time-period {
-  font-size: 0.85rem;
-}
-
-.current-high {
-  font-weight: 600;
-  color: #e36209;
-}
-</style>
-
 <script>
 import bTable from 'bootstrap-vue/es/components/table/table'
 import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
@@ -485,3 +389,99 @@ export default {
   }
 }
 </script>
+
+<style>
+.summary table {
+  margin-bottom: 0;
+}
+
+.summary th,
+.summary td {
+  padding: 0.35rem 0.5rem;
+  white-space: nowrap;
+  border-color: #e9ecef;
+}
+
+.summary th:focus {
+  outline: 0;
+}
+
+.summary th {
+  border-top: 0;
+}
+
+.summary thead th {
+  border-bottom: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f6f6f6;
+}
+
+.numeric {
+  text-align: right;
+}
+</style>
+
+<style scoped>
+.ticker {
+  white-space: nowrap;
+}
+
+.ticker-link:hover {
+  text-decoration: none;
+}
+
+.company-logo {
+  margin: -5px 5px -2px 0;
+  height: 25px;
+}
+
+.ticker-text {
+  display: inline-block;
+  width: 3.125rem;
+}
+
+.buy-link {
+  font-size: 0.8125rem;
+  color: #1e7e34;
+}
+
+.new-hot-tag {
+  font-size: small;
+  color: #e36209;
+}
+
+.num-change {
+  font-weight: 600;
+}
+
+.num-positive {
+  color: green;
+}
+
+.num-negative {
+  color: red;
+}
+
+.num-zero {
+  color: #6c757d;
+}
+
+.hoverable {
+  border-bottom: 1px dotted #888;
+}
+
+.time-period {
+  font-size: 0.85rem;
+}
+
+.current-high {
+  font-weight: 600;
+  color: #e36209;
+}
+</style>

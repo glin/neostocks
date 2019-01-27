@@ -15,6 +15,49 @@
   </b-list-group>
 </template>
 
+<script>
+import { mapState } from 'vuex'
+import bLink from 'bootstrap-vue/es/components/link/link'
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+
+import { timeSince } from '../date'
+
+export default {
+  components: {
+    bLink,
+    bListGroup,
+    bListGroupItem
+  },
+
+  props: {
+    notifications: {
+      type: Array,
+      required: true
+    },
+    hasAlertsCreated: {
+      type: Boolean,
+      required: true
+    }
+  },
+
+  computed: {
+    ...mapState({
+      now: state => state.app.now
+    })
+  },
+
+  methods: {
+    timeSince(time) {
+      return timeSince(new Date(time), this.now)
+    },
+    formatTimeNST(time) {
+      return new Date(time).toLocaleString() + ' NST'
+    }
+  }
+}
+</script>
+
 <style scoped>
 .notifications-list {
   width: 290px;
@@ -87,46 +130,3 @@
   font-weight: 600;
 }
 </style>
-
-<script>
-import { mapState } from 'vuex'
-import bLink from 'bootstrap-vue/es/components/link/link'
-import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
-import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
-
-import { timeSince } from '../date'
-
-export default {
-  components: {
-    bLink,
-    bListGroup,
-    bListGroupItem
-  },
-
-  props: {
-    notifications: {
-      type: Array,
-      required: true
-    },
-    hasAlertsCreated: {
-      type: Boolean,
-      required: true
-    }
-  },
-
-  computed: {
-    ...mapState({
-      now: state => state.app.now
-    })
-  },
-
-  methods: {
-    timeSince(time) {
-      return timeSince(new Date(time), this.now)
-    },
-    formatTimeNST(time) {
-      return new Date(time).toLocaleString() + ' NST'
-    }
-  }
-}
-</script>

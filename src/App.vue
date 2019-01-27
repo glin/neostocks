@@ -25,55 +25,6 @@
   </div>
 </template>
 
-<style>
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-}
-
-body {
-  overflow-y: scroll;
-  background-color: #f7f7f7 !important;
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-#shiny-disconnected-overlay,
-#ss-overlay,
-.ss-reconnecting {
-  display: none !important;
-}
-</style>
-
-<style scoped>
-.main {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.main-container {
-  flex: 1 0 auto;
-  margin-top: 3.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.main-content {
-  margin-top: 15px;
-  padding: 0;
-}
-
-@media (max-width: 575.98px) {
-  .main-container {
-    min-height: 100vh;
-  }
-
-  .main-content {
-    margin-top: 0;
-  }
-}
-</style>
-
 <script>
 import { mapState, mapGetters } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
@@ -261,3 +212,52 @@ export default {
   }
 }
 </script>
+
+<style>
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  overflow-y: scroll;
+  background-color: #f7f7f7 !important;
+  font-family: 'Open Sans', system-ui, Arial, sans-serif;
+}
+
+#shiny-disconnected-overlay,
+#ss-overlay,
+.ss-reconnecting {
+  display: none !important;
+}
+</style>
+
+<style scoped>
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-container {
+  flex: 1 0 auto;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.main-content {
+  margin-top: 15px;
+  padding: 0;
+}
+
+@media (max-width: 575.98px) {
+  .main-container {
+    min-height: 100vh;
+  }
+
+  .main-content {
+    margin-top: 0;
+  }
+}
+</style>
