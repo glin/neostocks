@@ -1,6 +1,6 @@
 <template>
   <b-nav-form class="search-form" @submit="handleSubmit" @keydown.esc="showResults(false)">
-    <label for="ticker-search-input" class="search-icon" @mousedown.prevent>
+    <label for="ticker-search-input" class="search-icon" aria-hidden="true" @mousedown.prevent>
       <SearchIcon />
     </label>
     <b-form-input id="ticker-search-input" ref="searchInput" :value="value" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="handleChange" @focus.native="showResults(true)" @blur.native="showResults(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />

@@ -78,7 +78,7 @@
             </b-row>
           </b-col>
 
-          <button :id="`delete-btn-${i}`" type="button" class="close delete-btn d-sm-none d-block" @click="handleDeleteAlert(i)">
+          <button :id="`delete-btn-${i}`" type="button" class="close delete-btn d-sm-none d-block" aria-label="Remove alert" @click="handleDeleteAlert(i)">
             <span aria-hidden="true">&times;</span>
           </button>
           <b-tooltip :target="`delete-btn-${i}`" :disabled="isTouchCapable" placement="bottomleft" title="Remove alert" delay="700" no-fade />

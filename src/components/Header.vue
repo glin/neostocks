@@ -17,8 +17,8 @@
         </b-navbar-nav>
       </b-collapse>
       <div class="notifications order-1 order-sm-last">
-        <button ref="notificationsBtn" class="notifications-btn icon-btn" @click="handleNotificationsBtnClick">
-          <BellIcon />
+        <button ref="notificationsBtn" class="notifications-btn icon-btn" aria-label="Price alerts" @click="handleNotificationsBtnClick">
+          <BellIcon aria-hidden="true" />
         </button>
         <span v-if="showUnreadNotifications" class="unread-notifications" />
       </div>

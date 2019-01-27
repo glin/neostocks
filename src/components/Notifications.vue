@@ -2,8 +2,8 @@
   <div>
     <div class="notifications-heading">
       <div class="notifications-title">Price Alerts</div>
-      <b-link ref="settingsBtn" :to="'/settings'" class="icon-btn">
-        <SettingsIcon class="settings-icon" />
+      <b-link ref="settingsBtn" :to="'/settings'" class="icon-btn" aria-label="Settings">
+        <SettingsIcon class="settings-icon" aria-hidden="true" />
       </b-link>
       <b-tooltip :target="() => $refs.settingsBtn" :disabled="isTouchCapable" placement="bottomleft" triggers="hover" title="Settings" no-fade />
     </div>
