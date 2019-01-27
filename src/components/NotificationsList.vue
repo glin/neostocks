@@ -1,7 +1,7 @@
 <template>
   <b-list-group class="notifications-list">
     <b-list-group-item v-for="(item, index) in notifications" :key="index" :to="item.location" class="notification-item">
-      <img :src="item.icon" :alt="item.ticker" class="notification-icon">
+      <img :src="item.icon" class="notification-icon" alt>
       <div>
         <div class="notification-title">{{ item.title }}</div>
         <div class="notification-message">{{ item.message }}</div>

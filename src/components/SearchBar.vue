@@ -6,7 +6,7 @@
     <b-form-input id="ticker-search-input" ref="searchInput" :value="value" :formatter="formatSearch" class="search-input" type="text" placeholder="search tickers" autocomplete="off" @input="handleChange" @focus.native="showResults(true)" @blur.native="showResults(false)" @keydown.up.prevent.native="changeSelectedIndex(-1)" @keydown.down.prevent.native="changeSelectedIndex(1)" />
     <b-list-group v-if="resultsVisible" ref="searchResults" class="search-results" @mouseout="handleResultsHover(-1)">
       <b-list-group-item v-for="(company, index) in results" ref="searchResultItems" :key="company.ticker" :to="company.location" :class="{ hover: isSelected(index) }" class="search-result-item" tabindex="-1" @mouseover.native="handleResultsHover(index)" @click.native="handleSubmit" @mousedown.prevent.native>
-        <img :src="company.logo" :alt="company.ticker" class="company-logo">
+        <img :src="company.logo" class="company-logo" alt>
         <span>{{ company.ticker }}</span>
       </b-list-group-item>
       <b-list-group-item v-if="value && results.length === 0" class="search-result-item">

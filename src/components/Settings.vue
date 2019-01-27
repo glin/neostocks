@@ -69,7 +69,7 @@
               <Multiselect :value="alert.includeTickers" :options="tickers" :close-on-select="false" :placeholder="(alert.includeTickers && alert.includeTickers.length > 0) ? '' : 'all tickers'" class="settings-multiselect" multiple hide-selected preserve-search select-label="" @input="includeTickers => handleAlertChange(i, { includeTickers })">
                 <template slot="option" slot-scope="props">
                   <div class="d-flex align-items-center">
-                    <img v-if="companies[props.option]" :src="companies[props.option].logo" :alt="props.option" class="company-logo">
+                    <img v-if="companies[props.option]" :src="companies[props.option].logo" class="company-logo" alt>
                     {{ props.option }}
                   </div>
                 </template>

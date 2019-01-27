@@ -4,7 +4,7 @@
     <Card v-if="showTicker">
       <Heading>
         <div class="company-title">
-          <img :src="company.logo" :alt="ticker" class="company-logo">
+          <img :src="company.logo" class="company-logo" alt>
           <span>{{ ticker }}</span>
           <span class="company-name"> {{ company.company }} </span>
         </div>

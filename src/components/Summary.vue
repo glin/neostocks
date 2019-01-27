@@ -6,7 +6,7 @@
       <template slot="ticker" slot-scope="data">
         <div class="ticker">
           <router-link :to="{ path: '/tickers/' + data.value, query }" class="ticker-link">
-            <img :src="getCompanyLogo(data.value)" :alt="data.value" class="company-logo">
+            <img :src="getCompanyLogo(data.value)" class="company-logo" alt>
             <span class="ticker-text">{{ data.value }}</span>
           </router-link>
           <a v-if="filter === 'bargain'" :href="getBuyUrl(data.value)">
