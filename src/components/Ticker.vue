@@ -6,51 +6,79 @@
         <div class="company-title">
           <img :src="company.logo" class="company-logo" alt>
           <span>{{ ticker }}</span>
-          <span class="company-name"> {{ company.company }} </span>
+          <span class="company-name">{{ company.company }}</span>
         </div>
 
         <div class="company-subtitle">
           <div class="current-price">
             <span>{{ currentPrice }}</span>
-            <span v-if="!isNaN(currentChange)" :class="numChangeClass(currentChange)" class="current-change">{{ formatChange(currentChange) }}</span>
+            <span
+              v-if="!isNaN(currentChange)"
+              :class="numChangeClass(currentChange)"
+              class="current-change"
+            >{{ formatChange(currentChange) }}</span>
           </div>
 
           <div v-if="company.buyUrl && company.profileUrl" class="company-links">
             <a :href="company.buyUrl">buy</a>
-            <span class="v-divider"> | </span>
+            <span class="v-divider">|</span>
             <a :href="company.profileUrl">profile</a>
           </div>
         </div>
       </Heading>
 
-      <PeriodNav :period="period" />
+      <PeriodNav :period="period"/>
       <div class="price-graph-container">
-        <Dygraph v-show="!isLoading" :data="prices" :annotations="annotations" class="price-graph" />
+        <Dygraph v-show="!isLoading" :data="prices" :annotations="annotations" class="price-graph"/>
       </div>
       <hr class="divider">
 
       <div v-for="tbl in summaryTables" :class="tbl.class" :key="tbl.class">
-        <b-table v-for="keys in tbl.keys" :key="keys[0]" :items="currentItems" :fields="keys.map(key => fields.find(f => f.key === key))" class="summary-table" small stacked>
+        <b-table
+          v-for="keys in tbl.keys"
+          :key="keys[0]"
+          :items="currentItems"
+          :fields="keys.map(key => fields.find(f => f.key === key))"
+          class="summary-table"
+          small
+          stacked
+        >
           <template slot="change" slot-scope="data">
-            <span :class="numChangeClass(data.value)" class="num-change">{{ formatChange(data.value) }}</span>
+            <span
+              :class="numChangeClass(data.value)"
+              class="num-change"
+            >{{ formatChange(data.value) }}</span>
           </template>
           <template slot="high" slot-scope="data">
-            <span v-b-tooltip :title="currentHighTimeFormatted" :class="{ 'current-high': isCurrentHigh }" class="hoverable" @mouseover="handleHighHover(true)" @mouseleave="handleHighHover(false)">
-              {{ data.value }}
-            </span>
+            <span
+              v-b-tooltip
+              :title="currentHighTimeFormatted"
+              :class="{ 'current-high': isCurrentHigh }"
+              class="hoverable"
+              @mouseover="handleHighHover(true)"
+              @mouseleave="handleHighHover(false)"
+            >{{ data.value }}</span>
           </template>
           <template slot="avg_peak" slot-scope="data">
-            <span v-b-tooltip :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable" @mouseover="handlePeaksHover(true)" @mouseleave="handlePeaksHover(false)">
-              {{ data.value }}
-            </span>
+            <span
+              v-b-tooltip
+              :title="`~${data.item.avg_days_peak} days between peaks`"
+              class="hoverable"
+              @mouseover="handlePeaksHover(true)"
+              @mouseleave="handlePeaksHover(false)"
+            >{{ data.value }}</span>
           </template>
           <template slot="avg_days_peak" slot-scope="data">
             <span class="time-period">{{ `${data.value} days` }}</span>
           </template>
           <template slot="last_peak" slot-scope="data">
-            <span v-b-tooltip :title="formatDate(data.item.last_peak_nst)" class="hoverable time-period" @mouseover="handleLastPeakHover(true)" @mouseleave="handleLastPeakHover(false)">
-              {{ formatTimeSince(data.value) }}
-            </span>
+            <span
+              v-b-tooltip
+              :title="formatDate(data.item.last_peak_nst)"
+              class="hoverable time-period"
+              @mouseover="handleLastPeakHover(true)"
+              @mouseleave="handleLastPeakHover(false)"
+            >{{ formatTimeSince(data.value) }}</span>
           </template>
         </b-table>
       </div>
@@ -63,7 +91,8 @@
   border: none;
 }
 
-.summary-table th, .summary-table td {
+.summary-table th,
+.summary-table td {
   border-color: #e9ecef;
 }
 
@@ -341,9 +370,7 @@ export default {
     summary() {
       const periods = Object.keys(this.summaryData)
       return periods.reduce((data, period) => {
-        data[period] = this.summaryData[period].find(
-          row => row.ticker === this.ticker
-        )
+        data[period] = this.summaryData[period].find(row => row.ticker === this.ticker)
         return data
       }, {})
     },
@@ -369,10 +396,7 @@ export default {
       return [this.currentSummary]
     },
     isCurrentHigh() {
-      return (
-        this.currentPrice === this.currentSummary.high &&
-        this.currentPrice >= 30
-      )
+      return this.currentPrice === this.currentSummary.high && this.currentPrice >= 30
     },
     currentHighTime() {
       if (this.period === 'all') {
@@ -396,20 +420,13 @@ export default {
     },
     currentKeys() {
       if (this.period === 'all') {
-        return [
-          ['avg_peak', 'last_peak'],
-          ['high', 'low'],
-          ['pct_95', 'median']
-        ]
+        return [['avg_peak', 'last_peak'], ['high', 'low'], ['pct_95', 'median']]
       }
       return [['open', 'volume'], ['high', 'low'], ['range', 'median']]
     },
     currentKeysCompact() {
       if (this.period === 'all') {
-        return [
-          ['high', 'low', 'median'],
-          ['avg_peak', 'last_peak', 'pct_95']
-        ]
+        return [['high', 'low', 'median'], ['avg_peak', 'last_peak', 'pct_95']]
       }
       return [['high', 'low', 'median'], ['open', 'volume', 'range']]
     },

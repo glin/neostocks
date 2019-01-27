@@ -1,18 +1,11 @@
 <template>
   <div>
     <b-row>
-      <b-col
-        lg="6"
-        class="trends-col"
-      >
+      <b-col lg="6" class="trends-col">
         <Card class="trends-card">
           <div class="chart-heading">
-            <!-- <span class="title">Average Days Between Peaks</span> -->
             <div class="d-flex flex-column align-items-center">
               <span class="chart-title">Average Days to Sell Point</span>
-              <!-- <span class="title">Average Days to Peak</span> -->
-              <!-- <span class="title">Average Days to Reach Price</span> -->
-              <!-- <span class="subtitle">for a stock at 15 NP</span> -->
               <span class="chart-subtitle">starting from 15 NP</span>
             </div>
           </div>
@@ -24,13 +17,11 @@
           />
         </Card>
       </b-col>
-      <b-col
-        lg="6"
-        class="trends-col"
-      >
+
+      <b-col lg="6" class="trends-col">
         <Card class="trends-card">
           <div class="chart-heading">
-            <span class="chart-title"> Price Distribution</span>
+            <span class="chart-title">Price Distribution</span>
           </div>
           <BarChart
             :data="priceDist"
@@ -43,31 +34,21 @@
     </b-row>
 
     <b-row>
-      <b-col
-        lg="6"
-        class="trends-col"
-      >
+      <b-col lg="6" class="trends-col">
         <Card class="trends-card">
           <div class="chart-heading">
-            <!-- <span class="title">Shares Purchased By Day</span> -->
-            <span class="chart-title"> Shares Bought by Day</span>
+            <span class="chart-title">Shares Bought by Day</span>
           </div>
           <div class="dygraph-container">
-            <Dygraph
-              :data="volumeByDayData"
-              :options="{ labelsKMB: true, colors: ['#3398db'] }"
-            />
+            <Dygraph :data="volumeByDayData" :options="{ labelsKMB: true, colors: ['#3398db'] }"/>
           </div>
         </Card>
       </b-col>
-      <b-col
-        lg="6"
-        class="trends-col"
-      >
+
+      <b-col lg="6" class="trends-col">
         <Card class="trends-card">
           <div class="chart-heading">
             <span class="chart-title">Shares Bought by Price</span>
-            <!-- <span class="title">Shares Purchased by Price</span> -->
           </div>
           <BarChart
             :data="volumeByPrice"

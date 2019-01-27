@@ -1,9 +1,6 @@
 <template>
   <div class="loader">
-    <clip-loader
-      :color="color"
-      class="loader"
-    />
+    <clip-loader :color="color" class="loader"/>
   </div>
 </template>
 

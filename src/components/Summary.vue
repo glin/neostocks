@@ -1,8 +1,21 @@
 <template>
   <Card>
-    <PeriodNav :period="period" />
+    <PeriodNav :period="period"/>
 
-    <b-table v-if="currentItems" :items="currentItems" :fields="currentFields" :filter="filterItem" :sort-by="sortBy" :sort-desc="sortDesc" :empty-filtered-text="emptyFilterText" class="summary" hover striped responsive show-empty>
+    <b-table
+      v-if="currentItems"
+      :items="currentItems"
+      :fields="currentFields"
+      :filter="filterItem"
+      :sort-by="sortBy"
+      :sort-desc="sortDesc"
+      :empty-filtered-text="emptyFilterText"
+      class="summary"
+      hover
+      striped
+      responsive
+      show-empty
+    >
       <template slot="ticker" slot-scope="data">
         <div class="ticker">
           <router-link :to="{ path: '/tickers/' + data.value, query }" class="ticker-link">
@@ -15,23 +28,32 @@
           <span v-if="filter === 'hot' && isHotStockNew(data.value)" class="new-hot-tag">new!</span>
         </div>
       </template>
-      <!-- <template slot="volume" slot-scope="data">
-        <span :title="data.value.toLocaleString()">{{ formatNum(data.value) }}</span>
-      </template> -->
       <template slot="change" slot-scope="data">
         <span :class="numChangeClass(data.value)">{{ formatChange(data.value) }}</span>
       </template>
       <template slot="high" slot-scope="data">
-        <span v-b-tooltip="{ boundary: 'window' }" :title="formatDate(data.item.time_high, period !== 'all')" :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }" class="hoverable">{{ data.value }}</span>
+        <span
+          v-b-tooltip="{ boundary: 'window' }"
+          :title="formatDate(data.item.time_high, period !== 'all')"
+          :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }"
+          class="hoverable"
+        >{{ data.value }}</span>
       </template>
       <template slot="num_peaks" slot-scope="data">
-        <span v-b-tooltip="{ boundary: 'window' }" :title="`~${data.item.avg_days_peak} days between peaks`" class="hoverable">{{ data.value }}</span>
+        <span
+          v-b-tooltip="{ boundary: 'window' }"
+          :title="`~${data.item.avg_days_peak} days between peaks`"
+          class="hoverable"
+        >{{ data.value }}</span>
       </template>
       <template slot="avg_days_peak" slot-scope="data">
         <span class="time-period">{{ `${data.value} days` }}</span>
       </template>
       <template slot="last_peak" slot-scope="data">
-        <span :title="formatDate(data.item.last_peak_nst)" class="time-period">{{ formatTimeSince(data.value) }}</span>
+        <span
+          :title="formatDate(data.item.last_peak_nst)"
+          class="time-period"
+        >{{ formatTimeSince(data.value) }}</span>
       </template>
     </b-table>
   </Card>
@@ -446,15 +468,10 @@ export default {
       return this.isHotStock(item.ticker)
     },
     isHotStock(ticker) {
-      return (
-        this.hotStocks && this.hotStocks.some(stock => stock.ticker === ticker)
-      )
+      return this.hotStocks && this.hotStocks.some(stock => stock.ticker === ticker)
     },
     isHotStockNew(ticker) {
-      return (
-        this.hotStocks &&
-        this.hotStocks.some(stock => stock.ticker === ticker && stock.new)
-      )
+      return this.hotStocks && this.hotStocks.some(stock => stock.ticker === ticker && stock.new)
     },
     isCurrentHigh(curr, high) {
       return curr === high && curr >= 30

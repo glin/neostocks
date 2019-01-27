@@ -19,6 +19,6 @@
   "plugins": ["vue"],
   "rules": {
     "no-unused-vars": "warn",
-    "vue/max-attributes-per-line": "warn"
+    "vue/max-attributes-per-line": "off"
   }
 }
