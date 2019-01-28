@@ -1,8 +1,8 @@
 <template>
   <b-navbar toggleable fixed="top" variant="light" type="light" class="header">
-    <b-container>
+    <b-container class="align-items-baseline">
       <b-navbar-toggle target="nav-menu-collapse" />
-      <b-navbar-brand :to="{ path: '/', query }" class="brand">
+      <b-navbar-brand :to="{ path: '/', query }" class="home-link p-0" aria-label="Home">
         <img class="logo" src="../../public/neostocks.png" alt> neostocks
       </b-navbar-brand>
       <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" class="order-2" is-nav>
@@ -16,7 +16,7 @@
           <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
         </b-navbar-nav>
       </b-collapse>
-      <div class="notifications order-1 order-sm-last">
+      <div class="notifications d-flex align-self-center order-1 order-sm-last">
         <button ref="notificationsBtn" class="notifications-btn icon-btn" aria-label="Price alerts" @click="handleNotificationsBtnClick">
           <BellIcon aria-hidden="true" />
         </button>
@@ -133,7 +133,7 @@ export default {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
 }
 
-.brand:hover {
+.home-link:hover {
   color: rgb(0, 0, 0, 0.7);
 }
 
