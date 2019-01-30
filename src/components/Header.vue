@@ -156,6 +156,14 @@ export default {
   transition: none;
 }
 
+.nav-link {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.nav-link:hover {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
 .nav-link.active {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.7) !important;
