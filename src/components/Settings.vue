@@ -379,6 +379,6 @@ input[type=number] {
 
 .multiselect__option--highlight,
 .multiselect__option--highlight:after {
-  background: #efefef;
+  background-color: hsl(210, 13%, 95%);
 }
 </style>

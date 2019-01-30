@@ -399,7 +399,7 @@ export default {
 .summary td {
   padding: 0.35rem 0.5rem;
   white-space: nowrap;
-  border-color: #e9ecef;
+  border-color: hsl(210, 13%, 93%);
 }
 
 .summary th:focus {
@@ -415,11 +415,11 @@ export default {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f9f9f9;
+  background-color: hsl(210, 13%, 98%);
 }
 
 .table-hover tbody tr:hover {
-  background-color: #f6f6f6;
+  background-color: hsl(210, 13%, 96%);
 }
 
 .numeric {

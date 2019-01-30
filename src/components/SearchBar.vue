@@ -217,12 +217,8 @@ export default {
   border-top: none;
 }
 
-.search-result-item:hover {
-  background-color: #efefef;
-}
-
 .search-result-item.hover {
-  background-color: #efefef;
+  background-color: hsl(210, 13%, 95%);
 }
 
 .no-results {
