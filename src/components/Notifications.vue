@@ -72,8 +72,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #eee;
-  background-color: #f3f3f3;
+  border-bottom: 1px solid #ddd;
+  background-color: hsl(210, 17%, 97%);
   font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 

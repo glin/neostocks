@@ -220,14 +220,14 @@ export default {
 
 .popover {
   max-width: 100%;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .popover-body {
   padding: 0;
   overflow: hidden;
-  border-radius: 0.3rem;
+  border-radius: 0.1rem;
 }
 
 .popover .arrow::before {
