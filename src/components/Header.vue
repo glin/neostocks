@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable fixed="top" variant="light" type="light" class="header">
-    <b-container class="align-items-baseline">
+    <b-container class="header-container">
       <b-navbar-toggle target="nav-menu-collapse" />
       <b-navbar-brand :to="{ path: '/', query }" class="home-link p-0" aria-label="Home">
         <img class="logo" src="../../public/neostocks.png" alt> neostocks
@@ -131,6 +131,16 @@ export default {
 <style scoped>
 .header {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+}
+
+.header-container {
+  align-items: baseline;
+}
+
+@media (max-width: 575.98px) {
+  .header-container {
+    align-items: center;
+  }
 }
 
 .home-link:hover {
