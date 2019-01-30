@@ -222,7 +222,7 @@ body {
 
 body {
   overflow-y: scroll;
-  background-color: #f7f7f7 !important;
+  background-color: hsl(210, 13%, 98%) !important;
   font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 

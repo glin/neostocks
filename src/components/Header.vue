@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable fixed="top" variant="light" type="light" class="header">
+  <b-navbar toggleable fixed="top" class="header">
     <b-container class="header-container">
       <b-navbar-toggle target="nav-menu-collapse" />
       <b-navbar-brand :to="{ path: '/', query }" class="home-link p-0" aria-label="Home">
@@ -130,6 +130,7 @@ export default {
 
 <style scoped>
 .header {
+  background-color: hsl(210, 11%, 99%);
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
 }
 
