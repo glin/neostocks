@@ -3,13 +3,15 @@
     <PageNotFound v-if="!showTicker" />
     <Card v-if="showTicker">
       <Heading>
-        <div class="company-title">
+        <div class="d-flex align-items-center">
           <img :src="company.logo" class="company-logo" alt>
-          <span>{{ ticker }}</span>
-          <span class="company-name">{{ company.company }}</span>
+          <div class="d-flex align-items-baseline">
+            <span class="company-ticker">{{ ticker }}</span>
+            <span class="company-name">{{ company.company }}</span>
+          </div>
         </div>
 
-        <div class="company-subtitle">
+        <div class="d-flex justify-content-between">
           <div class="current-price">
             <span>{{ currentPrice }}</span>
             <span
@@ -436,24 +438,19 @@ export default {
 </style>
 
 <style scoped>
-.company-title {
+.company-ticker {
   font-size: 1.2rem;
 }
 
 .company-logo {
-  margin-right: 0.15em;
+  margin-right: 0.5rem;
   height: 25px;
 }
 
 .company-name {
-  margin-left: 0.5em;
+  margin-left: 0.75rem;
   font-size: 0.9rem;
   color: #6c757d;
-}
-
-.company-subtitle {
-  display: flex;
-  justify-content: space-between;
 }
 
 .current-price {
@@ -470,7 +467,7 @@ export default {
 .company-links {
   margin-top: auto;
   white-space: nowrap;
-  font-size: small;
+  font-size: 0.8125rem;
 }
 
 .company-links a {
