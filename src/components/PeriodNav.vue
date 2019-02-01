@@ -52,15 +52,15 @@ export default {
 </script>
 
 <style scoped>
-.nav-link:hover,
-.nav-link:focus {
+.nav-link,
+.nav-link:hover {
+  border-top: 3px solid;
   border-color: transparent;
 }
 
 .nav-link.active {
   /* border-color: #893a98 #e1e4e8 transparent !important; */
   border-color: #f4a549 #e1e4e8 transparent !important;
-  border-width: 3px 1px 1px;
   border-radius: 2px 2px 0 0;
 }
 
