@@ -534,7 +534,7 @@ export default {
 }
 
 .num-zero {
-  color: #6c757d;
+  color: #495057;
 }
 
 .hoverable {

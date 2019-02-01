@@ -226,6 +226,10 @@ body {
   font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
+a {
+  color: hsl(214, 100%, 48%);
+}
+
 #shiny-disconnected-overlay,
 #ss-overlay,
 .ss-reconnecting {
