@@ -7,10 +7,17 @@
       <h2 class="settings-heading d-block d-sm-none">Browser Notifications</h2>
       <div class="toggle-group">
         <label class="toggle-label">
-          <toggle-button :value="settings.enableDesktopNotifications" :sync="true" :width="48" class="settings-toggle" color="#007bff" @click.native.stop.prevent="handleDesktopNotificationsChange" />
-          <span v-if="!notificationsBlocked">
-            {{ settings.enableDesktopNotifications ? 'Enabled' : 'Disabled' }}
-          </span>
+          <toggle-button
+            :value="settings.enableDesktopNotifications"
+            :sync="true"
+            :width="48"
+            class="settings-toggle"
+            color="#007bff"
+            @click.native.stop.prevent="handleDesktopNotificationsChange"
+          />
+          <span
+            v-if="!notificationsBlocked"
+          >{{ settings.enableDesktopNotifications ? 'Enabled' : 'Disabled' }}</span>
           <span v-else>
             Blocked
             <span class="notifications-blocked">(allow via browser settings)</span>
@@ -22,19 +29,28 @@
     <div class="settings-section alerts-section">
       <div class="alerts-header">
         <h2 class="settings-heading">Price Alerts</h2>
-        <a href="" class="new-alert-btn" @click.prevent="handleCreateAlert('above')">New alert</a>
+        <a href class="new-alert-btn" @click.prevent="handleCreateAlert('above')">New alert</a>
       </div>
 
       <b-list-group>
-        <b-list-group-item v-if="settings.alerts.length === 0" class="alerts-list-item no-alerts pl-1">
-          No alerts created
-        </b-list-group-item>
-        <b-list-group-item v-for="(alert, i) in settings.alerts" :key="i" class="alerts-list-item pl-2">
+        <b-list-group-item
+          v-if="settings.alerts.length === 0"
+          class="alerts-list-item no-alerts pl-1"
+        >No alerts created</b-list-group-item>
+        <b-list-group-item
+          v-for="(alert, i) in settings.alerts"
+          :key="i"
+          class="alerts-list-item pl-2"
+        >
           <b-col>
             <b-row class="mb-2">
               <label class="mr-3">
                 <div class="settings-label">Condition</div>
-                <b-form-select :value="alert.condition" class="settings-select" @change="condition => handleAlertChange(i, { condition })">
+                <b-form-select
+                  :value="alert.condition"
+                  class="settings-select"
+                  @change="condition => handleAlertChange(i, { condition })"
+                >
                   <option value="above">price above</option>
                   <option value="between">price between</option>
                   <option value="exact">price exactly</option>
@@ -43,19 +59,41 @@
               </label>
               <label v-if="alert.condition === 'exact'" class="mr-3">
                 <div class="settings-label">Price</div>
-                <b-form-input :value="alert.exactPrice" class="settings-num-input" type="number" min="0" @input="exactPrice => handleAlertChange(i, { exactPrice })" />
+                <b-form-input
+                  :value="alert.exactPrice"
+                  class="settings-num-input"
+                  type="number"
+                  min="0"
+                  @input="exactPrice => handleAlertChange(i, { exactPrice })"
+                />
               </label>
-              <label v-if="['above', 'between'].includes(alert.condition)" class=" mr-3">
+              <label v-if="['above', 'between'].includes(alert.condition)" class="mr-3">
                 <div class="settings-label">Min Price</div>
-                <b-form-input :value="alert.minPrice" class="settings-num-input" type="number" min="0" @input="minPrice => handleAlertChange(i, { minPrice })" />
+                <b-form-input
+                  :value="alert.minPrice"
+                  class="settings-num-input"
+                  type="number"
+                  min="0"
+                  @input="minPrice => handleAlertChange(i, { minPrice })"
+                />
               </label>
               <label v-if="['below', 'between'].includes(alert.condition)">
                 <div class="settings-label">Max Price</div>
-                <b-form-input :value="alert.maxPrice" class="settings-num-input" type="number" min="0" @input="maxPrice => handleAlertChange(i, { maxPrice })" />
+                <b-form-input
+                  :value="alert.maxPrice"
+                  class="settings-num-input"
+                  type="number"
+                  min="0"
+                  @input="maxPrice => handleAlertChange(i, { maxPrice })"
+                />
               </label>
               <label v-if="alert.condition === 'high'">
                 <div class="settings-label">Time Period</div>
-                <b-form-select :value="alert.highPeriod" class="settings-select" @change="highPeriod => handleAlertChange(i, { highPeriod })">
+                <b-form-select
+                  :value="alert.highPeriod"
+                  class="settings-select"
+                  @change="highPeriod => handleAlertChange(i, { highPeriod })"
+                >
                   <option value="1d">1 day</option>
                   <option value="5d">5 day</option>
                   <option value="1m">1 month</option>
@@ -66,22 +104,53 @@
 
             <b-row class="mb-3">
               <label class="settings-label">Tickers</label>
-              <Multiselect :value="alert.includeTickers" :options="tickers" :close-on-select="false" :placeholder="(alert.includeTickers && alert.includeTickers.length > 0) ? '' : 'all tickers'" class="settings-multiselect" multiple hide-selected preserve-search select-label="" @input="includeTickers => handleAlertChange(i, { includeTickers })">
+              <Multiselect
+                :value="alert.includeTickers"
+                :options="tickers"
+                :close-on-select="false"
+                :placeholder="(alert.includeTickers && alert.includeTickers.length > 0) ? '' : 'all tickers'"
+                class="settings-multiselect"
+                multiple
+                hide-selected
+                preserve-search
+                select-label
+                @input="includeTickers => handleAlertChange(i, { includeTickers })"
+              >
                 <template slot="option" slot-scope="props">
                   <div class="d-flex align-items-center">
-                    <img v-if="companies[props.option]" :src="companies[props.option].logo" class="company-logo" alt>
+                    <img
+                      v-if="companies[props.option]"
+                      :src="companies[props.option].logo"
+                      class="company-logo"
+                      alt
+                    >
                     {{ props.option }}
                   </div>
                 </template>
-                <template slot="noResult"><span class="no-results">No results found</span></template>
+                <template slot="noResult">
+                  <span class="no-results">No results found</span>
+                </template>
               </Multiselect>
             </b-row>
           </b-col>
 
-          <button :id="`delete-btn-${i}`" type="button" class="close delete-btn d-sm-none d-block" aria-label="Remove alert" @click="handleDeleteAlert(i)">
+          <button
+            :id="`delete-btn-${i}`"
+            type="button"
+            class="close delete-btn d-sm-none d-block"
+            aria-label="Remove alert"
+            @click="handleDeleteAlert(i)"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
-          <b-tooltip :target="`delete-btn-${i}`" :disabled="isTouchCapable" placement="bottomleft" title="Remove alert" delay="700" no-fade />
+          <b-tooltip
+            :target="`delete-btn-${i}`"
+            :disabled="isTouchCapable"
+            placement="bottomleft"
+            title="Remove alert"
+            delay="700"
+            no-fade
+          />
         </b-list-group-item>
       </b-list-group>
     </div>
@@ -310,15 +379,15 @@ export default {
 }
 
 /* Hide spinners */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
