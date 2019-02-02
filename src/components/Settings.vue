@@ -372,10 +372,9 @@ export default {
 }
 
 .settings-label {
-  margin-bottom: 0.4rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.25px;
-  color: #555;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 33%);
 }
 
 /* Hide spinners */
