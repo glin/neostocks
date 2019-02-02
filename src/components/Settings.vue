@@ -64,6 +64,7 @@
                   class="settings-num-input"
                   type="number"
                   min="0"
+                  placeholder="15"
                   @input="exactPrice => handleAlertChange(i, { exactPrice })"
                 />
               </label>
@@ -74,6 +75,7 @@
                   class="settings-num-input"
                   type="number"
                   min="0"
+                  placeholder="60"
                   @input="minPrice => handleAlertChange(i, { minPrice })"
                 />
               </label>
@@ -84,6 +86,7 @@
                   class="settings-num-input"
                   type="number"
                   min="0"
+                  placeholder="120"
                   @input="maxPrice => handleAlertChange(i, { maxPrice })"
                 />
               </label>
@@ -388,6 +391,14 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+input[type='number']::placeholder {
+  color: hsl(0, 0%, 75%);
+}
+
+input[type='number']:focus::placeholder {
+  color: transparent;
 }
 
 .settings-select {
