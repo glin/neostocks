@@ -4,7 +4,7 @@
 
 <script>
 import Dygraph from 'dygraphs/index.es5'
-import 'dygraphs/dist/dygraph.css'
+import 'dygraphs/dist/dygraph.min.css'
 
 export default {
   props: {

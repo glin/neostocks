@@ -29,8 +29,8 @@
 import { mapState, mapGetters } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
