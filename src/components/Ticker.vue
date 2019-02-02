@@ -2,7 +2,7 @@
   <div>
     <PageNotFound v-if="!showTicker" />
     <Card v-if="showTicker">
-      <Heading>
+      <div class="heading">
         <div class="d-flex align-items-center">
           <img :src="company.logo" class="company-logo" alt>
           <div class="d-flex align-items-baseline">
@@ -27,13 +27,16 @@
             <a :href="company.profileUrl">profile</a>
           </div>
         </div>
-      </Heading>
+      </div>
+
+      <hr class="heading-divider">
 
       <PeriodNav :period="period"/>
       <div class="price-graph-container">
         <Dygraph v-show="!isLoading" :data="prices" :annotations="annotations" class="price-graph"/>
       </div>
-      <hr class="divider">
+
+      <hr class="content-divider">
 
       <div v-for="tbl in summaryTables" :class="tbl.class" :key="tbl.class">
         <b-table
@@ -95,7 +98,6 @@ import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
 
 import Card from './Card'
 import Dygraph from './Dygraph'
-import Heading from './Heading'
 import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
 import * as types from '../store/types'
@@ -106,7 +108,6 @@ export default {
     bTable,
     Card,
     Dygraph,
-    Heading,
     PeriodNav,
     PageNotFound
   },
@@ -418,7 +419,9 @@ export default {
 
 .summary-table th,
 .summary-table td {
-  border-color: #e9ecef;
+  padding: 0.25rem 0.3rem;
+  border-color: hsl(210, 13%, 95%);
+  border: none;
 }
 
 .summary-table.table {
@@ -438,6 +441,18 @@ export default {
 </style>
 
 <style scoped>
+.heading {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  font-size: 1.25rem;
+}
+
+.heading-divider {
+  margin: 0.3125rem 0 0.8125rem;
+  border-top-color: hsl(210, 13%, 91%);
+}
+
 .company-ticker {
   font-size: 1.2rem;
 }
@@ -459,7 +474,7 @@ export default {
 }
 
 .current-change {
-  margin-left: 0.2em;
+  margin-left: 0.25rem;
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -478,8 +493,9 @@ export default {
   color: #aaa;
 }
 
-.divider {
-  margin: 15px 0 5px;
+.content-divider {
+  margin: 0.9rem 0 0.3125rem;
+  border-top: 1px solid hsl(210, 13%, 95%);
 }
 
 .price-graph-container {

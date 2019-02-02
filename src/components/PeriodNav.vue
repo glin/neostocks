@@ -1,5 +1,5 @@
 <template>
-  <b-nav :class="navClass" tabs>
+  <b-nav class="nav-tabs" tabs>
     <b-nav-item :active="period === '1d'" @click="navigate('')">1 day</b-nav-item>
     <b-nav-item :active="period === '5d'" @click="navigate('5d')">5 days</b-nav-item>
     <b-nav-item :active="period === '1m'" @click="navigate('1m')">1 month</b-nav-item>
@@ -21,19 +21,6 @@ export default {
     period: {
       type: String,
       default: '1d'
-    },
-    justify: {
-      type: String,
-      default: 'left',
-      validator(val) {
-        return val === 'left' || val === 'right'
-      }
-    }
-  },
-
-  computed: {
-    navClass() {
-      return this.justify === 'right' ? 'justify-content-end' : null
     }
   },
 
@@ -52,6 +39,10 @@ export default {
 </script>
 
 <style scoped>
+.nav-tabs {
+  border-bottom: 1px solid hsl(210, 13%, 93%);
+}
+
 .nav-link,
 .nav-link:hover {
   border-top: 3px solid;
