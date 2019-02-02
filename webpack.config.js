@@ -31,6 +31,10 @@ module.exports = {
         use: ['vue-style-loader', 'css-loader']
       },
       {
+        test: /\.scss$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+      },
+      {
         test: /\.svg$/,
         use: 'vue-svg-loader'
       },
@@ -64,9 +68,11 @@ module.exports = {
       template: 'src/assets/index.html',
       filename: path.resolve(__dirname, 'dist/index.html')
     }),
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, 'public')
-    }])
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'public')
+      }
+    ])
   ],
 
   devServer: {

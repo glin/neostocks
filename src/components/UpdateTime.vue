@@ -40,7 +40,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .update-time {
   display: flex;
   justify-content: flex-end;
@@ -50,7 +52,7 @@ export default {
   color: #555;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(sm) {
   .update-time {
     justify-content: center;
   }

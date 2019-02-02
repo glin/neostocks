@@ -38,7 +38,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .nav-tabs {
   border-bottom: 1px solid hsl(210, 13%, 93%);
 }
@@ -55,7 +57,7 @@ export default {
   border-radius: 2px 2px 0 0;
 }
 
-@media (max-width: 768px) {
+@include media-breakpoint-down(md) {
   .nav-item {
     flex-basis: 0;
     flex-grow: 1;

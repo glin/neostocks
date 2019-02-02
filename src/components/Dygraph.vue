@@ -133,7 +133,9 @@ function columnsToCsv(columns) {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "../assets/scss/variables";
+
 .dygraph-legend {
   position: static;
   float: right;
@@ -149,7 +151,7 @@ function columnsToCsv(columns) {
   margin-top: -3px;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .dygraph-legend {
     margin-right: 10px;
   }

@@ -121,24 +121,26 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .trends-card {
   height: 300px;
 }
 
-@media (max-width: 991.98px) {
+@include media-breakpoint-down(md) {
   .trends-col:not(:first-of-type) {
-    margin-top: 16px;
+    margin-top: 1rem;
   }
 }
 
 .row {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
 
 .chart-heading {
   margin: 0 auto;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .chart-title {
@@ -148,7 +150,7 @@ export default {
 }
 
 .chart-subtitle {
-  margin-top: 2px;
+  margin-top: 0.125rem;
   font-size: 0.8rem;
   color: #6c757d;
 }

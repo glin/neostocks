@@ -128,7 +128,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .header {
   background-color: hsl(210, 11%, 99%);
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
@@ -138,14 +140,14 @@ export default {
   align-items: baseline;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .header-container {
     align-items: center;
   }
 }
 
 .home-link:hover {
-  color: rgb(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .logo {

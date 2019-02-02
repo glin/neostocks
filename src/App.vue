@@ -30,6 +30,7 @@ import { mapState, mapGetters } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/scss/bootstrap.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 
 import Header from './components/Header'
@@ -213,6 +214,7 @@ export default {
 }
 </script>
 
+
 <style>
 html,
 body {
@@ -237,7 +239,9 @@ a {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "./assets/scss/variables";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -251,11 +255,11 @@ a {
 }
 
 .main-content {
-  margin-top: 15px;
+  margin-top: 1rem;
   padding: 0;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .main-container {
     min-height: 100vh;
   }

@@ -440,7 +440,9 @@ export default {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .heading {
   display: flex;
   flex-direction: column;
@@ -503,7 +505,7 @@ export default {
   height: 300px;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .price-graph-container {
     height: 200px;
   }
@@ -521,7 +523,7 @@ export default {
   display: none;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .summary-tables {
     display: none;
   }

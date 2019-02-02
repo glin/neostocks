@@ -21,7 +21,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -40,7 +42,7 @@ export default {
   font-size: 0.8rem;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .footer {
     padding: 1rem;
     border-top: none;
@@ -51,7 +53,7 @@ export default {
   }
 }
 
-@media (min-width: 576px) {
+@include media-breakpoint-up(sm) {
   .copyright-break {
     display: none;
   }

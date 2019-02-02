@@ -142,14 +142,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/variables";
+
 .search-form {
   position: relative;
+  max-width: 200px;
+  min-width: 120px;
 }
 
 .search-input {
   padding-left: 36px;
-  width: 200px;
+  width: 100%;
   border-radius: 2px;
   border-top: none;
   border-left: none;
@@ -157,15 +161,15 @@ export default {
   background-color: transparent;
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
   .search-form {
-    margin: 10px 0;
+    margin: 0.5rem 0;
   }
 }
 
-@media (max-width: 768px) {
-  .search-input {
-    width: 160px;
+@include media-breakpoint-only(sm) {
+  .search-input::placeholder {
+    font-size: 0.9rem;
   }
 }
 
@@ -191,6 +195,7 @@ export default {
   position: absolute;
   top: 100%;
   width: 100%;
+  min-width: 160px;
   max-height: 420px;
   overflow-y: auto;
   border: 1px solid rgba(0, 0, 0, 0.125);
