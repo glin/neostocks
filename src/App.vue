@@ -114,7 +114,7 @@ export default {
     },
     now() {
       this.notifications = this.notifications.filter(item => {
-        return this.now - new Date(item.updateTime) <= DAY * 5
+        return this.now - new Date(item.updateTime) <= 2 * DAY
       })
     },
     hasUnreadNotifications() {
