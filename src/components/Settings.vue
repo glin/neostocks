@@ -328,6 +328,8 @@ export default {
   border-left: none;
   border-right: none;
   border-bottom: none;
+  border-width: 2px;
+  border-color: hsl(0, 0%, 92%);
 }
 
 .alerts-list-item:hover {
