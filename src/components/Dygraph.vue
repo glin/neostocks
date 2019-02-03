@@ -134,7 +134,7 @@ function columnsToCsv(columns) {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .dygraph-legend {
   position: static;

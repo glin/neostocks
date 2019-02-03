@@ -46,12 +46,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .update-time {
   display: flex;
   justify-content: flex-end;
-  padding: 6px 4px;
+  padding: 0.375rem 0.25rem;
   font-style: italic;
   font-size: 0.8125rem;
   color: #555;

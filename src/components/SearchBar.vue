@@ -143,7 +143,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .search-form {
   position: relative;
@@ -174,8 +174,8 @@ export default {
 }
 
 .search-input:focus {
-  border-color: #f4a549;
-  box-shadow: 0 2px 0px -1px #f4a549;
+  border-color: $light-orange;
+  box-shadow: 0 2px 0px -1px $light-orange;
 }
 
 .search-icon {

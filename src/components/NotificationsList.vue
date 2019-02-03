@@ -63,7 +63,6 @@ export default {
   width: 290px;
   max-height: 420px;
   overflow-y: auto;
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 .notification-item {

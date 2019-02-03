@@ -29,8 +29,7 @@
 import { mapState, mapGetters } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-// import 'bootstrap/scss/bootstrap.scss'
+import './assets/scss/app.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 
 import Header from './components/Header'
@@ -214,7 +213,6 @@ export default {
 }
 </script>
 
-
 <style>
 html,
 body {
@@ -225,11 +223,6 @@ body {
 body {
   overflow-y: scroll;
   background-color: hsl(210, 13%, 98%) !important;
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-a {
-  color: hsl(214, 100%, 48%);
 }
 
 #shiny-disconnected-overlay,
@@ -240,7 +233,7 @@ a {
 </style>
 
 <style lang="scss" scoped>
-@import "./assets/scss/variables";
+@import './assets/scss/variables';
 
 .main {
   display: flex;

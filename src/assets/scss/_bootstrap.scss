@@ -1,0 +1,9 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+// Popovers
+
+// Use box shadow without having to enable global enable-shadows setting
+.popover {
+  box-shadow: $popover-box-shadow;
+}

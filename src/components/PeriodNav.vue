@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .nav-tabs {
   border-bottom: 1px solid hsl(210, 13%, 93%);
@@ -53,7 +53,7 @@ export default {
 
 .nav-link.active {
   /* border-color: #893a98 #e1e4e8 transparent !important; */
-  border-color: #f4a549 #e1e4e8 transparent !important;
+  border-color: $light-orange hsl(214, 13%, 90%) transparent !important;
   border-radius: 2px 2px 0 0;
 }
 

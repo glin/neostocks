@@ -13,17 +13,40 @@
           <b-nav-item :to="{ path: '/trends' }">Trends</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto mr-3">
-          <SearchBar :value="search" :results="searchResults" :on-change="onSearchChange" :on-submit="onSearchSubmit" />
+          <SearchBar
+            :value="search"
+            :results="searchResults"
+            :on-change="onSearchChange"
+            :on-submit="onSearchSubmit"
+          />
         </b-navbar-nav>
       </b-collapse>
       <div class="notifications d-flex align-self-center order-1 order-sm-last">
-        <button ref="notificationsBtn" class="notifications-btn icon-btn" aria-label="Price alerts" @click="handleNotificationsBtnClick">
+        <button
+          ref="notificationsBtn"
+          class="notifications-btn icon-btn"
+          aria-label="Price alerts"
+          @click="handleNotificationsBtnClick"
+        >
           <BellIcon aria-hidden="true" />
         </button>
         <span v-if="showUnreadNotifications" class="unread-notifications" />
       </div>
-      <b-tooltip :show.sync="showNotificationsTooltip" :disabled="isTouchCapable" :target="() => $refs.notificationsBtn" placement="bottomleft" title="Price Alerts" no-fade />
-      <b-popover :target="() => $refs.notificationsBtn" placement="bottomleft" triggers="click blur" no-fade @shown="handleNotificationsShown">
+      <b-tooltip
+        :show.sync="showNotificationsTooltip"
+        :disabled="isTouchCapable"
+        :target="() => $refs.notificationsBtn"
+        placement="bottomleft"
+        title="Price Alerts"
+        no-fade
+      />
+      <b-popover
+        :target="() => $refs.notificationsBtn"
+        placement="bottomleft"
+        triggers="click blur"
+        no-fade
+        @shown="handleNotificationsShown"
+      >
         <Notifications :notifications="notifications" :has-alerts-created="hasAlertsCreated" />
       </b-popover>
     </b-container>
@@ -129,11 +152,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .header {
   background-color: hsl(210, 11%, 99%);
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 4px -1px hsla(0, 0%, 0%, 0.25);
 }
 
 .header-container {
@@ -147,7 +170,7 @@ export default {
 }
 
 .home-link:hover {
-  color: rgba(0, 0, 0, 0.7);
+  color: hsla(0, 0%, 0%, 0.7);
 }
 
 .logo {
@@ -160,16 +183,16 @@ export default {
 }
 
 .nav-link {
-  color: rgba(0, 0, 0, 0.55) !important;
+  color: hsla(0, 0%, 0%, 0.55) !important;
 }
 
 .nav-link:hover {
-  color: rgba(0, 0, 0, 0.8) !important;
+  color: hsla(0, 0%, 0%, 0.8) !important;
 }
 
 .nav-link.active {
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: hsla(0, 0%, 0%, 0.7) !important;
 }
 
 .notifications {
@@ -187,8 +210,7 @@ export default {
   position: absolute;
   top: -1px;
   right: -2px;
-  background: #dc3545;
-  /* background: #e36209; */
+  background: $dark-red;
   border-radius: 50%;
   height: 7px;
   width: 7px;
@@ -208,35 +230,5 @@ export default {
 
 .icon-btn:active {
   opacity: 1;
-}
-</style>
-
-<style>
-.tooltip {
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-.tooltip-inner {
-  padding: 0.3rem 0.6rem;
-}
-
-.popover {
-  max-width: 100%;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.popover-body {
-  padding: 0;
-  overflow: hidden;
-  border-radius: 0.1rem;
-}
-
-.popover .arrow::before {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-.popover .arrow::after {
-  border-bottom-color: #f3f3f3;
 }
 </style>

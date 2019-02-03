@@ -270,7 +270,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/variables';
+
 .settings {
   padding: 20px 25px 20px;
 }
@@ -366,7 +368,7 @@ export default {
 }
 
 .new-alert-btn:active {
-  color: #003c7d;
+  color: $link-color-active;
 }
 
 .no-alerts {

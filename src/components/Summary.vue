@@ -425,7 +425,9 @@ export default {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/variables';
+
 .ticker {
   white-space: nowrap;
 }
@@ -446,12 +448,12 @@ export default {
 
 .buy-link {
   font-size: 0.8125rem;
-  color: #1e7e34;
+  color: $external-link-color;
 }
 
 .new-hot-tag {
-  font-size: small;
-  color: #e36209;
+  font-size: 0.8125rem;
+  color: $dark-orange;
 }
 
 .num-change {
@@ -459,15 +461,15 @@ export default {
 }
 
 .num-positive {
-  color: green;
+  color: $positive-color;
 }
 
 .num-negative {
-  color: red;
+  color: $negative-color;
 }
 
 .num-zero {
-  color: #495057;
+  color: $zero-color;
 }
 
 .hoverable {
@@ -480,6 +482,6 @@ export default {
 
 .current-high {
   font-weight: 600;
-  color: #e36209;
+  color: $dark-orange;
 }
 </style>

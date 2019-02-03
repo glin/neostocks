@@ -412,7 +412,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../assets/scss/variables';
+
 .summary-table.table td:first-child {
   border: none;
 }
@@ -430,7 +432,7 @@ export default {
 
 .peak-annotation {
   font-size: 20px !important;
-  color: #e36209 !important;
+  color: $dark-orange !important;
   border: none;
   background: transparent;
 }
@@ -441,7 +443,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .heading {
   display: flex;
@@ -488,7 +490,7 @@ export default {
 }
 
 .company-links a {
-  color: #1e7e34;
+  color: $external-link-color;
 }
 
 .v-divider {
@@ -544,15 +546,15 @@ export default {
 }
 
 .num-positive {
-  color: green;
+  color: $positive-color;
 }
 
 .num-negative {
-  color: red;
+  color: $negative-color;
 }
 
 .num-zero {
-  color: #495057;
+  color: $zero-color;
 }
 
 .hoverable {
@@ -565,6 +567,6 @@ export default {
 
 .current-high {
   font-weight: 600;
-  color: #e36209;
+  color: $dark-orange;
 }
 </style>

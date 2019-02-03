@@ -1,3 +1,37 @@
+// Colors
+$light-orange: #f4a549;
+$dark-orange: #e36209;
+$dark-red: #dc3545;
+$positive-color: green;
+$negative-color: red;
+$zero-color: #495057;
+$external-link-color: #1e7e34;
+$link-color-active: hsl(214, 100%, 25%);
+
+// Bootstrap overrides
+
+// Fonts
+$font-family-base: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+// Links
+$link-color: hsl(214, 100%, 48%);
+
+// Tooltips
+$tooltip-padding-y: 0.3rem;
+$tooltip-padding-x: 0.6rem;
+
+// Popovers
+$popover-max-width: 100%;
+$popover-border-color: hsla(0, 0%, 0%, 0.05);
+$popover-border-radius: 0.1rem;
+$popover-box-shadow: 0 6px 24px hsla(0, 0%, 0%, 0.25);
+
+$popover-body-padding-y: 0;
+$popover-body-padding-x: 0;
+
+$popover-arrow-color: hsl(210, 17%, 97%);
+$popover-arrow-outer-color: hsla(0, 0%, 0%, 0.1);
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";

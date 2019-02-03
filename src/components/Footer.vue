@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables";
+@import '../assets/scss/variables';
 
 .footer {
   display: flex;
@@ -30,11 +30,11 @@ export default {
   align-items: center;
   padding: 1.25rem 0;
   font-size: 0.9rem;
-  color: #999;
+  color: hsl(0, 0%, 60%);
 }
 
 .about-link {
-  color: #6f6f6f;
+  color: hsl(0, 0%, 45%);
 }
 
 .copyright {

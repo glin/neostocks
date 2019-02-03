@@ -56,25 +56,14 @@ export default {
 }
 </script>
 
-<style>
-.tooltip {
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
-}
-
-.tooltip-inner {
-  padding: 0.3rem 0.6rem;
-}
-</style>
-
 <style scoped>
 .notifications-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid hsl(210, 13%, 88%);
   background-color: hsl(210, 17%, 97%);
-  font-family: 'Open Sans', system-ui, Arial, sans-serif;
 }
 
 .notifications-title {
