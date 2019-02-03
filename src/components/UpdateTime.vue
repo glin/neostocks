@@ -1,20 +1,27 @@
 <template>
   <b-container class="update-time">
-    <div v-if="updateTimeString" :title="updateTimeString">
-      last updated {{ updateTimeSince }}
-    </div>
+    <div
+      v-b-tooltip="{ delay: { show: 300 }, placement: 'bottom' }"
+      v-if="updateTimeString"
+      :title="updateTimeString"
+    >last updated {{ updateTimeSince }}</div>
   </b-container>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
+import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
 
 import { timeSince } from '../date'
 
 export default {
   components: {
     bContainer
+  },
+
+  directives: {
+    bTooltip
   },
 
   computed: {
@@ -25,9 +32,7 @@ export default {
       return this.updateTime ? new Date(this.updateTime.NST) : null
     },
     updateTimeString() {
-      return this.updateTimeNST
-        ? this.updateTimeNST.toLocaleString() + ' NST'
-        : null
+      return this.updateTimeNST ? this.updateTimeNST.toLocaleString() + ' NST' : null
     },
     updateTimeSince() {
       return timeSince(this.updateTimeUTC, this.now)
