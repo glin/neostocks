@@ -72,13 +72,13 @@ import Card from './Card'
 import LoadingSpinner from './LoadingSpinner'
 
 const BarChart = () => ({
-  component: import('./BarChart'),
+  component: import(/* webpackPreload: true */ './BarChart'),
   loading: LoadingSpinner,
   delay: 200
 })
 
 const Dygraph = () => ({
-  component: import('./Dygraph'),
+  component: import(/* webpackPreload: true */ './Dygraph'),
   loading: LoadingSpinner,
   delay: 200
 })

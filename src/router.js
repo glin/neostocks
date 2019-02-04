@@ -72,7 +72,7 @@ const routes = [
   },
   {
     path: '/settings',
-    component: () => import(/* webpackPrefetch: true */ './components/Settings'),
+    component: () => import('./components/Settings'),
     meta: {
       title: 'Settings'
     }
