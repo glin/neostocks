@@ -3,8 +3,11 @@ const NamedModulesPlugin = require('webpack').NamedModulesPlugin
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
-module.exports = {
+module.exports = (env, argv) => ({
   resolve: {
     extensions: ['.js', '.vue']
   },
@@ -29,7 +32,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          argv.mode === 'development' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -42,7 +45,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
+          argv.mode === 'development' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -91,11 +94,24 @@ module.exports = {
       {
         from: path.resolve(__dirname, 'public')
       }
-    ])
+    ]),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    })
   ],
+
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true
+      }),
+      new OptimizeCSSAssetsPlugin()
+    ]
+  },
 
   devServer: {
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'public')
   }
-}
+})
