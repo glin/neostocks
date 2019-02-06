@@ -6,7 +6,7 @@
 
 <style>
 .content-card {
-  padding: 0.6125rem;
+  padding: 0.75rem 0.7rem 0.625rem;
   background-color: #fff;
   box-shadow: 0 1px 4px 0 hsla(0, 0%, 0%, 0.25);
   border-radius: 2px;
