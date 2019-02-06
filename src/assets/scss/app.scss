@@ -5,6 +5,7 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: local('Open Sans Regular'), local('OpenSans-Regular'),
     url('/static/fonts/open-sans-v15-latin-regular.woff2') format('woff2'),
     url('/static/fonts/open-sans-v15-latin-regular.woff') format('woff');
@@ -14,6 +15,7 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
+  font-display: swap;
   src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
     url('/static/fonts/open-sans-v15-latin-600.woff2') format('woff2'),
     url('/static/fonts/open-sans-v15-latin-600.woff') format('woff');
