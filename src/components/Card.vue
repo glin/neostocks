@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 .content-card {
   padding: 0.6125rem;
   background-color: #fff;
