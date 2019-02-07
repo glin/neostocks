@@ -29,7 +29,11 @@
     <div class="settings-section alerts-section">
       <div class="alerts-header">
         <h2 class="settings-heading">Price Alerts</h2>
-        <a href class="new-alert-btn" @click.prevent="handleCreateAlert('above')">New alert</a>
+        <b-button
+          class="new-alert-btn"
+          variant="link"
+          @click.prevent="handleCreateAlert('above')"
+        >New alert</b-button>
       </div>
 
       <b-list-group>
@@ -167,6 +171,7 @@ import ToggleButton from 'vue-js-toggle-button'
 import Multiselect from 'vue-multiselect'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
+import bButton from 'bootstrap-vue/es/components/button/button'
 import bCol from 'bootstrap-vue/es/components/layout/col'
 import bRow from 'bootstrap-vue/es/components/layout/row'
 import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select'
@@ -183,6 +188,7 @@ Vue.use(ToggleButton)
 
 export default {
   components: {
+    bButton,
     bCol,
     bRow,
     bFormSelect,
@@ -364,6 +370,8 @@ export default {
 
 .new-alert-btn {
   margin-bottom: 0.5rem;
+  padding: 0;
+  border: 0;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
