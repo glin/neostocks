@@ -227,7 +227,9 @@ export default {
 }
 
 .no-results {
-  font-size: 0.9rem;
+  margin-left: 0.25rem;
+  font-size: 0.95rem;
+  color: $gray-600;
 }
 
 .company-logo {
