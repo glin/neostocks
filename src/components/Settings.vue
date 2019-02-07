@@ -377,10 +377,6 @@ export default {
   text-decoration: none;
 }
 
-.new-alert-btn:active {
-  color: $link-color-active;
-}
-
 .no-alerts {
   font-size: 0.95rem;
   color: $gray-600;
