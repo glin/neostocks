@@ -469,7 +469,7 @@ export default {
 .company-name {
   margin-left: 0.75rem;
   font-size: 0.9rem;
-  color: #6c757d;
+  color: $gray-600;
 }
 
 .current-price {

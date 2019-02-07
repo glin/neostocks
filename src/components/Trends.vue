@@ -146,13 +146,13 @@ export default {
 .chart-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #545b62;
+  color: $gray-700;
 }
 
 .chart-subtitle {
   margin-top: 0.125rem;
   font-size: 0.8rem;
-  color: #6c757d;
+  color: $gray-600;
 }
 
 .dygraph-container {

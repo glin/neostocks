@@ -316,7 +316,7 @@ export default {
 .notifications-blocked {
   margin-left: 0.4rem;
   font-size: 0.8rem;
-  color: #6c757d;
+  color: $gray-600;
 }
 
 .alerts-section {
@@ -383,7 +383,7 @@ export default {
 
 .no-alerts {
   font-size: 0.95rem;
-  color: #737373;
+  color: $gray-600;
 }
 
 .settings-label {
@@ -414,13 +414,13 @@ input[type='number']:focus::placeholder {
 }
 
 .settings-select {
-  border: 1px solid #dee2e6;
+  border: 1px solid $gray-300;
   transition: none;
 }
 
 .settings-num-input {
   width: 80px;
-  border: 1px solid #dee2e6;
+  border: 1px solid $gray-300;
   transition: none;
 }
 
@@ -440,7 +440,7 @@ input[type='number']:focus::placeholder {
 
 .no-results {
   font-size: 0.95rem;
-  color: #737373;
+  color: $gray-600;
 }
 </style>
 

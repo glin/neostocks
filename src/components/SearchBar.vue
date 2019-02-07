@@ -211,7 +211,7 @@ export default {
   min-height: 45px;
   padding: 0.35rem 0.7rem;
   border-radius: 0;
-  color: #495057;
+  color: $gray-700;
   background-color: #fff;
   border: 1px solid #fff;
   border-right: none;
