@@ -1,7 +1,9 @@
 import { addMessageHandler, setInputValue } from './shiny'
 
 export function getInitialStockData() {
-  return getStockData(window.__data__)
+  const data = getStockData(window.__data__)
+  delete window.__data__
+  return data
 }
 
 export function subscribeToStockData(handler) {
@@ -23,7 +25,9 @@ function getStockData(data) {
 }
 
 export function getInitialTickerData() {
-  return getTickerData(window.__ticker_data__)
+  const data = getTickerData(window.__ticker_data__)
+  delete window.__ticker_data__
+  return data
 }
 
 export function subscribeToTickerData(handler) {
