@@ -2,6 +2,7 @@ import {
   getInitialStockData,
   subscribeToStockData,
   subscribeToTickerData,
+  getInitialTickerData,
   selectTicker,
   setLastUpdate
 } from '../stocks'
@@ -52,6 +53,13 @@ describe('stocks', () => {
 })
 
 describe('ticker', () => {
+  test('getInitialTickerData', () => {
+    window.__ticker_data__ = { prices: [1, 2, 3], peaks: [4, 5, 6]}
+    expect(getInitialTickerData()).toEqual({ prices: [1, 2, 3], peaks: [4, 5, 6]})
+    window.__ticker_data__ = undefined
+    expect(getInitialTickerData()).toBeNull()
+  })
+
   test('selectTicker', () => {
     selectTicker('BUZZ', '1d')
     expect(setInputValue).toHaveBeenCalledTimes(1)

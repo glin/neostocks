@@ -1,10 +1,11 @@
 import * as types from '../types'
-import { subscribeToTickerData, selectTicker } from '../../api/stocks'
+import { getInitialTickerData, subscribeToTickerData, selectTicker } from '../../api/stocks'
 
 const state = {
   isLoading: false,
   prices: null,
-  peaks: null
+  peaks: null,
+  ...getInitialTickerData()
 }
 
 export const actions = {

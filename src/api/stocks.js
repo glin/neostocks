@@ -22,6 +22,10 @@ function getStockData(data) {
   }
 }
 
+export function getInitialTickerData() {
+  return getTickerData(window.__ticker_data__)
+}
+
 export function subscribeToTickerData(handler) {
   addMessageHandler('ticker_data', data => {
     handler(getTickerData(data))
@@ -33,6 +37,7 @@ export function selectTicker(ticker, period) {
 }
 
 function getTickerData(data) {
+  if (!data) return null
   return {
     prices: data.prices,
     peaks: data.peaks

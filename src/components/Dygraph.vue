@@ -41,33 +41,17 @@ export default {
   },
 
   watch: {
+    data() {
+      this.render()
+    },
     annotations() {
       this.setAnnotations()
     }
   },
 
   mounted() {
-    this.$watch(
-      'data',
-      () => {
-        if (this.data == null) {
-          this.clearGraph()
-          return
-        }
-        const csv = columnsToCsv(this.data)
-        const isDateOnly = this.data.time[0].indexOf(':') < 0
-        const valueFormatter = isDateOnly ? dateValueFormatter : dateTimeValueFormatter
-        const options = { ...defaultOptions(valueFormatter), ...this.options }
-        if (!this.g) {
-          this.g = new Dygraph(this.$refs.el, csv, options)
-        } else {
-          // Redraw so we don't have to destroy and recreate the existing Dygraph
-          this.g.updateOptions({ ...options, file: csv })
-        }
-        this.setAnnotations()
-      },
-      { immediate: true }
-    )
+    // Don't block initial rendering
+    setTimeout(this.render)
   },
 
   beforeDestroy() {
@@ -77,6 +61,23 @@ export default {
   },
 
   methods: {
+    render() {
+      if (this.data == null) {
+        this.clearGraph()
+        return
+      }
+      const csv = columnsToCsv(this.data)
+      const isDateOnly = this.data.time[0].indexOf(':') < 0
+      const valueFormatter = isDateOnly ? dateValueFormatter : dateTimeValueFormatter
+      const options = { ...defaultOptions(valueFormatter), ...this.options }
+      if (!this.g) {
+        this.g = new Dygraph(this.$refs.el, csv, options)
+      } else {
+        // Redraw so we don't have to destroy and recreate the existing Dygraph
+        this.g.updateOptions({ ...options, file: csv })
+      }
+      this.setAnnotations()
+    },
     clearGraph() {
       if (!this.g) return
       const plotData = [[0, 0]]
@@ -144,7 +145,7 @@ function columnsToCsv(columns) {
 }
 
 .dygraph-axis-label {
-  color: #495057;
+  color: $gray-700;
 }
 
 .dygraph-axis-label-y {

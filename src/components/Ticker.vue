@@ -310,23 +310,20 @@ export default {
   },
 
   watch: {
-    ticker: {
-      handler() {
-        this.selectTicker()
-      },
-      immediate: true
+    ticker() {
+      this.selectTicker()
     },
-    period: {
-      handler() {
-        this.selectTicker()
-      },
-      immediate: true
+    period() {
+      this.selectTicker()
     }
   },
 
   created() {
     this.$store.dispatch(types.TICKER_SUBSCRIBE)
-    this.selectTicker()
+    if (!this.prices) {
+      // Not the initial page load, must fetch data from the server
+      this.selectTicker()
+    }
   },
 
   methods: {
