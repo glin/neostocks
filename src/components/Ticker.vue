@@ -459,7 +459,7 @@ export default {
 }
 
 .heading-divider {
-  margin: 0.3125rem 0 0.8125rem;
+  margin: 0.3125rem 0 0.7rem;
   border-top-color: hsl(210, 13%, 91%);
 }
 
