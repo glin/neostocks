@@ -1,7 +1,7 @@
 <template>
   <div>
-    <PageNotFound v-if="!showTicker" />
-    <Card v-if="showTicker">
+    <PageNotFound v-if="!tickerFound" />
+    <Card v-if="tickerFound">
       <div class="heading">
         <div class="d-flex align-items-center">
           <img :src="company.logo" class="company-logo" alt>
@@ -102,6 +102,7 @@ import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
 import * as types from '../store/types'
 import { timeSince } from '../date'
+import { updateDocumentTitle } from '../document';
 
 export default {
   components: {
@@ -222,7 +223,7 @@ export default {
     company() {
       return this.companies[this.ticker]
     },
-    showTicker() {
+    tickerFound() {
       return this.company != null
     },
     summary() {
@@ -315,6 +316,14 @@ export default {
     },
     period() {
       this.selectTicker()
+    },
+    tickerFound: {
+      handler() {
+        if (!this.tickerFound) {
+          updateDocumentTitle({ newPageTitle: 'page not found' })
+        }
+      },
+      immediate: true
     }
   },
 
