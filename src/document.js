@@ -11,5 +11,7 @@ export function updateDocumentTitle({ newPageTitle = null, newUnread = null }) {
     pageTitle = newPageTitle.length ? `${newPageTitle} - ` : ''
   }
 
-  document.title = unreadIndicator + pageTitle + docTitle
+  const title = pageTitle + docTitle
+  document.title = unreadIndicator + title
+  document.querySelector('meta[property="og:title"]').content = title
 }
