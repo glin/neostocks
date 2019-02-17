@@ -1,0 +1,13 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^dist$
+^node_modules$
+^public$
+^\.prettierrc\.json$
+^\.babelrc$
+^\.eslintignore$
+^\.eslintrc\.json$
+^jest\.config\.js$
+^package-lock\.json$
+^package\.json$
+^webpack\.config\.js$

@@ -1,0 +1,24 @@
+Package: neostocks
+Title: Real-time stock tracker for the Neopets Stock Market
+Version: 0.1.0
+Authors@R: person("Greg", "Lin", email = "glin@glin.io", role = c("aut", "cre"))
+Description: Real-time stock tracker for the Neopets Stock Market.
+License: MIT
+Depends:
+    R (>= 3.0.0)
+Imports:
+    data.table,
+    future,
+    jsonlite,
+    later,
+    lubridate,
+    promises,
+    R6,
+    shiny (>= 1.2.0.9001)
+Suggests:
+    testthat
+Remotes:
+    rstudio/shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
