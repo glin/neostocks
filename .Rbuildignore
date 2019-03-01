@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^ui$
 ^dist$
 ^node_modules$
 ^public$

@@ -8,6 +8,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = (env, argv) => ({
+  entry: './ui',
+
   resolve: {
     extensions: ['.js', '.vue']
   },
@@ -87,7 +89,7 @@ module.exports = (env, argv) => ({
     new NamedModulesPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/assets/index.html',
+      template: 'ui/assets/index.html',
       filename: path.resolve(__dirname, 'dist/index.html')
     }),
     new CopyWebpackPlugin([
