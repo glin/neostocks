@@ -24,3 +24,7 @@ read_stock_data <- function(file) {
   data[, time := as_datetime(time)]
   data
 }
+
+stock_data_example <- function() {
+  system.file("extdata", "neostocks.csv", package = "neostocks")
+}
