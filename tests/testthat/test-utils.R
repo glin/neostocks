@@ -17,3 +17,16 @@ test_that("to_iso_string converts datetimes", {
   str <- to_iso_string(time)
   expect_equal(str, "2018-07-01T17:30:00Z")
 })
+
+test_that("as_json defaults", {
+  expect_equal(as.character(as_json("auto unboxed?")), '"auto unboxed?"')
+  expect_equal(as.character(as_json(NULL)), "null")
+  expect_equal(as.character(as_json(NA)), "null")
+
+  df <- data.frame(
+    a = c(1, 2),
+    b = as_datetime(c("2018-07-04", "2018-08-04"))
+  )
+  expected <- '[{"a":1,"b":"2018-07-04T07:00:00Z"},{"a":2,"b":"2018-08-04T07:00:00Z"}]'
+  expect_equal(as.character(as_json(df)), expected)
+})
