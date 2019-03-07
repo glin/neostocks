@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^www$
 ^ui$
 ^dist$
 ^node_modules$
