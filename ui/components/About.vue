@@ -13,7 +13,7 @@
 
     <div class="section">
       <h2 class="section-heading">When does the site update?</h2>
-      <p>About every 30 minutes, usually within a minute of Neopets Stock Market updates.</p>
+      <p>About every half hour, usually within a minute of Neopets Stock Market updates.</p>
     </div>
 
     <div class="section">
