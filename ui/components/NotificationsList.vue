@@ -6,7 +6,7 @@
         <div class="notification-title">{{ item.title }}</div>
         <div class="notification-message">{{ item.message }}</div>
       </div>
-      <div :title="formatTimeNST(item.updateTimeNST)" class="notification-time ml-auto">{{ timeSince(item.updateTime) }}</div>
+      <div :title="formatTimeNST(item.updateTime)" class="notification-time ml-auto">{{ timeSince(item.updateTime) }}</div>
     </b-list-group-item>
     <b-list-group-item v-if="notifications.length === 0" class="notification-item no-notifications">
       No alerts yet
@@ -21,7 +21,7 @@ import bLink from 'bootstrap-vue/es/components/link/link'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
 import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
 
-import { timeSince } from '../date'
+import { toDateTimeStringNST, timeSince } from '../date'
 
 export default {
   components: {
@@ -52,7 +52,7 @@ export default {
       return timeSince(new Date(time), this.now)
     },
     formatTimeNST(time) {
-      return new Date(time).toLocaleString() + ' NST'
+      return toDateTimeStringNST(time) + ' NST'
     }
   }
 }

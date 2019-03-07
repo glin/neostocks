@@ -7,7 +7,7 @@ export function getInitialStockData() {
 }
 
 export function subscribeToStockData(handler) {
-  addMessageHandler('stock_data', data => {
+  addMessageHandler('market_summary', data => {
     handler(getStockData(data))
   })
 }
@@ -31,7 +31,7 @@ export function getInitialTickerData() {
 }
 
 export function subscribeToTickerData(handler) {
-  addMessageHandler('ticker_data', data => {
+  addMessageHandler('ticker_prices', data => {
     handler(getTickerData(data))
   })
 }

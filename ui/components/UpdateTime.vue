@@ -13,7 +13,7 @@ import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 import bTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip'
 
-import { timeSince } from '../date'
+import { toDateTimeStringNST, timeSince } from '../date'
 
 export default {
   components: {
@@ -25,20 +25,14 @@ export default {
   },
 
   computed: {
-    updateTimeUTC() {
-      return this.updateTime ? new Date(this.updateTime.UTC) : null
-    },
-    updateTimeNST() {
-      return this.updateTime ? new Date(this.updateTime.NST) : null
-    },
     updateTimeString() {
-      return this.updateTimeNST ? this.updateTimeNST.toLocaleString() + ' NST' : null
+      return toDateTimeStringNST(this.updateTime) + ' NST'
     },
     updateTimeSince() {
-      return timeSince(this.updateTimeUTC, this.now)
+      return timeSince(this.updateTime, this.now)
     },
     ...mapState({
-      updateTime: state => state.stocks.updateTime,
+      updateTime: state => new Date(state.stocks.updateTime),
       now: state => state.app.now
     })
   }

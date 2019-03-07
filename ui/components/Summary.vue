@@ -34,7 +34,7 @@
       <template slot="high" slot-scope="data">
         <span
           v-b-tooltip="{ boundary: 'window' }"
-          :title="formatDate(data.item.time_high, period !== 'all')"
+          :title="period === 'all' ? formatDate(data.item.time_high) : formatDateTime(data.item.time_high)"
           :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }"
           class="hoverable"
         >{{ data.value }}</span>
@@ -51,7 +51,7 @@
       </template>
       <template slot="last_peak" slot-scope="data">
         <span
-          :title="formatDate(data.item.last_peak_nst)"
+          :title="formatDateTime(data.item.last_peak)"
           class="time-period"
         >{{ formatTimeSince(data.value) }}</span>
       </template>
@@ -66,7 +66,7 @@ import { mapState, mapGetters } from 'vuex'
 
 import Card from './Card'
 import PeriodNav from './PeriodNav'
-import { timeSince } from '../date'
+import { timeSince, toDateTimeStringNST, toDateStringNST } from '../date'
 
 export default {
   components: {
@@ -238,33 +238,8 @@ export default {
           return 'Summary'
       }
     },
-    period_1d() {
-      if (!this.summaryData) return null
-      return this.summaryData.period_1d
-    },
-    period_5d() {
-      if (!this.summaryData) return null
-      return this.summaryData.period_5d
-    },
-    period_1m() {
-      if (!this.summaryData) return null
-      return this.summaryData.period_1m
-    },
-    period_all() {
-      if (!this.summaryData) return null
-      return this.summaryData.period_all
-    },
     currentSummary() {
-      switch (this.period) {
-        case '1d':
-          return this.period_1d
-        case '5d':
-          return this.period_5d
-        case '1m':
-          return this.period_1m
-        case 'all':
-          return this.period_all
-      }
+      return this.summaryData[this.period]
     },
     currentItems() {
       return this.currentSummary.filter(item => item.ticker !== 'NEODAQ')
@@ -314,11 +289,11 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(val, time = true) {
-      const date = new Date(val)
-      return time
-        ? date.toLocaleString() + ' NST'
-        : date.toLocaleDateString({}, { timeZone: 'UTC' })
+    formatDateTime(date) {
+      return toDateTimeStringNST(date)
+    },
+    formatDate(date) {
+      return toDateStringNST(date)
     },
     formatTimeSince(then) {
       return timeSince(new Date(then))

@@ -16,13 +16,13 @@ afterEach(() => {
 
 describe('stocks', () => {
   const data = {
-    summary_data: { period_1d: [{ curr: 1 }] },
+    summary_data: { '1d': [{ curr: 1 }] },
     hot_stocks: [{ ticker: 'a' }, { ticker: 'b' }],
     days_from_15: [{ curr: 30 }],
     price_dist: [{ curr: 10 }],
     volume_by_day: [{ volume: 20 }],
     volume_by_price: [{ curr: 5 }],
-    update_time: { NST: 1 }
+    update_time: 'wednesday'
   }
 
   const expected = {
@@ -43,7 +43,7 @@ describe('stocks', () => {
   test('subscribeToStockData', () => {
     const handler = jest.fn()
     subscribeToStockData(handler)
-    expect(addMessageHandler).toHaveBeenCalledWith('stock_data', expect.any(Function))
+    expect(addMessageHandler).toHaveBeenCalledWith('market_summary', expect.any(Function))
 
     const msgHandler = addMessageHandler.mock.calls[0][1]
     msgHandler(data)
@@ -69,7 +69,7 @@ describe('ticker', () => {
   test('subscribeToTickerData', () => {
     const handler = jest.fn()
     subscribeToTickerData(handler)
-    expect(addMessageHandler).toHaveBeenCalledWith('ticker_data', expect.any(Function))
+    expect(addMessageHandler).toHaveBeenCalledWith('ticker_prices', expect.any(Function))
 
     const data = {
       prices: { a: [1] },

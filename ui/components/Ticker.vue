@@ -33,7 +33,7 @@
 
       <PeriodNav :period="period"/>
       <div class="price-graph-container">
-        <Dygraph v-show="!isLoading" :data="prices" :annotations="annotations" class="price-graph"/>
+        <Dygraph v-show="!isLoading" :data="priceData" :annotations="annotations" class="price-graph"/>
       </div>
 
       <hr class="content-divider">
@@ -79,7 +79,7 @@
           <template slot="last_peak" slot-scope="data">
             <span
               v-b-tooltip
-              :title="formatDate(data.item.last_peak_nst)"
+              :title="formatDate(data.item.last_peak)"
               class="hoverable time-period"
               @mouseover="handleLastPeakHover(true)"
               @mouseleave="handleLastPeakHover(false)"
@@ -101,7 +101,7 @@ import Dygraph from './Dygraph'
 import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
 import * as types from '../store/types'
-import { timeSince } from '../date'
+import { timeSince, toDateTimeStringNST, toDateStringNST } from '../date'
 import { updateDocumentTitle } from '../document';
 
 export default {
@@ -220,6 +220,13 @@ export default {
   },
 
   computed: {
+    priceData() {
+      if (!this.prices) return null
+      return {
+        time: this.prices.time,
+        [this.ticker]: this.prices.curr
+      }
+    },
     company() {
       return this.companies[this.ticker]
     },
@@ -234,16 +241,7 @@ export default {
       }, {})
     },
     currentSummary() {
-      switch (this.period) {
-        case '1d':
-          return this.summary.period_1d
-        case '5d':
-          return this.summary.period_5d
-        case '1m':
-          return this.summary.period_1m
-        case 'all':
-          return this.summary.period_all
-      }
+      return this.summary[this.period]
     },
     currentPrice() {
       return this.currentSummary.curr
@@ -259,17 +257,15 @@ export default {
     },
     currentHighTime() {
       if (this.period === 'all') {
-        const date = new Date(this.currentSummary.time_high)
-        return date.toLocaleDateString()
+        return toDateStringNST(this.currentSummary.time_high)
       }
-      return this.currentSummary.time_high
+      return toDateTimeStringNST(this.currentSummary.time_high)
     },
     currentHighTimeFormatted() {
-      const date = new Date(this.currentSummary.time_high)
       if (this.period === 'all') {
-        return date.toLocaleDateString()
+        return toDateStringNST(this.currentSummary.time_high)
       }
-      return date.toLocaleString() + ' NST'
+      return toDateTimeStringNST(this.currentSummary.time_high) + ' NST'
     },
     summaryTables() {
       return [
@@ -351,11 +347,8 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(val, time = true) {
-      const date = new Date(val)
-      return time
-        ? date.toLocaleString() + ' NST'
-        : date.toLocaleDateString({}, { timeZone: 'UTC' })
+    formatDate(val) {
+      return toDateTimeStringNST(val) + ' NST'
     },
     formatTimeSince(then) {
       return timeSince(new Date(then))
@@ -398,7 +391,7 @@ export default {
     },
     handleLastPeakHover(hovered) {
       if (hovered) {
-        const date = new Date(this.summary.period_all.last_peak_nst).toLocaleDateString()
+        const date = toDateStringNST(this.summary.all.last_peak)
         this.lastPeakAnnotation = {
           series: this.ticker,
           x: date,

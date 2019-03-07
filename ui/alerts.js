@@ -14,13 +14,12 @@ export function getPriceAlerts(summaryData, rule = {}) {
   }
 
   const filteredData = filterSummaryData(summaryData, rule)
-  const alertsByTicker = filteredData.period_all.reduce((obj, data) => {
+  const alertsByTicker = filteredData['all'].reduce((obj, data) => {
     const alert = {
       ticker: data.ticker,
       curr: data.curr,
       highPeriods: [],
       updateTime: data.update_time,
-      updateTimeNST: data.update_time_nst,
       updateTimestamp: new Date(data.update_time).getTime(),
       title: `${data.ticker} at ${data.curr}`,
       icon: companies[data.ticker].logo,
@@ -32,7 +31,7 @@ export function getPriceAlerts(summaryData, rule = {}) {
 
   const periods = ['1d', '5d', '1m', 'all']
   periods.forEach(period => {
-    filteredData[`period_${period}`].forEach(data => {
+    filteredData[period].forEach(data => {
       if (isCurrentHigh(data)) {
         alertsByTicker[data.ticker].highPeriods.push(period)
         alertsByTicker[data.ticker].message = HIGH_MESSAGES[period]
@@ -59,7 +58,7 @@ export function isValidRule(rule) {
 function filterSummaryData(summaryData, filters = {}) {
   const { minPrice, maxPrice, exactPrice, includeTickers, excludeTickers, includeIndex } = filters
 
-  const tickers = summaryData.period_all
+  const tickers = summaryData.all
     .filter(data => {
       if (!includeIndex && data.ticker === 'NEODAQ') {
         return false

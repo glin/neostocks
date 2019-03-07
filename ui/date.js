@@ -1,3 +1,17 @@
+export function toDateTimeStringNST(date) {
+  if (typeof date === 'string') {
+    date = new Date(date)
+  }
+  return date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
+}
+
+export function toDateStringNST(date) {
+  if (typeof date === 'string') {
+    date = new Date(date)
+  }
+  return date.toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })
+}
+
 export function timeSince(then, now = new Date()) {
   const seconds = Math.floor((now - then) / 1000)
 
