@@ -1,3 +1,3 @@
 #' @keywords internal
-#' @import data.table
+#' @import shiny data.table promises
 "_PACKAGE"

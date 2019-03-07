@@ -5,7 +5,7 @@ Authors@R: person("Greg", "Lin", email = "glin@glin.io", role = c("aut", "cre"))
 Description: Real-time stock tracker for the Neopets Stock Market.
 License: MIT
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.1)
 Imports:
     data.table,
     future,
@@ -16,7 +16,8 @@ Imports:
     R6,
     shiny (>= 1.2.0.9001)
 Suggests:
-    testthat
+    testthat,
+    pkgload
 Remotes:
     rstudio/shiny
 Encoding: UTF-8
