@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^app.R$
 ^www$
 ^ui$
 ^dist$
