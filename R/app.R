@@ -1,3 +1,9 @@
+#' Create a new app
+#'
+#' Uses the following environment variables:
+#'  * NEOSTOCKS_DATA_FILE  path to the stock data file
+#'  * NEOSTOCKS_UI_DIR     path to the UI directory
+#'
 #' @export
 new_app <- function() {
   stock_data_file <- Sys.getenv("NEOSTOCKS_DATA_FILE", stock_data_example())
