@@ -1,4 +1,4 @@
-# neostocks
+# neostocks <img src="public/neostocks.png" align="right" />
 
 ## Getting Started
 
