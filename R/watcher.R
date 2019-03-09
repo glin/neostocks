@@ -31,8 +31,12 @@ FileWatcher <- R6::R6Class(
       if (!identical(mtime, self$mtime)) {
         self$mtime <- mtime
         result <- self$change_handler()
-        if (promises::is.promise(result)) {
-          promises::finally(result, self$watch)
+        # Ensure async handlers run one at a time
+        if (is.promise(result)) {
+          result %>% then(self$watch) %>% catch(function(e) {
+            self$stop()
+            warning(e)
+          })
           return()
         }
       }
