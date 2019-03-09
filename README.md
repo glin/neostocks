@@ -1,20 +1,62 @@
-# neostocks <img src="public/neostocks.png" align="right" />
+# neostocks <a href="https://neostocks.info"><img src="public/neostocks.png" align="right" /></a>
+
+neostocks is a real-time dashboard for the Neopets Stock Market, similar to the former NeoDaq.com (RIP).
 
 ## Getting Started
 
+### Prerequisites
+- [R](https://www.r-project.org/) >= 3.1
+- [Node.js](https://nodejs.org) LTS or later
+
+### Installation
+Clone the repo:
 ```sh
-# install
-npm install
-
-# build (production)
-npm run build
-npm run build:watch
-
-# build (dev)
-npm run dev
-npm run dev:watch
-
-# test
-npm test
-npm run test:watch
+git clone https://github.com/glin/neostocks
+cd neostocks/
 ```
+
+Install the R package:
+```r
+# install.packages("devtools")
+devtools::install()
+```
+
+Build the UI:
+```sh
+npm install
+npm run build
+```
+
+### Running
+```r
+shiny::runApp()
+```
+
+To use custom stock data, set the `NEOSTOCKS_DATA_FILE` environment variable:
+
+```sh
+# .Renviron
+NEOSTOCKS_DATA_FILE=/path/to/neostocks.csv
+```
+
+## Development
+Build the UI for development:
+```sh
+npm run dev
+npm run dev:watch  # rebuild on changes
+```
+
+Run UI tests:
+```sh
+npm test
+npm run test:cover  # with coverage
+npm run test:watch  # rerun on changes
+```
+
+Run R tests:
+```r
+devtools::test()
+```
+
+## License
+MIT
