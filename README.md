@@ -1,6 +1,6 @@
 # neostocks <a href="https://neostocks.info"><img src="public/neostocks.png" align="right" /></a>
 
-neostocks is a real-time dashboard for the Neopets Stock Market, similar to the former NeoDaq.com (RIP).
+[neostocks](https://neostocks.info) is a real-time dashboard for the Neopets Stock Market, similar to the former NeoDaq.com (RIP).
 
 ## Getting Started
 
