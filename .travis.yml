@@ -1,9 +1,14 @@
 language: r
 sudo: false
 cache: packages
-r:
-  - oldrel
-  - release
 
-after_success:
-  - Rscript -e 'covr::codecov()'
+matrix:
+  include:
+    - node_js: node
+      cache:
+        directories:
+          - node_modules
+    - r: oldrel
+    - r: release
+      after_success:
+        - Rscript -e 'covr::codecov()'
