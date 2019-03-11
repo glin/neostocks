@@ -85,6 +85,13 @@ const routes = [
     }
   },
   {
+    path: '/privacy',
+    component: () => import('./components/Privacy'),
+    meta: {
+      title: 'Privacy'
+    }
+  },
+  {
     path: '*',
     component: () => import('./components/PageNotFound'),
     meta: {

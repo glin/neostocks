@@ -9,6 +9,7 @@ new_ui <- function(template_file, stock_data) {
       route("/trends", trends_page),
       route("/settings", settings_page),
       route("/about", about_page),
+      route("/privacy", privacy_page),
       route("/bargain", bargain_page),
       route(".*", not_found_page)
     )
@@ -56,6 +57,8 @@ trends_page <- list(title = "Trends")
 settings_page <- list(title = "Settings")
 
 about_page <- list(title = "About")
+
+privacy_page <- list(title = "Privacy")
 
 not_found_page <- list(title = "page not found")
 
