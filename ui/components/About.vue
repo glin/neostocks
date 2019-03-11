@@ -20,7 +20,7 @@
       <h2 class="section-heading">Credits</h2>
       <p>
         All data from 2006 to 2018 originally came from
-        <strong>NeoDaq.com</strong>. Pieces of it were recovered from WaybackMachine snapshots by
+        NeoDaq.com. Pieces of it were recovered from WaybackMachine snapshots by
         <a
           href="https://www.reddit.com/r/neopets/comments/7rwxwd/neodaqs_data_collected_from_old_neodaqs_website/"
         >/u/HostilePride</a>.

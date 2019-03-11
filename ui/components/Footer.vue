@@ -1,10 +1,13 @@
 <template>
   <footer>
-    <b-container class="footer">
-      <div class="copyright">© 1999-2019 Neopets, Inc.
-        <br class="copyright-break">All rights reserved. Used with permission.
+    <b-container class="footer">Images © 1999-2019 Neopets, Inc.
+      <div class="footer-2">
+        All rights reserved.
+        <span class="spacer">·</span>
+        <b-link to="/privacy" class="footer-link">Privacy Policy</b-link>
+        <span class="spacer">·</span>
+        <b-link to="/about" class="footer-link">About</b-link>
       </div>
-      <b-link to="/about" class="about-link">About</b-link>
     </b-container>
   </footer>
 </template>
@@ -25,37 +28,23 @@ export default {
 @import '../assets/scss/variables';
 
 .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 0;
-  font-size: 0.9rem;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  font-size: 0.75rem;
   color: hsl(0, 0%, 60%);
 }
 
-.about-link {
-  color: hsl(0, 0%, 45%);
+.footer-link {
+  color: hsl(0, 0%, 60%);
 }
 
-.copyright {
-  text-align: right;
-  font-size: 0.8rem;
+.spacer {
+  margin: 0 0.15rem;
 }
 
-@include media-breakpoint-down(xs) {
-  .footer {
-    padding: 1rem;
-    border-top: none;
-  }
-
-  .copyright {
-    font-size: 0.7rem;
-  }
-}
-
-@include media-breakpoint-up(sm) {
-  .copyright-break {
-    display: none;
+@include media-breakpoint-up(xs) {
+  .footer-2 {
+    display: inline-block;
   }
 }
 </style>
