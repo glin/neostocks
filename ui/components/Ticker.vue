@@ -79,7 +79,7 @@
           <template slot="last_peak" slot-scope="data">
             <span
               v-b-tooltip
-              :title="formatDate(data.item.last_peak)"
+              :title="formatDateTime(data.item.last_peak_nst)"
               class="hoverable time-period"
               @mouseover="handleLastPeakHover(true)"
               @mouseleave="handleLastPeakHover(false)"
@@ -101,7 +101,7 @@ import Dygraph from './Dygraph'
 import PeriodNav from './PeriodNav'
 import PageNotFound from './PageNotFound'
 import * as types from '../store/types'
-import { timeSince, toDateTimeStringNST, toDateStringNST } from '../date'
+import { timeSince, toDateString, toDateTimeString } from '../date'
 import { updateDocumentTitle } from '../document';
 
 export default {
@@ -256,16 +256,13 @@ export default {
       return this.currentPrice === this.currentSummary.high && this.currentPrice >= 30
     },
     currentHighTime() {
-      if (this.period === 'all') {
-        return toDateStringNST(this.currentSummary.time_high)
-      }
-      return toDateTimeStringNST(this.currentSummary.time_high)
+      return toDateString(this.currentSummary.time_high_nst)
     },
     currentHighTimeFormatted() {
       if (this.period === 'all') {
-        return toDateStringNST(this.currentSummary.time_high)
+        return toDateString(this.currentSummary.time_high_nst)
       }
-      return toDateTimeStringNST(this.currentSummary.time_high) + ' NST'
+      return toDateTimeString(this.currentSummary.time_high_nst) + ' NST'
     },
     summaryTables() {
       return [
@@ -352,8 +349,8 @@ export default {
       if (val >= 0) return '+' + val
       return val
     },
-    formatDate(val) {
-      return toDateTimeStringNST(val) + ' NST'
+    formatDateTime(val) {
+      return toDateTimeString(val) + ' NST'
     },
     formatTimeSince(then) {
       return timeSince(new Date(then))
@@ -396,7 +393,7 @@ export default {
     },
     handleLastPeakHover(hovered) {
       if (hovered) {
-        const date = toDateStringNST(this.summary.all.last_peak)
+        const date = toDateString(this.summary.all.last_peak_nst)
         this.lastPeakAnnotation = {
           series: this.ticker,
           x: date,

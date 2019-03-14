@@ -34,7 +34,7 @@
       <template slot="high" slot-scope="data">
         <span
           v-b-tooltip="{ boundary: 'window' }"
-          :title="period === 'all' ? formatDate(data.item.time_high) : formatDateTime(data.item.time_high)"
+          :title="period === 'all' ? formatDate(data.item.time_high_nst) : formatDateTime(data.item.time_high_nst)"
           :class="{ 'current-high': filter === 'hot' && isCurrentHigh(data.item.curr, data.value) }"
           class="hoverable"
         >{{ data.value }}</span>
@@ -51,7 +51,7 @@
       </template>
       <template slot="last_peak" slot-scope="data">
         <span
-          :title="formatDateTime(data.item.last_peak)"
+          :title="formatDateTime(data.item.last_peak_nst)"
           class="time-period"
         >{{ formatTimeSince(data.value) }}</span>
       </template>
@@ -66,7 +66,7 @@ import { mapState, mapGetters } from 'vuex'
 
 import Card from './Card'
 import PeriodNav from './PeriodNav'
-import { timeSince, toDateTimeStringNST, toDateStringNST } from '../date'
+import { timeSince, toDateString, toDateTimeString } from '../date'
 
 export default {
   components: {
@@ -290,10 +290,10 @@ export default {
       return val
     },
     formatDateTime(date) {
-      return toDateTimeStringNST(date)
+      return toDateTimeString(date) + ' NST'
     },
     formatDate(date) {
-      return toDateStringNST(date)
+      return toDateString(date)
     },
     formatTimeSince(then) {
       return timeSince(new Date(then))

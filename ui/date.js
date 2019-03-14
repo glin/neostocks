@@ -1,3 +1,17 @@
+export function toDateTimeString(date) {
+  if (typeof date === 'string') {
+    date = new Date(date)
+  }
+  return date.toLocaleString()
+}
+
+export function toDateString(date) {
+  if (typeof date === 'string') {
+    date = new Date(date)
+  }
+  return date.toLocaleDateString()
+}
+
 export function toDateTimeStringNST(date) {
   if (typeof date === 'string') {
     date = new Date(date)
