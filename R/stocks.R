@@ -72,7 +72,7 @@ summarize_market <- function(data) {
 
 # Find hot stocks with large increases or recent peaks
 find_hot_stocks <- function(summary_data) {
-  update_time <- get_update_time(summary_data[["1d"]])
+  update_time <- summary_data[["1d"]]$update_time[1]
   hot_stocks <- unique(c(
     summary_data[["1d"]][change >= 5, ticker],
     summary_data[["5d"]][change >= 5, ticker],
