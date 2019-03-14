@@ -39,7 +39,13 @@ summarize_market <- function(data) {
   # Add period and update time
   for (period in names(summary_data)) {
     summ <- summary_data[[period]]
-    summ[, c("period", "update_time") := list(period, update_time)]
+    summ[, period := period]
+    summ[, update_time := update_time]
+    summ[, update_time_nst := as.character(update_time)]
+    summ[, time_high_nst := as.character(time_high)]
+    if ("last_peak" %in% names(summ)) {
+      summ[, last_peak_nst := as.character(last_peak)]
+    }
   }
 
   # Hot stocks
