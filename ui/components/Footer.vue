@@ -3,9 +3,9 @@
     <b-container class="footer">Images © 1999-2019 Neopets, Inc.
       <div class="footer-2">
         All rights reserved.
-        <span class="spacer">·</span>
+        <span class="separator">·</span>
         <b-link to="/privacy" class="footer-link">Privacy Policy</b-link>
-        <span class="spacer">·</span>
+        <span class="separator">·</span>
         <b-link to="/about" class="footer-link">About</b-link>
       </div>
     </b-container>
@@ -38,7 +38,7 @@ export default {
   color: hsl(0, 0%, 55%);
 }
 
-.spacer {
+.separator {
   margin: 0 0.15rem;
 }
 

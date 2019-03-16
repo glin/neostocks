@@ -23,7 +23,7 @@
 
           <div v-if="company.buyUrl && company.profileUrl" class="company-links">
             <a :href="company.buyUrl">buy</a>
-            <span class="v-divider">|</span>
+            <span class="separator">|</span>
             <a :href="company.profileUrl">profile</a>
           </div>
         </div>
@@ -493,7 +493,7 @@ export default {
   color: $external-link-color;
 }
 
-.v-divider {
+.separator {
   color: #aaa;
 }
 
