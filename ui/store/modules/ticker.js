@@ -2,7 +2,6 @@ import * as types from '../types'
 import { getInitialTickerData, subscribeToTickerData, selectTicker } from '../../api/stocks'
 
 const state = {
-  isLoading: false,
   prices: null,
   peaks: null,
   ...getInitialTickerData()
@@ -22,12 +21,11 @@ export const actions = {
 
 export const mutations = {
   [types.TICKER_REQUEST_DATA](state) {
-    state.isLoading = true
+    state.prices = null
   },
   [types.TICKER_RECEIVE_DATA](state, data) {
     state.prices = data.prices
     state.peaks = data.peaks
-    state.isLoading = false
   }
 }
 

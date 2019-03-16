@@ -33,7 +33,7 @@
 
       <PeriodNav :period="period"/>
       <div class="price-graph-container">
-        <Dygraph v-show="!isLoading" :data="priceData" :annotations="annotations" class="price-graph"/>
+        <Dygraph :data="priceData" :annotations="annotations" class="price-graph"/>
       </div>
 
       <hr class="content-divider">
@@ -297,7 +297,6 @@ export default {
     },
     ...mapState({
       summaryData: state => state.stocks.summaryData,
-      isLoading: state => state.ticker.isLoading,
       prices: state => state.ticker.prices,
       peaks: state => state.ticker.peaks
     })
