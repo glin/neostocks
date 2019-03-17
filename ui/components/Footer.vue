@@ -1,13 +1,13 @@
 <template>
   <footer>
-    <b-container class="footer">Images © 1999-2019 Neopets, Inc.
-      <div class="footer-2">
-        All rights reserved.
+    <b-container class="footer">
+      Images © 1999-2019 Neopets, Inc.
+      <span class="d-inline-block">
         <span class="separator">·</span>
-        <b-link to="/privacy" class="footer-link">Privacy Policy</b-link>
+        <b-link to="/privacy" class="footer-link">Privacy</b-link>
         <span class="separator">·</span>
         <b-link to="/about" class="footer-link">About</b-link>
-      </div>
+      </span>
     </b-container>
   </footer>
 </template>
@@ -40,11 +40,5 @@ export default {
 
 .separator {
   margin: 0 0.15rem;
-}
-
-@include media-breakpoint-up(xs) {
-  .footer-2 {
-    display: inline-block;
-  }
 }
 </style>
