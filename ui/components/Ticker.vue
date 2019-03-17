@@ -256,7 +256,10 @@ export default {
       return this.currentPrice === this.currentSummary.high && this.currentPrice >= 30
     },
     currentHighTime() {
-      return toDateString(this.currentSummary.time_high_nst)
+      if (this.period === 'all') {
+        return toDateString(this.currentSummary.time_high_nst)
+      }
+      return this.currentSummary.time_high_nst
     },
     currentHighTimeFormatted() {
       if (this.period === 'all') {
