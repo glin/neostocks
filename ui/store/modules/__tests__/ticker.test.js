@@ -6,15 +6,19 @@ jest.mock('../../../api/stocks')
 
 describe('mutations', () => {
   test('TICKER_REQUEST_DATA', () => {
-    const state = { prices: 1 }
+    const initialState = { prices: 1, firstLoad: true }
+    mutations[types.TICKER_REQUEST_DATA](initialState)
+    expect(initialState).toEqual({ prices: 1, firstLoad: true })
+
+    const state = { prices: 1, firstLoad: false }
     mutations[types.TICKER_REQUEST_DATA](state)
-    expect(state).toEqual({ prices: null })
+    expect(state).toEqual({ prices: null, firstLoad: false })
   })
 
   test('TICKER_RECEIVE_DATA', () => {
-    const state = { prices: null }
+    const state = { prices: null, peaks: null, firstLoad: true }
     mutations[types.TICKER_RECEIVE_DATA](state, { prices: 1, peaks: 2 })
-    expect(state).toEqual({ prices: 1, peaks: 2 })
+    expect(state).toEqual({ prices: 1, peaks: 2, firstLoad: false })
   })
 })
 

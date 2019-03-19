@@ -319,20 +319,12 @@ export default {
         }
       },
       immediate: true
-    },
-    summaryData() {
-      // Ensure that stock charts are updated on data updates. On the initial
-      // page load, no ticker will be selected since price data is preloaded.
-      this.selectTicker()
     }
   },
 
   created() {
     this.$store.dispatch(types.TICKER_SUBSCRIBE)
-    if (!this.prices) {
-      // Not the initial page load, must fetch price data from the server
-      this.selectTicker()
-    }
+    this.selectTicker()
   },
 
   methods: {

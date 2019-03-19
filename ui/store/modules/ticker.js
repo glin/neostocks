@@ -4,7 +4,8 @@ import { getInitialTickerData, subscribeToTickerData, selectTicker } from '../..
 const state = {
   prices: null,
   peaks: null,
-  ...getInitialTickerData()
+  ...getInitialTickerData(),
+  firstLoad: true
 }
 
 export const actions = {
@@ -21,11 +22,14 @@ export const actions = {
 
 export const mutations = {
   [types.TICKER_REQUEST_DATA](state) {
-    state.prices = null
+    if (!state.firstLoad) {
+      state.prices = null
+    }
   },
   [types.TICKER_RECEIVE_DATA](state, data) {
     state.prices = data.prices
     state.peaks = data.peaks
+    state.firstLoad = false
   }
 }
 
