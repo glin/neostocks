@@ -18,6 +18,51 @@ test_that("index_page", {
   ))
 })
 
+test_that("new_ui", {
+  template_file <- "data/template.html"
+  stock_data <- reactiveVal(list(market_summary = list(price = 5), price_data = NULL))
+
+  ui <- new_ui(template_file, stock_data)
+  expect_true(is.function(ui))
+
+  expected_html <- function(title = NULL, ticker = NULL) {
+    title <- document_title(title)
+    if (!is.null(ticker)) {
+      ticker_script <- "\n<script>window.__ticker_data__ = null</script>"
+    } else {
+      ticker_script <- ""
+    }
+    sprintf('<html>
+<head>
+<meta property="og:title" content="%s"/>
+<title>%s</title>
+</head>
+<body>
+<script>window.__data__ = {"price":5}</script>%s
+</body>
+</html>', title, title, ticker_script)
+  }
+
+  test_cases <- list(
+    list(path = "/"),
+    list(path = "/bargain", page = bargain_page),
+    list(path = "/hot", page = hot_page),
+    list(path = "/trends", page = trends_page),
+    list(path = "/settings", page = settings_page),
+    list(path = "/about", page = about_page),
+    list(path = "/privacy", page = privacy_page),
+    list(path = "/doesntexist", page = not_found_page),
+    list(path = "/tickers/VPTS", page = ticker_page("VPTS", "1d")),
+    list(path = "/index", page = index_page("1d")),
+    list(path = "/tickers/BOOM", page = not_found_page)
+  )
+  for (test in test_cases) {
+    html <- ui(list(PATH_INFO = test$path))
+    expected <- expected_html(title = test$page$title, ticker = test$page$ticker)
+    expect_equal(as.character(html), expected)
+  }
+})
+
 test_that("ui_template", {
   template_file <- "data/template.html"
 
