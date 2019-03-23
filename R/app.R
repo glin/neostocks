@@ -1,8 +1,9 @@
 #' Create a new app
 #'
 #' Uses the following environment variables:
-#'  * NEOSTOCKS_DATA_FILE  path to the stock data file
-#'  * NEOSTOCKS_UI_DIR     path to the UI directory
+#'  * NEOSTOCKS_DATA_FILE   path to the stock data file
+#'  * NEOSTOCKS_UI_DIR      path to the UI directory
+#'  * NEOSTOCKS_ENABLE_API  if `true`, enable the internal API
 #'
 #' @export
 new_app <- function() {
@@ -51,5 +52,12 @@ new_app <- function() {
     onStop(watcher$stop)
   }
 
-  shinyApp(ui, server, onStart = on_start, uiPattern = "^.*$")
+  app <- shinyApp(ui, server, onStart = on_start, uiPattern = "^.*$")
+
+  if (Sys.getenv("NEOSTOCKS_ENABLE_API") == "true") {
+    api <- new_api(stock_data)
+    app <- app_with_api(app, api)
+  }
+
+  app
 }
