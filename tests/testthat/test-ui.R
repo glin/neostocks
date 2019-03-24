@@ -3,6 +3,7 @@ context("ui")
 test_that("ticker_page", {
   expect_equal(ticker_page("AAVL", "5d"), list(
     title = "AAVL",
+    description = "Real-time stock quote and historical prices for AAVL - Alien Aisha Vending Ltd.",
     ticker = "AAVL",
     period = "5d"
   ))
@@ -13,6 +14,7 @@ test_that("ticker_page", {
 test_that("index_page", {
   expect_equal(index_page("5d"), list(
     title = "Neodaq Index",
+    description = "The Neodaq Index - how well the stock market is doing as a whole.",
     ticker = "NEODAQ",
     period = "5d"
   ))

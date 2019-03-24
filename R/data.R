@@ -14,6 +14,10 @@ get_companies <- function() {
 
 companies <- get_companies()
 
+company_name <- function(stock_ticker) {
+  companies[ticker == stock_ticker, company]
+}
+
 get_archived_prices <- function() {
   file <- system.file("extdata", "archived_prices.csv", package = "neostocks")
   read_stock_data(file)

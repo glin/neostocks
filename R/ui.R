@@ -32,14 +32,20 @@ home_page <- list(
   description = "Real-time stock tracker for the Neopets Stock Market. Explore stock history, get price alerts, and find the best stocks to buy and sell."
 )
 
-bargain_page <- list(title = "Bargain")
+bargain_page <- list(
+  title = "Bargain",
+  description = "Cheap bargain stocks on the Neopets Stock Market. Buy low, sell high!"
+)
 
 ticker_page <- function(ticker, period) {
   if (!ticker %in% companies$ticker) {
     return(not_found_page)
   }
+  description <- sprintf("Real-time stock quote and historical prices for %s - %s",
+                         ticker, company_name(ticker))
   list(
     title = ticker,
+    description = description,
     ticker = ticker,
     period = period
   )
@@ -48,14 +54,21 @@ ticker_page <- function(ticker, period) {
 index_page <- function(period) {
   list(
     title = "Neodaq Index",
+    description = "The Neodaq Index - how well the stock market is doing as a whole.",
     ticker = "NEODAQ",
     period = period
   )
 }
 
-hot_page <- list(title = "Hot")
+hot_page <- list(
+  title = "Hot",
+  description = "Hot stocks on the rise in the Neopets Stock Market."
+)
 
-trends_page <- list(title = "Trends")
+trends_page <- list(
+  title = "Trends",
+  description = "Explore trends and patterns in the Neopets Stock Market."
+)
 
 settings_page <- list(title = "Settings")
 
