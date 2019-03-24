@@ -8,6 +8,7 @@ new_app()
 }
 \description{
 Uses the following environment variables:
- * NEOSTOCKS_DATA_FILE  path to the stock data file
- * NEOSTOCKS_UI_DIR     path to the UI directory
+ * NEOSTOCKS_DATA_FILE   path to the stock data file
+ * NEOSTOCKS_UI_DIR      path to the UI directory
+ * NEOSTOCKS_ENABLE_API  if `true`, enable the internal API
 }
