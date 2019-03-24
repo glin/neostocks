@@ -21,13 +21,16 @@ new_ui <- function(template_file, stock_data) {
       template_file,
       isolate(stock_data()),
       title = page$title,
+      description = page$description,
       ticker = page$ticker,
       period = page$period
     )
   }
 }
 
-home_page <- list()
+home_page <- list(
+  description = "Real-time stock tracker for the Neopets Stock Market. Explore stock history, get price alerts, and find the best stocks to buy and sell."
+)
 
 bargain_page <- list(title = "Bargain")
 
@@ -62,7 +65,8 @@ privacy_page <- list(title = "Privacy Policy")
 
 not_found_page <- list(title = "page not found")
 
-ui_template <- function(file, stock_data, title = NULL, ticker = NULL, period = NULL) {
+ui_template <- function(file, stock_data, title = NULL, description = NULL,
+                        ticker = NULL, period = NULL) {
   data_script <- tags$script(HTML(
     sprintf("window.__data__ = %s", as_json(stock_data$market_summary))
   ))
@@ -79,11 +83,19 @@ ui_template <- function(file, stock_data, title = NULL, ticker = NULL, period = 
 
   title <- document_title(page_title = title)
 
+  if (is.null(description)) {
+    description <- home_page$description
+  }
+
   htmlTemplate(
     file,
     data_script = data_script,
-    title = tags$title(title),
-    meta = tags$meta(property = "og:title", content = title)
+    head = list(
+      tags$meta(property = "og:title", content = title),
+      tags$meta(name = "description", content = description),
+      tags$meta(property = "og:description", content = description),
+      tags$title(title)
+    )
   )
 }
 

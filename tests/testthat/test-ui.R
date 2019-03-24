@@ -25,8 +25,11 @@ test_that("new_ui", {
   ui <- new_ui(template_file, stock_data)
   expect_true(is.function(ui))
 
-  expected_html <- function(title = NULL, ticker = NULL) {
+  expected_html <- function(title = NULL, description = NULL, ticker = NULL) {
     title <- document_title(title)
+    if (is.null(description)) {
+      description <- home_page$description
+    }
     if (!is.null(ticker)) {
       ticker_script <- "\n<script>window.__ticker_data__ = null</script>"
     } else {
@@ -35,12 +38,14 @@ test_that("new_ui", {
     sprintf('<html>
 <head>
 <meta property="og:title" content="%s"/>
+<meta name="description" content="%s"/>
+<meta property="og:description" content="%s"/>
 <title>%s</title>
 </head>
 <body>
 <script>window.__data__ = {"price":5}</script>%s
 </body>
-</html>', title, title, ticker_script)
+</html>', title, description, description, title, ticker_script)
   }
 
   test_cases <- list(
@@ -58,7 +63,11 @@ test_that("new_ui", {
   )
   for (test in test_cases) {
     html <- ui(list(PATH_INFO = test$path))
-    expected <- expected_html(title = test$page$title, ticker = test$page$ticker)
+    expected <- expected_html(
+      title = test$page$title,
+      description = test$page$description,
+      ticker = test$page$ticker
+    )
     expect_equal(as.character(html), expected)
   }
 })
@@ -72,6 +81,8 @@ test_that("ui_template", {
   expected <- '<html>
 <head>
 <meta property="og:title" content="summary - neostocks"/>
+<meta name="description" content="Real-time stock tracker for the Neopets Stock Market. Explore stock history, get price alerts, and find the best stocks to buy and sell."/>
+<meta property="og:description" content="Real-time stock tracker for the Neopets Stock Market. Explore stock history, get price alerts, and find the best stocks to buy and sell."/>
 <title>summary - neostocks</title>
 </head>
 <body>
@@ -95,12 +106,15 @@ test_that("ui_template", {
     template_file,
     stock_data,
     title = "ticker",
+    description = "not BOOM",
     ticker = "AAVL",
     period = "1d"
   )
   expected <- '<html>
 <head>
 <meta property="og:title" content="ticker - neostocks"/>
+<meta name="description" content="not BOOM"/>
+<meta property="og:description" content="not BOOM"/>
 <title>ticker - neostocks</title>
 </head>
 <body>
