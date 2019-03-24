@@ -34,7 +34,7 @@ home_page <- list(
 
 bargain_page <- list(
   title = "Bargain",
-  description = "Cheap bargain stocks on the Neopets Stock Market. Buy low, sell high!"
+  description = "Bargain stocks on the Neopets Stock Market. Buy low, sell high!"
 )
 
 ticker_page <- function(ticker, period) {
