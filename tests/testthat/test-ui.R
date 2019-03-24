@@ -12,7 +12,7 @@ test_that("ticker_page", {
 
 test_that("index_page", {
   expect_equal(index_page("5d"), list(
-    title = "Index",
+    title = "Neodaq Index",
     ticker = "NEODAQ",
     period = "5d"
   ))

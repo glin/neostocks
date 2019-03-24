@@ -44,7 +44,7 @@ ticker_page <- function(ticker, period) {
 
 index_page <- function(period) {
   list(
-    title = "Index",
+    title = "Neodaq Index",
     ticker = "NEODAQ",
     period = period
   )
@@ -58,7 +58,7 @@ settings_page <- list(title = "Settings")
 
 about_page <- list(title = "About")
 
-privacy_page <- list(title = "Privacy")
+privacy_page <- list(title = "Privacy Policy")
 
 not_found_page <- list(title = "page not found")
 

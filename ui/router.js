@@ -59,7 +59,7 @@ const routes = [
     props: route => ({ ticker: 'NEODAQ', period: route.query.period }),
     meta: {
       showUpdateTime: true,
-      title: 'Index'
+      title: 'Neodaq Index'
     }
   },
   {
@@ -88,7 +88,7 @@ const routes = [
     path: '/privacy',
     component: () => import('./components/Privacy'),
     meta: {
-      title: 'Privacy'
+      title: 'Privacy Policy'
     }
   },
   {
