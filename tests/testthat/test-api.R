@@ -4,8 +4,7 @@ test_that("new_api", {
   stock_data <- reactiveVal(list(
     market_summary = list(summary_data = list(
       "1d" = data.table(ticker = "YIPP", curr = 11),
-      "5d" = data.table(ticker = "YIPP", curr = 22),
-      "all" = data.table(error = "bad")
+      "5d" = data.table(ticker = "YIPP", curr = 22)
     ))
   ))
 
@@ -24,7 +23,7 @@ test_that("new_api", {
   expect_equal(res_tickers$status, 200)
   expect_equal(
     as.character(res_tickers$content),
-    '[{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":11}]'
+    '{"1d":[{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":11}],"5d":[{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":22}]}'
   )
 
   # Ticker
@@ -32,7 +31,7 @@ test_that("new_api", {
   expect_equal(res_tickers$status, 200)
   expect_equal(
     as.character(res_tickers$content),
-    '{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":11}'
+    '{"1d":{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":11},"5d":{"ticker":"YIPP","company":"Yippee!","id":"23","logo_id":"2","curr":22}}'
   )
 
   res_tickers <- request("/api/tickers/yipp", query = "period=5d")
@@ -46,6 +45,12 @@ test_that("new_api", {
   expect_equal(res_not_found$status, 404)
 
   # Server error
+  stock_data <- reactiveVal(list(
+    market_summary = list(summary_data = list(
+      "all" = data.table(error = "bad")
+    ))
+  ))
+  api_handler <- new_api(stock_data)
   res_error <- request("/api/tickers/yipp", query = "period=all")
   expect_equal(res_error$status, 500)
 })

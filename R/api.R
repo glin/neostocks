@@ -36,9 +36,14 @@ new_api <- function(stock_data) {
 # Get all tickers
 tickers_handler <- function(summary_data) {
   function(period = "1d") {
-    period <- as_time_period(period)
-    summary <- summary_data()[[period]]
-    summary <- merge(companies, summary, by = "ticker")
+    if (is.null(period)) {
+      summary <- summary_data()
+      summary <- lapply(summary, function(data) merge(companies, data, by = "ticker"))
+    } else {
+      period <- as_time_period(period)
+      summary <- summary_data()[[period]]
+      summary <- merge(companies, summary, by = "ticker")
+    }
     content <- as_json(summary)
     json_response(content)
   }
@@ -51,10 +56,16 @@ ticker_handler <- function(summary_data) {
     if (!stock_ticker %in% companies$ticker) {
       return(not_found_response())
     }
-    period <- as_time_period(period)
-    summary <- summary_data()[[period]][ticker == stock_ticker]
-    summary <- merge(companies, summary, by = "ticker")
-    summary <- as.list(summary)
+    if (is.null(period)) {
+      summary <- lapply(summary_data(), function(data) data[ticker == stock_ticker])
+      summary <- lapply(summary, function(data) {
+        as.list(merge(companies, data, by = "ticker"))
+      })
+    } else {
+      period <- as_time_period(period)
+      summary <- summary_data()[[period]][ticker == stock_ticker]
+      summary <- as.list(merge(companies, summary, by = "ticker"))
+    }
     content <- as_json(summary)
     json_response(content)
   }
