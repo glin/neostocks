@@ -35,7 +35,7 @@ FileWatcher <- R6::R6Class(
         if (is.promise(result)) {
           result %>% then(self$watch) %>% catch(function(e) {
             self$stop()
-            warning(e)
+            stop("FileWatcher handler error: ", e$message)
           })
           return()
         }
