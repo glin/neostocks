@@ -54,7 +54,7 @@ new_app <- function() {
 
   app <- shinyApp(ui, server, onStart = on_start, uiPattern = "^.*$")
 
-  if (Sys.getenv("NEOSTOCKS_ENABLE_API") == "true") {
+  if (Sys.getenv("NEOSTOCKS_ENABLE_API", "true") == "true") {
     api <- new_api(stock_data)
     app <- app_with_api(app, api)
   }
