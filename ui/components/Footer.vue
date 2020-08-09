@@ -1,7 +1,7 @@
 <template>
   <footer>
     <b-container class="footer">
-      Images © 1999-2019 Neopets, Inc.
+      Images © 1999-2020 Neopets, Inc.
       <span class="d-inline-block">
         <span class="separator">·</span>
         <b-link to="/privacy" class="footer-link">Privacy</b-link>
