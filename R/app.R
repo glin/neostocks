@@ -3,11 +3,14 @@
 #' Uses the following environment variables:
 #'  * NEOSTOCKS_DATA_FILE   path to the stock data file
 #'  * NEOSTOCKS_UI_DIR      path to the UI directory
-#'  * NEOSTOCKS_ENABLE_API  if `true`, enable the internal API
+#'  * NEOSTOCKS_CACHE_DIR   path to the cache directory
+#'  * NEOSTOCKS_ENABLE_API  if `true` (default), enable the internal API
 #'
 #' @export
 new_app <- function() {
   stock_data_file <- Sys.getenv("NEOSTOCKS_DATA_FILE", stock_data_example())
+
+  stock_data <- reactiveVal()
 
   summarize_data <- function() {
     data <- load_stock_data(stock_data_file)
@@ -17,14 +20,6 @@ new_app <- function() {
       update_time = get_update_time(data)
     )
   }
-
-  stock_data <- reactiveVal()
-
-  ui_dir <- Sys.getenv("NEOSTOCKS_UI_DIR", "dist")
-  ui_template_file <- file.path(ui_dir, "index.html")
-  ui <- new_ui(ui_template_file, stock_data)
-
-  server <- new_server(stock_data)
 
   update_stock_data <- function() {
     log_info("updating stock data")
@@ -36,16 +31,46 @@ new_app <- function() {
       stock_data(result)
       end_time <- Sys.time()
       log_info("updated in ", format(end_time - start_time))
+      if (nzchar(cache_dir)) {
+        dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
+        saveRDS(result, file.path(cache_dir, "data.rds"))
+      }
     })
   }
 
+  last_update_time <- NULL
+
+  # Load cached data
+  cache_dir <- Sys.getenv("NEOSTOCKS_CACHE_DIR")
+  if (nzchar(cache_dir)) {
+    cache_file <- file.path(cache_dir, "data.rds")
+    if (file.exists(cache_file)) {
+      log_info("loading stock data from cache")
+      cache_data <- readRDS(cache_file)
+      stock_data(cache_data)
+      last_update_time <- cache_data$update_time
+    }
+  }
+
+  # Load initial data
+  data <- load_stock_data(stock_data_file)
+  if (!identical(last_update_time, get_update_time(data))) {
+    update_stock_data()
+    # Wait until initial data is ready
+    while (!later::loop_empty()) {
+      later::run_now()
+      Sys.sleep(0.1)
+    }
+  }
+
+  ui_dir <- Sys.getenv("NEOSTOCKS_UI_DIR", "dist")
+  ui_template_file <- file.path(ui_dir, "index.html")
+  ui <- new_ui(ui_template_file, stock_data)
+  addResourcePath("static", file.path(ui_dir, "static"))
+
+  server <- new_server(stock_data)
+
   on_start <- function() {
-    addResourcePath("static", file.path(ui_dir, "static"))
-
-    # Load initial data
-    initial_data <- summarize_data()
-    stock_data(initial_data)
-
     # Poll for updates in the background
     watcher <- FileWatcher$new(stock_data_file, update_stock_data, 5)
     watcher$start()
