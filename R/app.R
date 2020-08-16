@@ -56,11 +56,6 @@ new_app <- function() {
   data <- load_stock_data(stock_data_file)
   if (!identical(last_update_time, get_update_time(data))) {
     update_stock_data()
-    # Wait until initial data is ready
-    while (!later::loop_empty()) {
-      later::run_now()
-      Sys.sleep(0.1)
-    }
   }
 
   ui_dir <- Sys.getenv("NEOSTOCKS_UI_DIR", "dist")
