@@ -2,6 +2,8 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^app.R$
+^renv$
+^renv\.lock$
 ^www$
 ^ui$
 ^dist$

@@ -17,6 +17,7 @@ Imports:
     shiny
 Suggests:
     covr,
+    devtools,
     pkgload,
     testthat
 Encoding: UTF-8
