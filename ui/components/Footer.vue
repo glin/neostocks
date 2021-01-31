@@ -31,11 +31,11 @@ export default {
   text-align: center;
   padding: 1.25rem 1rem;
   font-size: 0.75rem;
-  color: hsl(0, 0%, 55%);
+  color: hsl(0, 0%, 45%);
 }
 
 .footer-link {
-  color: hsl(0, 0%, 55%);
+  color: hsl(0, 0%, 45%);
 }
 
 .separator {
