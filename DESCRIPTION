@@ -14,7 +14,7 @@ Imports:
     lubridate,
     promises,
     R6,
-    shiny
+    shiny (>= 1.6)
 Suggests:
     covr,
     devtools,
