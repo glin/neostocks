@@ -60,8 +60,21 @@ new_app <- function() {
 
   ui_dir <- Sys.getenv("NEOSTOCKS_UI_DIR", "dist")
   ui_template_file <- file.path(ui_dir, "index.html")
-  ui <- new_ui(ui_template_file, stock_data)
+  ui_handler <- new_ui(ui_template_file, stock_data)
   addResourcePath("static", file.path(ui_dir, "static"))
+
+  if (Sys.getenv("NEOSTOCKS_ENABLE_API", "true") == "true") {
+    api_handler <- new_api(stock_data)
+    ui <- function(req) {
+      res <- api_handler(req)
+      if (is.null(res)) {
+        res <- ui_handler(req)
+      }
+      res
+    }
+  } else {
+    ui <- ui_handler
+  }
 
   server <- new_server(stock_data)
 
@@ -72,12 +85,5 @@ new_app <- function() {
     onStop(watcher$stop)
   }
 
-  app <- shinyApp(ui, server, onStart = on_start, uiPattern = "^.*$")
-
-  if (Sys.getenv("NEOSTOCKS_ENABLE_API", "true") == "true") {
-    api <- new_api(stock_data)
-    app <- app_with_api(app, api)
-  }
-
-  app
+  shinyApp(ui, server, onStart = on_start, uiPattern = ".*")
 }

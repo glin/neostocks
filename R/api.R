@@ -1,15 +1,3 @@
-app_with_api <- function(app, api_handler) {
-  ui_handler <- app$httpHandler
-  app$httpHandler <- function(req) {
-    res <- api_handler(req)
-    if (is.null(res)) {
-      res <- ui_handler(req)
-    }
-    res
-  }
-  app
-}
-
 new_api <- function(stock_data) {
   summary_data <- function() {
     isolate(stock_data()$market_summary$summary_data)
@@ -72,7 +60,7 @@ ticker_handler <- function(summary_data) {
 }
 
 json_response <- function(content, content_type = "application/json") {
-  shiny:::httpResponse(
+  shiny::httpResponse(
     status = 200,
     content_type = content_type,
     content = content
@@ -80,9 +68,9 @@ json_response <- function(content, content_type = "application/json") {
 }
 
 not_found_response <- function() {
-  shiny:::httpResponse(status = 404)
+  shiny::httpResponse(status = 404)
 }
 
 internal_server_error_response <- function() {
-  shiny:::httpResponse(status = 500)
+  shiny::httpResponse(status = 500)
 }

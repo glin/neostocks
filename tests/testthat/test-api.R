@@ -114,14 +114,3 @@ test_that("ticker_handler", {
   res_not_found <- handler("BOOM")
   expect_equal(res_not_found$status, 404)
 })
-
-test_that("app_with_api", {
-  app <- shinyApp(ui = function(req) "ui", server = function() {})
-  api_handler <- function(req) {
-    if (req$PATH_INFO == "/api") {
-      return("api")
-    }
-  }
-  app <- app_with_api(app, api_handler)
-  expect_equal(app$httpHandler(list(PATH_INFO = "/api")), "api")
-})
