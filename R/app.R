@@ -1,9 +1,9 @@
 #' Create a new app
 #'
 #' Uses the following environment variables:
-#'  * NEOSTOCKS_DATA_FILE   path to the stock data file
-#'  * NEOSTOCKS_UI_DIR      path to the UI directory
-#'  * NEOSTOCKS_CACHE_DIR   path to the cache directory
+#'  * NEOSTOCKS_DATA_FILE   path to the stock data file (defaults to example data)
+#'  * NEOSTOCKS_UI_DIR      path to the UI directory (defaults to `dist`)
+#'  * NEOSTOCKS_CACHE_DIR   path to the cache directory (optional)
 #'  * NEOSTOCKS_ENABLE_API  if `true` (default), enable the internal API
 #'
 #' @export
