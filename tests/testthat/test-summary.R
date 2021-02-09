@@ -1,5 +1,3 @@
-context("summary")
-
 test_that("summarize_day", {
   data <- read_stock_data(stock_data_example())
   summ <- summarize_day(data[ticker %in% c("AAVL", "BUZZ")])

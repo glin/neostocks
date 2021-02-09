@@ -1,5 +1,3 @@
-context("ui")
-
 test_that("ticker_page", {
   expect_equal(ticker_page("AAVL", "5d"), list(
     title = "AAVL",

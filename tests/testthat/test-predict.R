@@ -1,5 +1,3 @@
-context("predict")
-
 test_that("predict_prices", {
   data <- read_stock_data(stock_data_example())
   predicted <- predict_prices(data[time <= as_date("2018-07-15")])

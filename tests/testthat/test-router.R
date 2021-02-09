@@ -1,5 +1,3 @@
-context("router")
-
 request <- function(path = "/", query = NULL) {
   list(PATH_INFO = path, QUERY_STRING = query)
 }

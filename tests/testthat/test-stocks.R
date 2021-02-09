@@ -1,5 +1,3 @@
-context("stocks")
-
 test_that("load_stock_data", {
   get_archived_prices <- function() {
     data.table(

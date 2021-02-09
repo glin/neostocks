@@ -1,5 +1,3 @@
-context("watcher")
-
 test_that("FileWatcher works", {
   f <- tempfile()
   on.exit(unlink(f))

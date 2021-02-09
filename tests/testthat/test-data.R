@@ -1,5 +1,3 @@
-context("data")
-
 test_that("get_companies", {
   companies <- get_companies()
   expect_identical(names(companies), c("ticker", "company", "id", "logo_id"))

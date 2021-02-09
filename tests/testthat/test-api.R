@@ -1,5 +1,3 @@
-context("api")
-
 test_that("new_api", {
   stock_data <- reactiveVal(list(
     market_summary = list(summary_data = list(

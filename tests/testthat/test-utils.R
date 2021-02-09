@@ -1,5 +1,3 @@
-context("utils")
-
 test_that("as_datetime converts time strings", {
   time <- as_datetime("2018-07-01T17:30:00Z")
   expected <- as.POSIXct(1530466200, origin = "1970-01-01", tz = TZ_NST)

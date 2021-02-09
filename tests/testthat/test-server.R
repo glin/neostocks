@@ -1,5 +1,3 @@
-context("server")
-
 test_that("server", {
   stock_data <- reactive(list(
     price_data = "price_data",
