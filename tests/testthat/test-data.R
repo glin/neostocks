@@ -10,6 +10,7 @@ test_that("archived_prices", {
 })
 
 test_that("read_stock_data", {
+  # Reads from file
   data <- read_stock_data("data/stocks.csv")
   expected <- data.table::data.table(
     time = as_datetime(c("2018-07-01T17:30:00Z", "2018-07-01T17:30:00Z", "2018-07-01T17:30:00Z")),
@@ -17,6 +18,17 @@ test_that("read_stock_data", {
     volume = c(0, 549255, 0),
     open = c(8, 15, 6),
     curr = c(9, 15, 6)
+  )
+  expect_equal(data, expected)
+
+  # Reads from directory
+  data <- read_stock_data("data/stocks")
+  expected <- data.table::data.table(
+    time = as_datetime(c("2018-07-01T17:30:00Z", "2018-07-01T17:30:00Z", "2018-07-01T17:30:00Z")),
+    ticker = c("AAVL", "ACFI", "BB"),
+    volume = c(0, 34424, 0),
+    open = c(8, 15, 6),
+    curr = c(9, 15, 12)
   )
   expect_equal(data, expected)
 })

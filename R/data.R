@@ -24,7 +24,13 @@ get_archived_prices <- function() {
 }
 
 read_stock_data <- function(file) {
-  data <- data.table::fread(file)
+  data <- if (is_directory(file)) {
+    files <- dir(file, full.names = TRUE)
+    files <- Filter(Negate(is_directory), files)
+    rbindlist(lapply(files, data.table::fread))
+  } else {
+    data.table::fread(file)
+  }
   data[, time := as_datetime(time)]
   data
 }

@@ -1,18 +1,18 @@
-# Watches for file changes in the background
+# Watches for file or directory changes in the background
 FileWatcher <- R6::R6Class(
   "FileWatcher",
   public = list(
-    file = NULL,
+    path = NULL,
     change_handler = NULL,
     interval_sec = 0,
     running = FALSE,
-    mtime = NULL,
+    mtimes = NULL,
 
-    initialize = function(file, change_handler, interval_sec) {
-      self$file <- file
+    initialize = function(path, change_handler, interval_sec) {
+      self$path <- path
       self$change_handler <- change_handler
       self$interval_sec <- interval_sec
-      self$mtime <- file.mtime(file)
+      self$mtimes <- file_mtimes(path)
     },
 
     start = function() {
@@ -27,9 +27,9 @@ FileWatcher <- R6::R6Class(
 
     watch = function() {
       if (!self$running) return()
-      mtime <- file.mtime(self$file)
-      if (!identical(mtime, self$mtime)) {
-        self$mtime <- mtime
+      mtimes <- file_mtimes(self$path)
+      if (!identical(mtimes, self$mtimes)) {
+        self$mtimes <- mtimes
         result <- self$change_handler()
         # Ensure async handlers run one at a time
         if (is.promise(result)) {
@@ -44,3 +44,17 @@ FileWatcher <- R6::R6Class(
     }
   )
 )
+
+file_mtimes <- function(path) {
+  files <- if (is_directory(path)) {
+    dir(path, full.names = TRUE)
+  } else {
+    path
+  }
+  files <- normalizePath(files, winslash = "/", mustWork = TRUE)
+  mtimes <- stats::setNames(file.info(files)$mtime, files)
+}
+
+is_directory <- function(path) {
+  isTRUE(file.info(path)$isdir)
+}
