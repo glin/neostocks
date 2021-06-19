@@ -17,7 +17,7 @@ new_ui <- function(template_file, stock_data) {
 
   function(req) {
     page <- r$handle(req)
-    ui_template(
+    ui <- ui_template(
       template_file,
       isolate(stock_data()),
       title = page$title,
@@ -25,6 +25,12 @@ new_ui <- function(template_file, stock_data) {
       ticker = page$ticker,
       period = page$period
     )
+    if (!is.null(page$status)) {
+      html <- htmltools::renderDocument(ui)
+      shiny::httpResponse(status = page$status, content = html)
+    } else {
+      ui
+    }
   }
 }
 
@@ -76,7 +82,7 @@ about_page <- list(title = "About")
 
 privacy_page <- list(title = "Privacy Policy")
 
-not_found_page <- list(title = "page not found")
+not_found_page <- list(title = "page not found", status = 404)
 
 ui_template <- function(file, stock_data, title = NULL, description = NULL,
                         ticker = NULL, period = NULL) {

@@ -56,19 +56,25 @@ test_that("new_ui", {
     list(path = "/settings", page = settings_page),
     list(path = "/about", page = about_page),
     list(path = "/privacy", page = privacy_page),
-    list(path = "/doesntexist", page = not_found_page),
     list(path = "/tickers/VPTS", page = ticker_page("VPTS", "1d")),
     list(path = "/index", page = index_page("1d")),
-    list(path = "/tickers/BOOM", page = not_found_page)
+    list(path = "/doesntexist", page = not_found_page, status = 404),
+    list(path = "/tickers/BOOM", page = not_found_page, status = 404)
   )
   for (test in test_cases) {
-    html <- ui(list(PATH_INFO = test$path))
     expected <- expected_html(
       title = test$page$title,
       description = test$page$description,
       ticker = test$page$ticker
     )
-    expect_equal(as.character(html), expected)
+    if (!is.null(test$status)) {
+      resp <- ui(list(PATH_INFO = test$path))
+      expect_equal(resp$status, test$status)
+      expect_equal(as.character(resp$content), expected)
+    } else {
+      html <- ui(list(PATH_INFO = test$path))
+      expect_equal(as.character(html), expected)
+    }
   }
 })
 

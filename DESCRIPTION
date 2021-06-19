@@ -9,6 +9,7 @@ Depends:
 Imports:
     data.table,
     future,
+    htmltools,
     jsonlite,
     later,
     lubridate,
