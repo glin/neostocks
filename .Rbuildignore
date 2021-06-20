@@ -1,6 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
+^\.github$
 ^app.R$
 ^renv$
 ^renv\.lock$

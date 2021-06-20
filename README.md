@@ -1,6 +1,6 @@
 # neostocks <a href="https://neostocks.info"><img src="public/neostocks.png" align="right" /></a>
 
-[![Build Status](https://travis-ci.com/glin/neostocks.svg?branch=master)](https://travis-ci.com/glin/neostocks)
+[![Build Status](https://github.com/glin/neostocks/workflows/build/badge.svg)](https://github.com/glin/neostocks/actions)
 [![codecov](https://codecov.io/gh/glin/neostocks/branch/master/graph/badge.svg)](https://codecov.io/gh/glin/neostocks)
 
 [neostocks](https://neostocks.info) is a real-time dashboard for the Neopets Stock Market, similar to the former NeoDaq.com (RIP).
