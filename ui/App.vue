@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <div style="text-align: center; border-bottom: 1px solid #ddd; background: hsl(210, 13%, 42%);">
+      <a href="https://www.jellyneo.net/nfts/" style="display: block; padding: .3rem; margin: 4px; font-size: 0.9rem; color: #fff;">
+        #NoNeoNFTs — Read about the Neopets Metaverse project at Jellyneo
+      </a>
+    </div>
     <div class="main-container">
       <Header
         :search="search"
@@ -243,7 +248,6 @@ body {
 
 .main-container {
   flex: 1 0 auto;
-  margin-top: 3.5rem;
   margin-bottom: 1.5rem;
 }
 
