@@ -19,7 +19,7 @@
     "@mdi/svg": "^2.5.94",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.4",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap-vue": "^2.22.0",
     "chart.js": "^2.7.3",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
