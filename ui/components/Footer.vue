@@ -1,7 +1,7 @@
 <template>
   <footer>
     <b-container class="footer">
-      Images © 1999-2021 Neopets, Inc.
+      Images © 1999-{{ now.getFullYear() }} Neopets, Inc.
       <span class="d-inline-block">
         <span class="separator">·</span>
         <b-link to="/privacy" class="footer-link">Privacy</b-link>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
 import bContainer from 'bootstrap-vue/es/components/layout/container'
 import bLink from 'bootstrap-vue/es/components/link/link'
 
@@ -20,6 +21,12 @@ export default {
   components: {
     bContainer,
     bLink
+  },
+
+  computed: {
+    ...mapState({
+      now: state => state.app.now
+    })
   }
 }
 </script>
