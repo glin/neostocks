@@ -13,16 +13,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.19.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.19.0",
     "@mdi/svg": "^2.5.94",
     "autoprefixer": "^9.4.7",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.2.5",
     "bootstrap-vue": "^2.0.0-rc.11",
     "chart.js": "^2.7.3",
     "copy-webpack-plugin": "^4.5.2",
-    "css-loader": "^1.0.0",
+    "css-loader": "^1.0.1",
     "dygraphs": "^2.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
@@ -48,7 +48,6 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^23.6.0",
     "eslint": "^8.23.0",
@@ -57,7 +56,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.3.1",
     "regenerator-runtime": "^0.13.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.11.3"
   },
   "browserslist": [
     "> 0.25%, not dead"
