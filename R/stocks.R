@@ -105,7 +105,7 @@ get_price_data <- function(data) {
   prices_5d <- last_n_days(data, 5)[, list(time, ticker, curr)]
   prices_1m <- last_n_days(data, 30)[, list(time, ticker, curr)]
   # Aggregate by day
-  prices_all <- data[, list(curr = max(curr)), by = list(time = as_date(time), ticker)]
+  prices_all <- data[, list(curr = max(curr)), by = list(time = date(time), ticker)]
 
   peaks <- peaks_by_day(data)
 
@@ -163,7 +163,7 @@ last_n_days <- function(data, n, full_days = FALSE) {
   time_day <- 3600*24
   start_time <- max(data$time) - n * time_day
   if (full_days) {
-    start_time <- as_date(start_time)
+    start_time <- floor_date(start_time)
   }
   data[time >= start_time]
 }

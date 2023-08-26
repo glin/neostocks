@@ -1,6 +1,6 @@
 test_that("predict_prices", {
   data <- read_stock_data(stock_data_example())
-  predicted <- predict_prices(data[time <= as_date("2018-07-15")])
+  predicted <- predict_prices(data[time <= as_datetime("2018-07-15")])
 
   p <- predicted[curr %in% c(6, 10, 15, 30, 60, 90), p]
   expected_p <- c(8.03, 7.18, 4.46, 0.348, 0.176, 0.052)

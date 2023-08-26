@@ -5,7 +5,18 @@ as_datetime <- function(x, tz = TZ_NST) {
 }
 
 as_date <- function(x, tz = TZ_NST) {
+  # Note: as.Date ignores tz for character strings
   as.Date(x, tz = tz)
+}
+
+# Get the date of an existing date-time object. Use this over as_date() for
+# date-time objects as date() will be much faster.
+date <- function(x) {
+  lubridate::date(x)
+}
+
+floor_date <- function(x, unit = "day") {
+  lubridate::floor_date(x, unit = unit)
 }
 
 to_iso_string <- function(time, tz = "UTC") {

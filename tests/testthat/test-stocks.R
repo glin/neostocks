@@ -211,7 +211,7 @@ test_that("get_price_data", {
   expect_equal(prices[["1d"]], data[1:2, ])
   expect_equal(prices[["5d"]], data[1:3, ])
   expect_equal(prices[["1m"]], data[1:4, ])
-  expect_equal(prices[["all"]], data[, list(time = as_date(time), ticker, curr)])
+  expect_equal(prices[["all"]], data[, list(time = date(time), ticker, curr)])
   expect_equal(prices$peaks, peaks_by_day(data))
 })
 
@@ -309,6 +309,14 @@ test_that("last_n_days", {
   ))
 
   expect_equal(last_n_days(data, 2), data.table(
+    time = as_datetime(c(
+      "2018-03-06 8:24:58",
+      "2018-03-07",
+      "2018-03-07 08:24:59"
+    ))
+  ))
+
+  expect_equal(last_n_days(data, 3), data.table(
     time = as_datetime(c(
       "2018-03-06 8:24:58",
       "2018-03-07",

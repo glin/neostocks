@@ -75,11 +75,11 @@ summarize_all <- function(data) {
 # Get price highs by day
 high_by_day <- function(data, fill = TRUE) {
   highs <- data[data[, list(.I = .I[which.max(curr)]),
-                     by = list(ticker, date = as_date(time))]$.I]
+                     by = list(ticker, date = date(time))]$.I]
 
   if (fill) {
     # Fill in missing days
-    highs[, date := as_date(time)]
+    highs[, date := date(time)]
     all_dates <- highs[, list(date = seq(min(date), max(date), by = "days")), by = ticker]
     highs <- highs[all_dates, on = list(date, ticker)]
     highs[is.na(curr), time := as_datetime(format(date))]
@@ -148,7 +148,7 @@ summarize_volume_price <- function(data) {
 # Summarize market volume (shares bought) by day
 summarize_volume_day <- function(data) {
   summ <- data[, list(volume = total_volume(volume)),
-               by = list(date = as_date(time), ticker)]
+               by = list(date = date(time), ticker)]
   summ <- summ[, list(volume = sum(volume)), by = date]
   summ
 }
