@@ -1,10 +1,9 @@
 const path = require('path')
-const NamedModulesPlugin = require('webpack').NamedModulesPlugin
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = (env, argv) => ({
@@ -39,7 +38,9 @@ module.exports = (env, argv) => ({
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('autoprefixer')]
+              postcssOptions: {
+                plugins: [require('autoprefixer')]
+              }
             }
           }
         ]
@@ -48,11 +49,20 @@ module.exports = (env, argv) => ({
         test: /\.scss$/,
         use: [
           argv.mode === 'development' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // Disable url() resolving for fonts. These should be preloaded and cached
+              // long-term under /static/fonts/.
+              url: false
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('autoprefixer')]
+              postcssOptions: {
+                plugins: [require('autoprefixer')]
+              }
             }
           },
           'sass-loader'
@@ -63,22 +73,17 @@ module.exports = (env, argv) => ({
         use: 'vue-svg-loader'
       },
       {
+        // Embed images as data URIs
         test: /\.(png|jpg|gif|ico)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
-        ]
+        type: 'asset/inline'
       },
       {
         test: /\.html$/,
         use: {
           loader: 'html-loader',
           options: {
-            attrs: ['link:href']
+            // Disable attribute processing; preserve URLs as-is in index.html
+            sources: false
           }
         }
       }
@@ -86,7 +91,6 @@ module.exports = (env, argv) => ({
   },
 
   plugins: [
-    new NamedModulesPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: 'ui/assets/index.html',
@@ -103,12 +107,10 @@ module.exports = (env, argv) => ({
   ],
 
   optimization: {
+    moduleIds: 'named',
     minimizer: [
-      new TerserPlugin({
-        cache: true,
-        parallel: true
-      }),
-      new OptimizeCSSAssetsPlugin()
+      new TerserPlugin(),
+      new CssMinimizerPlugin()
     ]
   },
 

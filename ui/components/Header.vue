@@ -3,7 +3,7 @@
     <b-container class="header-container">
       <b-navbar-toggle target="nav-menu-collapse" />
       <b-navbar-brand :to="{ path: '/', query }" class="home-link p-0" aria-label="Home">
-        <img class="logo" src="../../public/neostocks.png" alt> neostocks
+        <img class="logo" src="../../public/neostocks.png" alt /> neostocks
       </b-navbar-brand>
       <b-collapse id="nav-menu-collapse" v-model="showNavMenuCollapse" class="order-2" is-nav>
         <b-navbar-nav>
@@ -33,7 +33,6 @@
         <span v-if="showUnreadNotifications" class="unread-notifications" />
       </div>
       <b-tooltip
-        :show.sync="showNotificationsTooltip"
         :disabled="isTouchCapable"
         :target="() => $refs.notificationsBtn"
         placement="bottomleft"
@@ -119,8 +118,7 @@ export default {
 
   data() {
     return {
-      showNavMenuCollapse: false,
-      showNotificationsTooltip: false
+      showNavMenuCollapse: false
     }
   },
 
@@ -142,7 +140,7 @@ export default {
 
   methods: {
     handleNotificationsBtnClick() {
-      this.showNotificationsTooltip = false
+      this.$root.$emit('bv::hide::tooltip')
     },
     handleNotificationsShown() {
       this.onNotificationsRead()

@@ -2,6 +2,7 @@ import { getters, mutations, actions } from '../app'
 import * as types from '../../types'
 
 jest.useFakeTimers()
+jest.spyOn(global, 'setInterval')
 
 describe('getters', () => {
   test('query', () => {

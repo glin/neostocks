@@ -3,5 +3,6 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.js'],
   moduleNameMapper: {
     '\\.(png|svg|css)$': 'identity-obj-proxy'
-  }
+  },
+  testEnvironment: 'jsdom'
 }
