@@ -27,7 +27,7 @@ new_app <- function() {
 
     future::future({
       summarize_data()
-    }) %>% then(function(result) {
+    }, seed = TRUE) %>% then(function(result) {
       stock_data(result)
       end_time <- Sys.time()
       log_info("updated in ", format(end_time - start_time))
