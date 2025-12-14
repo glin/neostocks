@@ -30,8 +30,8 @@ test_that("server", {
   }
 
   flush <- function() {
-    with_mock(
-      "neostocks:::get_ticker_prices" = get_ticker_prices,
+    with_mocked_bindings(
+      get_ticker_prices = get_ticker_prices,
       shiny:::flushReact()
     )
   }

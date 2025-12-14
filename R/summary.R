@@ -67,8 +67,8 @@ summarize_all <- function(data) {
     med_peak = round(median(curr))
   ), by = ticker]
 
-  summ <- merge(summ, summ_day, on = "ticker", all = TRUE)
-  summ <- merge(summ, summ_peaks, on = "ticker", all = TRUE)
+  summ <- merge(summ, summ_day, by = "ticker", all = TRUE)
+  summ <- merge(summ, summ_peaks, by = "ticker", all = TRUE)
   summ
 }
 

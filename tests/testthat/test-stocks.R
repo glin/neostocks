@@ -9,8 +9,8 @@ test_that("load_stock_data", {
     )
   }
 
-  data <- with_mock(
-    "neostocks:::get_archived_prices" = get_archived_prices,
+  data <- with_mocked_bindings(
+    get_archived_prices = get_archived_prices,
     load_stock_data("data/stocks.csv")
   )
 
@@ -74,10 +74,10 @@ test_that("summarize_market", {
     )
   }
 
-  summ <- with_mock(
-    "neostocks:::predict_prices" = predict_prices,
-    "neostocks:::summarize_volume_price" = summarize_volume_price,
-    "neostocks:::summarize_volume_day" = summarize_volume_day,
+  summ <- with_mocked_bindings(
+    predict_prices = predict_prices,
+    summarize_volume_price = summarize_volume_price,
+    summarize_volume_day = summarize_volume_day,
     summarize_market(data)
   )
 

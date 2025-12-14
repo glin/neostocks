@@ -147,6 +147,7 @@ get_ticker_prices <- function(price_data, ticker, period) {
   )
 }
 
+#' @export
 as_json.ticker_prices <- function(x, ...) {
   data <- unclass(x)
   data$ticker <- attr(x, "ticker")

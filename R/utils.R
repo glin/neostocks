@@ -27,6 +27,7 @@ as_json <- function(x, ...) {
   UseMethod("as_json")
 }
 
+#' @export
 as_json.default <- function(x, dataframe = "rows", auto_unbox = TRUE, null = "null",
                             na = "null", UTC = TRUE, POSIXt = "ISO8601", ...) {
   jsonlite::toJSON(x, dataframe = dataframe, auto_unbox = auto_unbox, null = null,
