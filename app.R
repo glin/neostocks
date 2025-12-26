@@ -2,7 +2,7 @@
 # first via `R CMD INSTALL .` or `devtools::install()`.
 pkgload::load_all()
 
-future::plan(future.mirai::mirai_multisession)
+future::plan(future::multisession)
 
 options(shiny.autoload.r = FALSE)
 

@@ -9,7 +9,6 @@ Depends:
 Imports:
     data.table,
     future,
-    future.mirai,
     htmltools,
     jsonlite,
     later,
