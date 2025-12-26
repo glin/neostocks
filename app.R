@@ -1,6 +1,8 @@
+# load_all() is only for Windows. On Linux, the neostocks package must be installed
+# first via `R CMD INSTALL .` or `devtools::install()`.
 pkgload::load_all()
 
-future::plan(future::multisession)
+future::plan(future.mirai::mirai_multisession)
 
 options(shiny.autoload.r = FALSE)
 
